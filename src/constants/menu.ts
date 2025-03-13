@@ -42,21 +42,13 @@ export interface MenuItemTypes {
 }
 
 const MENU_ITEMS: MenuItemTypes[] = [
-  { key: "navigation", label: "Navigation", isTitle: true },
+  { key: "navigation", label: "Dashboards", isTitle: true },
   {
     key: "dashboards",
-    label: "Dashboards",
+    label: "Dashboard",
     isTitle: false,
     icon: FiAirplay,
-    // badge: { variant: "success", text: "4" },
-    children: [
-      {
-        key: "ecommerce-dashboard",
-        label: "Dashboard",
-        url: "/dashboard",
-        parentKey: "apps-ecommerce",
-      },
-    ],
+    url: "/",
   },
   { key: "apps", label: "Apps", isTitle: true },
   {
@@ -73,6 +65,12 @@ const MENU_ITEMS: MenuItemTypes[] = [
     isTitle: false,
     icon: FiShoppingCart,
     children: [
+      {
+        key: "categories-groups",
+        label: "Category Group",
+        url: "/store/category-groups",
+        parentKey: "apps-ecommerce",
+      },
       {
         key: "ecommerce-categories",
         label: "Categories",

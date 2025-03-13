@@ -2,9 +2,8 @@ import React from "react";
 // import { Collapse } from 'react-bootstrap';
 // import classNames from 'classnames';
 // import SimpleBar from 'simplebar-react';
-
 // helpers
-import { getHorizontalMenuItems } from "../../helpers/menu";
+import { getMenuItems } from "../../helpers/menu";
 
 // components
 import AppMenu from "./Menu";
@@ -16,7 +15,7 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <div className="app-menu">
-        <AppMenu menuItems={getHorizontalMenuItems()} />
+        <AppMenu menuItems={getMenuItems()} />
       </div>
     </React.Fragment>
   );

@@ -3,7 +3,7 @@ import { Button, Flex, Table } from "antd";
 //dummy data
 import PageTitle from "@/components/PageTitle.tsx";
 import { useDisclosure } from "@/hooks/useDisclosure.ts";
-import AddCategory from "@/pages/apps/Ecommerce/Categories/Components/AddCategory.tsx";
+import AddGroup from "@/pages/apps/Ecommerce/CategoryGroups/Components/AddGroup.tsx";
 
 const columns = [
   {
@@ -47,12 +47,12 @@ const data = [
   },
 ];
 
-const Categories = () => {
+const CategoriesGroups = () => {
   const { isOpen, toggle } = useDisclosure();
   return (
     <>
-      <AddCategory isOpen={isOpen} toggle={toggle} />
-      <PageTitle title={"Categories"} />
+      <AddGroup isOpen={isOpen} toggle={toggle} />
+      <PageTitle title={"Categories Groups"} />
 
       <Row>
         <Col>
@@ -70,4 +70,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default CategoriesGroups;

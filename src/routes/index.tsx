@@ -1,4 +1,4 @@
-import { Navigate, Route, RouteProps } from "react-router-dom";
+import { Route, RouteProps } from "react-router-dom";
 
 // components
 import PrivateRoute from "./PrivateRoute";
@@ -39,6 +39,10 @@ const EcommerceDashboard = React.lazy(
 );
 const EcommerceProducts = React.lazy(
   () => import("../pages/apps/Ecommerce/Products"),
+);
+
+const CategoryGroups = React.lazy(
+  () => import("../pages/apps/Ecommerce/CategoryGroups"),
 );
 const ProductDetails = React.lazy(
   () => import("../pages/apps/Ecommerce/ProductDetails"),
@@ -98,23 +102,24 @@ export interface RoutesProps {
 // dashboards
 const dashboardRoutes: RoutesProps = {
   path: "/",
-  name: "Dashboards",
+  name: "Dashboard",
   icon: "airplay",
   header: "Navigation",
-  children: [
-    {
-      path: "/",
-      name: "Root",
-      element: <Navigate to="/dashboard" />,
-      route: PrivateRoute,
-    },
-    {
-      path: "/dashboard",
-      name: "Products",
-      element: <EcommerceDashboard />,
-      route: PrivateRoute,
-    },
-  ],
+  element: <EcommerceDashboard />,
+  // children: [
+  //   {
+  //     path: "/",
+  //     name: "Root",
+  //     element: <Navigate to="/dashboard" />,
+  //     route: PrivateRoute,
+  //   },
+  //   {
+  //     path: "/dashboard",
+  //     name: "Products",
+  //
+  //     route: PrivateRoute,
+  //   },
+  // ],
 };
 
 const calendarAppRoutes: RoutesProps = {
@@ -136,8 +141,14 @@ const ecommerceAppRoutes = {
   children: [
     {
       path: "/store/categories",
-      name: "Products",
+      name: "Categories",
       element: <Categories />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/store/category-groups",
+      name: "Category-groups",
+      element: <CategoryGroups />,
       route: PrivateRoute,
     },
     {
