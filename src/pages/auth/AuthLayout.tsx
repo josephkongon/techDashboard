@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import LogoDark from "@/assets/images/logo-dark.png";
@@ -22,14 +22,14 @@ const AuthLayout = ({
     if (document.body)
       document.body.classList.add(
         "authentication-bg",
-        "authentication-bg-pattern"
+        "authentication-bg-pattern",
       );
 
     return () => {
       if (document.body)
         document.body.classList.remove(
           "authentication-bg",
-          "authentication-bg-pattern"
+          "authentication-bg-pattern",
         );
     };
   }, []);
@@ -69,12 +69,12 @@ const AuthLayout = ({
         </Container>
       </div>
 
-      <footer className="footer footer-alt">
-        2015 - {new Date().getFullYear()} &copy; UBold theme by{" "}
-        <Link to="#" className="text-white-50">
-          Coderthemes
-        </Link>
-      </footer>
+      {/*<footer className="footer footer-alt">*/}
+      {/*  2015 - {new Date().getFullYear()} &copy; UBold theme by{" "}*/}
+      {/*  <Link to="#" className="text-white-50">*/}
+      {/*    Coderthemes*/}
+      {/*  </Link>*/}
+      {/*</footer>*/}
     </>
   );
 };

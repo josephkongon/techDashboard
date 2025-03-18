@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, ProgressBar, Tab, Nav } from "react-bootstrap";
+import { Card, Col, Nav, ProgressBar, Row, Tab } from "react-bootstrap";
 
-// components
-import PageTitle from "../../../components/PageTitle";
-import Rating from "../../../components/Rating";
+import PageTitle from "../../../../../components/PageTitle";
+import Rating from "../../../../../components/Rating";
 
 import productImg1 from "@/assets/images/products/product-9.jpg";
 import productImg2 from "@/assets/images/products/product-10.jpg";
@@ -121,7 +120,7 @@ const Stocks = () => {
   );
 };
 
-const ProductDetails = () => {
+const Index = () => {
   const [product] = useState<Product>({
     brand: "Jack & Jones",
     name: "Jack & Jones Men's T-shirt (Blue)",
@@ -142,22 +141,12 @@ const ProductDetails = () => {
   });
 
   const [discountPrice] = useState<number>(
-    Math.round(product.price - (product.price * product.discount) / 100)
+    Math.round(product.price - (product.price * product.discount) / 100),
   );
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/details" },
-          {
-            label: "Product Detail",
-            path: "/apps/ecommerce/details",
-            active: true,
-          },
-        ]}
-        title={"Product Detail"}
-      />
+      <PageTitle title={"Product Detail"} />
 
       <Row>
         <Col>
@@ -364,4 +353,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default Index;

@@ -1,61 +1,72 @@
-import {yupResolver} from '@hookform/resolvers/yup'
-import {useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {useNavigate, useSearchParams} from 'react-router-dom'
-import * as yup from 'yup'
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import * as yup from "yup";
 
-import {useAuthContext} from '@/context/useAuthContext'
-import httpClient from '@/helpers/httpClient'
+import { useAuthContext } from "@/context/useAuthContext";
+import { useMutation } from "react-query";
+
+import { login } from "@/service/api/auth.ts";
+import { message } from "antd";
 
 const useLogin = () => {
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const {saveSession} = useAuthContext()
-    const [searchParams] = useSearchParams()
+  const { saveSession } = useAuthContext();
+  const [searchParams] = useSearchParams();
 
-    const loginFormSchema = yup.object({
-        email: yup.string().email('Please enter a valid email').required('Please enter your email'),
-        password: yup.string().required('Please enter your password'),
-    })
+  const { isLoading, mutateAsync } = useMutation(
+    async (payload: { email: string; password: string }) => login(payload),
+  );
 
-    const {control, handleSubmit} = useForm({
-        resolver: yupResolver(loginFormSchema),
-        defaultValues: {
-            email: 'user@demo.com',
-            password: '123456',
-        }
-    })
+  const loginFormSchema = yup.object({
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .required("Please enter your email"),
+    password: yup.string().required("Please enter your password"),
+  });
 
-    type LoginFormFields = yup.InferType<typeof loginFormSchema>
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(loginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-    const redirectUser = () => {
-        const redirectLink = searchParams.get('redirectTo')
-        if (redirectLink) navigate(redirectLink)
-        else navigate('/dashboard-1')
-    }
+  type LoginFormFields = yup.InferType<typeof loginFormSchema>;
 
-    const login = handleSubmit(async (values: LoginFormFields) => {
-        try {
-            const res = await httpClient.post('/login', values)
-            if (res.data.token) {
-                saveSession({
-                    ...(res.data ?? {}),
-                    token: res.data.token,
-                })
-                redirectUser()
-            }
-        } catch (e: any) {
-            if (e.response?.data?.error) {
-                control.setError('email', {type: "custom", message: e.response?.data?.error})
-                control.setError('password', {type: "custom", message: e.response?.data?.error})
-            }
-        } finally {
-            setLoading(false)
-        }
-    })
+  const redirectUser = () => {
+    const redirectLink = searchParams.get("redirectTo");
+    if (redirectLink) navigate(redirectLink);
+    else navigate("/");
+  };
 
-    return {loading, login, control}
-}
+  const handleLogin = handleSubmit(async (values: LoginFormFields) => {
+    mutateAsync(
+      {
+        email: values.email,
+        password: values.password,
+      },
+      {
+        onSuccess: async (resData) => {
+          message.success("Login successful");
+          // saveSession({
+          //   ...(resData.data ?? {}),
+          //   token: res.data.token,
+          // });
+          // redirectUser();
+        },
+        onError: async (error) => {
+          console.log(error);
+          message.error("Login failed.");
+        },
+      },
+    );
+  });
 
-export default useLogin
+  return { isLoading, handleLogin, control };
+};
+
+export default useLogin;

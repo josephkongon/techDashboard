@@ -7,10 +7,13 @@ import PageTitle from "../../../../components/PageTitle.tsx";
 import { ProductItemTypes, products as data } from "../data.tsx";
 import AddProduct from "@/pages/apps/Ecommerce/Products/Component/AddProduct.tsx";
 import { useDisclosure } from "@/hooks/useDisclosure.ts";
+import { useIsMobile } from "@/hooks/useMediaQuery.ts";
+import ProductTable from "@/pages/apps/Ecommerce/Products/Component/ProductTable.tsx";
 
 const Products = () => {
   const [products, setProducts] = useState<Array<ProductItemTypes>>(data);
   const { isOpen, toggle } = useDisclosure();
+  const isMobile = useIsMobile();
 
   const searchProduct = (value: string) => {
     if (value === "") setProducts(data);
@@ -81,114 +84,120 @@ const Products = () => {
         </Col>
       </Row>
 
-      <Row>
-        {(products || []).map((product, index) => {
-          return (
-            <Col key={index} md={6} xl={3}>
-              <Card className="product-box">
-                <Card.Body>
-                  <div className="product-action">
-                    <Link
-                      to="#"
-                      className="btn btn-success btn-xs waves-effect waves-light me-1"
-                    >
-                      <i className="mdi mdi-pencil"></i>
-                    </Link>
-                    <Link
-                      to="#"
-                      className="btn btn-danger btn-xs waves-effect waves-light"
-                    >
-                      <i className="mdi mdi-close"></i>
-                    </Link>
-                  </div>
-
-                  <div className="bg-light">
-                    <img src={product.image} alt="" className="img-fluid" />
-                  </div>
-
-                  <div className="product-info">
-                    <div className="row align-items-center">
-                      <div className="col">
-                        <h5 className="font-16 mt-0 sp-line-1">
-                          <Link
-                            to="/apps/ecommerce/product-details"
-                            className="text-dark"
-                          >
-                            {product.name}
-                          </Link>
-                        </h5>
-                        <div className="text-warning mb-2 font-13">
-                          <i className="fa fa-star me-1"></i>
-                          <i className="fa fa-star me-1"></i>
-                          <i className="fa fa-star me-1"></i>
-                          <i className="fa fa-star me-1"></i>
-                          <i className="fa fa-star"></i>
-                        </div>
-                        <h5 className="m-0">
-                          {" "}
-                          <span className="text-muted">
-                            {" "}
-                            Stocks : {product.quantity} pcs
-                          </span>
-                        </h5>
+      {isMobile ? (
+        <>
+          <Row>
+            {(products || []).map((product, index) => {
+              return (
+                <Col key={index} md={6} xl={3}>
+                  <Card className="product-box">
+                    <Card.Body>
+                      <div className="product-action">
+                        <Link
+                          to="#"
+                          className="btn btn-success btn-xs waves-effect waves-light me-1"
+                        >
+                          <i className="mdi mdi-pencil"></i>
+                        </Link>
+                        <Link
+                          to="#"
+                          className="btn btn-danger btn-xs waves-effect waves-light"
+                        >
+                          <i className="mdi mdi-close"></i>
+                        </Link>
                       </div>
-                      <div className="col-auto">
-                        <div className="product-price-tag">
-                          ${product.price}
+
+                      <div className="bg-light">
+                        <img src={product.image} alt="" className="img-fluid" />
+                      </div>
+
+                      <div className="product-info">
+                        <div className="row align-items-center">
+                          <div className="col">
+                            <h5 className="font-16 mt-0 sp-line-1">
+                              <Link
+                                to="/apps/ecommerce/product-details"
+                                className="text-dark"
+                              >
+                                {product.name}
+                              </Link>
+                            </h5>
+                            <div className="text-warning mb-2 font-13">
+                              <i className="fa fa-star me-1"></i>
+                              <i className="fa fa-star me-1"></i>
+                              <i className="fa fa-star me-1"></i>
+                              <i className="fa fa-star me-1"></i>
+                              <i className="fa fa-star"></i>
+                            </div>
+                            <h5 className="m-0">
+                              {" "}
+                              <span className="text-muted">
+                                {" "}
+                                Stocks : {product.quantity} pcs
+                              </span>
+                            </h5>
+                          </div>
+                          <div className="col-auto">
+                            <div className="product-price-tag">
+                              ${product.price}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
+
+          <Row>
+            <Col>
+              <ul className="pagination pagination-rounded justify-content-end mb-3">
+                <li className="page-item">
+                  <Link className="page-link" to="#" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                    <span className="visually-hidden">Previous</span>
+                  </Link>
+                </li>
+                <li className="page-item active">
+                  <Link className="page-link" to="#">
+                    1
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#">
+                    2
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#">
+                    3
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#">
+                    4
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#">
+                    5
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                    <span className="visually-hidden">Next</span>
+                  </Link>
+                </li>
+              </ul>
             </Col>
-          );
-        })}
-      </Row>
-
-      <Row>
-        <Col>
-          <ul className="pagination pagination-rounded justify-content-end mb-3">
-            <li className="page-item">
-              <Link className="page-link" to="#" aria-label="Previous">
-                <span aria-hidden="true">«</span>
-                <span className="visually-hidden">Previous</span>
-              </Link>
-            </li>
-            <li className="page-item active">
-              <Link className="page-link" to="#">
-                1
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                2
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                3
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                4
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                5
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#" aria-label="Next">
-                <span aria-hidden="true">»</span>
-                <span className="visually-hidden">Next</span>
-              </Link>
-            </li>
-          </ul>
-        </Col>
-      </Row>
+          </Row>
+        </>
+      ) : (
+        <ProductTable products={products} />
+      )}
     </>
   );
 };

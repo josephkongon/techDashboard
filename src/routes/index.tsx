@@ -45,19 +45,15 @@ const CategoryGroups = React.lazy(
   () => import("../pages/apps/Ecommerce/CategoryGroups"),
 );
 const ProductDetails = React.lazy(
-  () => import("../pages/apps/Ecommerce/ProductDetails"),
+  () => import("../pages/apps/Ecommerce/Products/ProductDetails"),
 );
-const ProductEdit = React.lazy(
-  () => import("../pages/apps/Ecommerce/ProductEdit"),
-);
+
 const Customers = React.lazy(() => import("../pages/apps/Ecommerce/Customers"));
 const Orders = React.lazy(() => import("../pages/apps/Ecommerce/Orders"));
 const OrderDetails = React.lazy(
   () => import("../pages/apps/Ecommerce/OrderDetails"),
 );
-const Sellers = React.lazy(() => import("../pages/apps/Ecommerce/Sellers"));
-const Cart = React.lazy(() => import("../pages/apps/Ecommerce/Cart"));
-const Checkout = React.lazy(() => import("../pages/apps/Ecommerce/Checkout"));
+
 const Invoice = React.lazy(() => import("../pages/other/Invoice"));
 const Categories = React.lazy(
   () => import("../pages/apps/Ecommerce/Categories"),
@@ -158,17 +154,12 @@ const ecommerceAppRoutes = {
       route: PrivateRoute,
     },
     {
-      path: "/store/product-details",
+      path: "/store/products/:id",
       name: "Product Details",
       element: <ProductDetails />,
       route: PrivateRoute,
     },
-    {
-      path: "/store/edit-product",
-      name: "Product Edit",
-      element: <ProductEdit />,
-      route: PrivateRoute,
-    },
+
     {
       path: "/store/customers",
       name: "Customers",
@@ -182,27 +173,9 @@ const ecommerceAppRoutes = {
       route: PrivateRoute,
     },
     {
-      path: "/store/order/details",
+      path: "/store/orders/:id",
       name: "Order Details",
       element: <OrderDetails />,
-      route: PrivateRoute,
-    },
-    {
-      path: "/store/sellers",
-      name: "Sellers",
-      element: <Sellers />,
-      route: PrivateRoute,
-    },
-    {
-      path: "/store/shopping-cart",
-      name: "Shopping Cart",
-      element: <Cart />,
-      route: PrivateRoute,
-    },
-    {
-      path: "/store/checkout",
-      name: "Checkout",
-      element: <Checkout />,
       route: PrivateRoute,
     },
   ],

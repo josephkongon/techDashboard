@@ -83,18 +83,7 @@ const MENU_ITEMS: MenuItemTypes[] = [
         url: "/store/products",
         parentKey: "apps-ecommerce",
       },
-      {
-        key: "ecommerce-details",
-        label: "Product Details",
-        url: "/store/product-details",
-        parentKey: "apps-ecommerce",
-      },
-      {
-        key: "ecommerce-edit-product",
-        label: "Add Product",
-        url: "/store/edit-product",
-        parentKey: "apps-ecommerce",
-      },
+
       {
         key: "ecommerce-customers",
         label: "Customers",
@@ -107,30 +96,7 @@ const MENU_ITEMS: MenuItemTypes[] = [
         url: "/store/orders",
         parentKey: "apps-ecommerce",
       },
-      {
-        key: "ecommerce-order-details",
-        label: "Order Details",
-        url: "/store/order/details",
-        parentKey: "apps-ecommerce",
-      },
-      {
-        key: "ecommerce-sellers",
-        label: "Sellers",
-        url: "/store/sellers",
-        parentKey: "apps-ecommerce",
-      },
-      {
-        key: "ecommerce-shopping-cart",
-        label: "Shopping Cart",
-        url: "/store/shopping-cart",
-        parentKey: "apps-ecommerce",
-      },
-      {
-        key: "ecommerce-checkout",
-        label: "Checkout",
-        url: "/store/checkout",
-        parentKey: "apps-ecommerce",
-      },
+
       {
         key: "page-invoice",
         label: "Invoice",
@@ -196,12 +162,7 @@ const HORIZONTAL_MENU_ITEMS: MenuItemTypes[] = [
     url: "/store/product-details",
     parentKey: "apps-ecommerce",
   },
-  {
-    key: "ecommerce-edit-product",
-    label: "Add Product",
-    url: "/store/edit-product",
-    parentKey: "apps-ecommerce",
-  },
+
   {
     key: "ecommerce-customers",
     label: "Customers",
@@ -803,12 +764,7 @@ const TWO_COl_MENU_ITEMS: MenuItemTypes[] = [
             url: "/store/product-details",
             parentKey: "apps-ecommerce",
           },
-          {
-            key: "ecommerce-edit-product",
-            label: "Add Product",
-            url: "/store/edit-product",
-            parentKey: "apps-ecommerce",
-          },
+
           {
             key: "ecommerce-customers",
             label: "Customers",
