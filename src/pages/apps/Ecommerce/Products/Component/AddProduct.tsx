@@ -49,7 +49,6 @@ const AddProduct: FC<IProps> = ({ isOpen, toggle, refetch }) => {
   };
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log({ values });
     const formData = new FormData();
 
     if (!fileList.length) {
@@ -59,19 +58,14 @@ const AddProduct: FC<IProps> = ({ isOpen, toggle, refetch }) => {
     fileList.forEach((file) => {
       formData.append("file", file.originFileObj);
     });
-    // formData.append("file", values.image?.fileList);
 
-    // for (let i = 0; i < values.image?.fileList; i++) {
-    //   formData.append("file", values.image?.fileList[i]); // Append each file
-    // }
-
-    // delete values.image;
     appendObjectToFormData(formData, values);
 
     mutateAsync(formData, {
       onSuccess: () => {
         message.success("Success!");
         form.resetFields();
+        setFileList([]);
         refetch();
         toggle();
       },

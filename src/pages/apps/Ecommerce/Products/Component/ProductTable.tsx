@@ -18,7 +18,6 @@ const ProductTable: FC<IProps> = ({ products, isFetching }) => {
       dataIndex: "image",
       key: "image",
       render: (_, product) => {
-        console.log(product?.productImages?.[0]?.file);
         return (
           <Image
             src={product?.productImages?.[0]?.file.originalUrl}

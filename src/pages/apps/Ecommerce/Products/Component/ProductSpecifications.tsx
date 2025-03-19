@@ -38,7 +38,7 @@ const ProductSpecifications = () => {
               {ProductSpecificationsMap[selectedCategory].map((spec) => (
                 <Form.Item
                   key={spec}
-                  name={spec.replaceAll(" ", "")}
+                  name={["specification", spec.replaceAll(" ", "")]}
                   label={spec}
                   style={{ marginBottom: "8px" }}
                 >
