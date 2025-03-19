@@ -1,11 +1,11 @@
 import localStore from "store";
+import { UsersType } from "@/types/auth.ts";
+import { AppTheme } from "@/types/ui.ts";
 
 interface ILocalStorageItems {
   loginUser: string;
-  userAuth: {
-    accessToken: string;
-    id: string;
-  };
+  userAuth: UsersType;
+  theme: AppTheme;
 }
 
 export class LocalStorageService {

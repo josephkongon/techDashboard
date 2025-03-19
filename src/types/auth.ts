@@ -1,10 +1,8 @@
 export type UsersType = {
-  id: string
-  username: string
-  email: string
-  password: string
-  firstName: string
-  lastName: string
-  role: string
-  token: string
-}
+  id: string;
+  fullName: string;
+  email: string;
+  role: string;
+  accessToken: string;
+  token: string;
+};

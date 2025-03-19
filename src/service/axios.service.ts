@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { LocalStorageService } from "@/service/localStorage.service.ts";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 export const apiClient = axios.create({
@@ -8,13 +9,13 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((req) => {
-  const authUser = {};
   req.baseURL = baseUrl;
-  console.log(baseUrl);
 
-  // if (authUser) {
-  //   req.headers.authorization = `Bearer ${authUser?.accessToken}`;
-  // }
+  const authUser = LocalStorageService.get("userAuth");
+
+  if (authUser) {
+    req.headers.authorization = `Bearer ${authUser?.accessToken}`;
+  }
 
   return req;
 });

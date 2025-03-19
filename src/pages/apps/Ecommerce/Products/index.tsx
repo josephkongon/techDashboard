@@ -1,34 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
 import PageTitle from "../../../../components/PageTitle.tsx";
-
-import { ProductItemTypes, products as data } from "../data.tsx";
 import AddProduct from "@/pages/apps/Ecommerce/Products/Component/AddProduct.tsx";
 import { useDisclosure } from "@/hooks/useDisclosure.ts";
 import { useIsMobile } from "@/hooks/useMediaQuery.ts";
 import ProductTable from "@/pages/apps/Ecommerce/Products/Component/ProductTable.tsx";
+import useProducts from "@/hooks/queries/useProducts.ts";
 
 const Products = () => {
-  const [products, setProducts] = useState<Array<ProductItemTypes>>(data);
+  const { data, refetch, isFetching } = useProducts();
   const { isOpen, toggle } = useDisclosure();
   const isMobile = useIsMobile();
 
-  const searchProduct = (value: string) => {
-    if (value === "") setProducts(data);
-    else {
-      let modifiedProducts = data;
-      modifiedProducts = modifiedProducts.filter((item) =>
-        item.name.toLowerCase().includes(value),
-      );
-      setProducts(modifiedProducts);
-    }
-  };
-
   return (
     <>
-      <AddProduct isOpen={isOpen} toggle={toggle} />
+      <AddProduct isOpen={isOpen} toggle={toggle} refetch={refetch} />
       <PageTitle title={"Products"} />
 
       <Row>
@@ -47,7 +35,7 @@ const Products = () => {
                         className="form-control my-1 my-lg-0"
                         id="inputPassword2"
                         placeholder="Search..."
-                        onChange={(e: any) => searchProduct(e.target.value)}
+                        // onChange={(e: any) => searchProduct(e.target.value)}
                       />
                     </div>
                     <label htmlFor="status-select" className="me-2">
@@ -87,7 +75,7 @@ const Products = () => {
       {isMobile ? (
         <>
           <Row>
-            {(products || []).map((product, index) => {
+            {(data || []).map((product, index) => {
               return (
                 <Col key={index} md={6} xl={3}>
                   <Card className="product-box">
@@ -196,7 +184,7 @@ const Products = () => {
           </Row>
         </>
       ) : (
-        <ProductTable products={products} />
+        <ProductTable products={data} isFetching={isFetching} />
       )}
     </>
   );

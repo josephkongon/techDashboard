@@ -7,22 +7,25 @@ import { useNavigate } from "react-router-dom";
 
 interface IProps {
   products: any[];
+  isFetching: boolean;
 }
-const ProductTable: FC<IProps> = ({ products }) => {
+const ProductTable: FC<IProps> = ({ products, isFetching }) => {
   const navigate = useNavigate();
 
   const columns: TableColumnsType<any> = [
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (image) => {
-        return <Image src={image} height={60} width={60} />;
+      render: (_, product) => {
+        console.log(product?.productImages?.[0]?.file);
+        return (
+          <Image
+            src={product?.productImages?.[0]?.file.originalUrl}
+            height={60}
+            width={60}
+          />
+        );
       },
     },
     {
@@ -66,7 +69,7 @@ const ProductTable: FC<IProps> = ({ products }) => {
   return (
     <Card>
       <Card.Body>
-        <Table columns={columns} dataSource={products} />
+        <Table loading={isFetching} columns={columns} dataSource={products} />
       </Card.Body>
     </Card>
   );

@@ -1,8 +1,9 @@
 import { createSlice, Draft, PayloadAction } from "@reduxjs/toolkit";
 
-import { AppTheme } from "@/type/ui";
 import { LocalStorageService } from "@/service/localStorage.service";
-import { getUserTheme } from "@/theme/helpers";
+
+import { AppTheme } from "@/types/ui.ts";
+import { getUserTheme } from "@/helpers/theme.ts";
 
 const theme = getUserTheme();
 // updateBodyTheme(theme);
@@ -33,7 +34,7 @@ const slice = createSlice({
     },
     openModal: <T extends ModalNames>(
       ui: Draft<typeof initialState>,
-      { payload }: PayloadAction<{ name: T; data?: ModalData<T> } | T>
+      { payload }: PayloadAction<{ name: T; data?: ModalData<T> } | T>,
     ) => {
       if (typeof payload === "string") {
         ui.modals[payload].visible = true;

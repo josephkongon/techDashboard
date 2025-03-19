@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Button,
   Drawer,
@@ -7,13 +7,21 @@ import {
   FormProps,
   Input,
   InputNumber,
+  message,
   Select,
+  Upload,
 } from "antd";
 import JoditEditor from "jodit-react";
-import ProductSpecifications from "@/pages/apps/Ecommerce/Categories/Components/ProductSpecifications.tsx";
+import ProductSpecifications from "@/pages/apps/Ecommerce/Products/Component/ProductSpecifications.tsx";
+import { PlusOutlined } from "@ant-design/icons";
+import useCategory from "@/hooks/queries/useCategory.ts";
+import { useMutation } from "react-query";
+import { createProduct } from "@/service/api/product.ts";
+import { appendObjectToFormData } from "@/utils/formdata.ts";
 
 type FieldType = {
   name?: string;
+  brand?: string;
   description?: string;
   summary?: string;
   price?: number;
@@ -25,10 +33,52 @@ type FieldType = {
 interface IProps {
   isOpen: boolean;
   toggle: () => void;
+  refetch: () => void;
 }
-const AddProduct: FC<IProps> = ({ isOpen, toggle }) => {
+const AddProduct: FC<IProps> = ({ isOpen, toggle, refetch }) => {
+  const [form] = Form.useForm();
+  const { data } = useCategory();
+  const [fileList, setFileList] = useState([]);
+
+  const { isLoading, mutateAsync } = useMutation(async (payload: any) =>
+    createProduct(payload),
+  );
+
+  const handleFileChange = ({ fileList }) => {
+    setFileList(fileList);
+  };
+
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
+    console.log({ values });
+    const formData = new FormData();
+
+    if (!fileList.length) {
+      message.warning("Please select at least 1 image of the product");
+      return;
+    }
+    fileList.forEach((file) => {
+      formData.append("file", file.originFileObj);
+    });
+    // formData.append("file", values.image?.fileList);
+
+    // for (let i = 0; i < values.image?.fileList; i++) {
+    //   formData.append("file", values.image?.fileList[i]); // Append each file
+    // }
+
+    // delete values.image;
+    appendObjectToFormData(formData, values);
+
+    mutateAsync(formData, {
+      onSuccess: () => {
+        message.success("Success!");
+        form.resetFields();
+        refetch();
+        toggle();
+      },
+      onError: () => {
+        message.error("Error!");
+      },
+    });
   };
 
   return (
@@ -48,11 +98,20 @@ const AddProduct: FC<IProps> = ({ isOpen, toggle }) => {
         name="basic"
         onFinish={onFinish}
         autoComplete="off"
+        form={form}
       >
         <Form.Item<FieldType>
           label="Product Name"
           name="name"
           rules={[{ required: true, message: "Please enter the product name" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="Brand"
+          name="brand"
+          rules={[{ required: true, message: "Please enter the brand" }]}
         >
           <Input />
         </Form.Item>
@@ -105,11 +164,9 @@ const AddProduct: FC<IProps> = ({ isOpen, toggle }) => {
             filterOption={(input, option) =>
               (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
-            options={[
-              { value: "1", label: "Jack" },
-              { value: "2", label: "Lucy" },
-              { value: "3", label: "Tom" },
-            ]}
+            options={data?.map((item) => {
+              return { value: item.id, label: item.name };
+            })}
           />
         </Form.Item>
 
@@ -132,11 +189,38 @@ const AddProduct: FC<IProps> = ({ isOpen, toggle }) => {
           />
         </Form.Item>
 
+        <Form.Item<FieldType>
+          label="Group Image"
+          // name="image"
+          rules={[{ required: true, message: "Please upload the image!" }]}
+        >
+          <Upload
+            beforeUpload={() => false}
+            listType="picture-card"
+            maxCount={5}
+            fileList={fileList}
+            onChange={handleFileChange}
+          >
+            <button
+              style={{
+                color: "inherit",
+                cursor: "pointer",
+                border: 0,
+                background: "none",
+              }}
+              type="button"
+            >
+              <PlusOutlined />
+              <div style={{ marginTop: 8 }}>Upload</div>
+            </button>
+          </Upload>
+        </Form.Item>
+
         <ProductSpecifications />
 
         <Flex className={"justify-content-end mt-3"}>
           <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
+            <Button loading={isLoading} type="primary" htmlType="submit">
               Add Product
             </Button>
           </Form.Item>

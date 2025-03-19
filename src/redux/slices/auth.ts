@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IAuthUser } from "@/type/auth";
+import { UsersType } from "@/types/auth.ts";
 
 interface IState {
-  authUser: IAuthUser | null;
+  authUser: UsersType | null;
 }
 
 const slice = createSlice({
@@ -20,4 +20,4 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const systemUsersActions = slice.actions;
+export const usersActions = slice.actions;

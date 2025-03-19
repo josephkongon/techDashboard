@@ -1,18 +1,56 @@
 import React, { FC } from "react";
-import { Button, Flex, Form, FormProps, Input, Modal, Select } from "antd";
+import {
+  Button,
+  Flex,
+  Form,
+  FormProps,
+  Input,
+  message,
+  Modal,
+  Select,
+} from "antd";
+import { useMutation } from "react-query";
+import { createCategory } from "@/service/api/category.ts";
+import useCategoryGroups from "@/hooks/queries/useCategoryGroups.ts";
 
 type FieldType = {
   name?: string;
-  groupId?: string;
+  categoryGroupId?: string;
 };
 
 interface IProps {
   isOpen: boolean;
   toggle: () => void;
+  refetch: () => void;
 }
-const AddCategory: FC<IProps> = ({ isOpen, toggle }) => {
+const AddCategory: FC<IProps> = ({ isOpen, toggle, refetch }) => {
+  const [form] = Form.useForm();
+  const { data } = useCategoryGroups();
+
+  const { isLoading, mutateAsync } = useMutation(
+    async (payload: { name: string; categoryGroupId: string }) =>
+      createCategory(payload),
+  );
+
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Success:", values);
+    mutateAsync(
+      {
+        name: values.name,
+        categoryGroupId: values.categoryGroupId,
+      },
+      {
+        onSuccess: () => {
+          message.success("Success!");
+          form.resetFields();
+          refetch();
+          toggle();
+        },
+        onError: () => {
+          message.error("Error!");
+        },
+      },
+    );
   };
 
   return (
@@ -22,12 +60,14 @@ const AddCategory: FC<IProps> = ({ isOpen, toggle }) => {
       onClose={toggle}
       onCancel={toggle}
       footer={null}
+      destroyOnClose={true}
     >
       <Form
         className={"mt-3"}
         name="basic"
         onFinish={onFinish}
         autoComplete="off"
+        form={form}
       >
         <Form.Item<FieldType>
           label="Name"
@@ -41,7 +81,7 @@ const AddCategory: FC<IProps> = ({ isOpen, toggle }) => {
 
         <Form.Item<FieldType>
           label="Category Group"
-          name="groupId"
+          name="categoryGroupId"
           rules={[{ message: "Please select the category group!" }]}
         >
           <Select
@@ -50,11 +90,9 @@ const AddCategory: FC<IProps> = ({ isOpen, toggle }) => {
             filterOption={(input, option) =>
               (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
-            options={[
-              { value: "1", label: "Jack" },
-              { value: "2", label: "Lucy" },
-              { value: "3", label: "Tom" },
-            ]}
+            options={data?.map((item) => {
+              return { value: item.id, label: item.name };
+            })}
           />
         </Form.Item>
         <Flex className={"justify-content-end"}>

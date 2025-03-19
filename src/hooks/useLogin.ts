@@ -8,10 +8,13 @@ import { useMutation } from "react-query";
 
 import { login } from "@/service/api/auth.ts";
 import { message } from "antd";
+import { LocalStorageService } from "@/service/localStorage.service.ts";
+import { useDispatch } from "react-redux";
+import { usersActions } from "@/redux/slices/auth.ts";
 
 const useLogin = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const { saveSession } = useAuthContext();
   const [searchParams] = useSearchParams();
 
@@ -52,11 +55,13 @@ const useLogin = () => {
       {
         onSuccess: async (resData) => {
           message.success("Login successful");
-          // saveSession({
-          //   ...(resData.data ?? {}),
-          //   token: res.data.token,
-          // });
-          // redirectUser();
+          saveSession({
+            ...resData,
+            token: resData.accessToken,
+          });
+          dispatch(usersActions.setCurrentUser({ currentUser: resData }));
+          LocalStorageService.set("userAuth", resData);
+          redirectUser();
         },
         onError: async (error) => {
           console.log(error);
