@@ -3,3 +3,5 @@ export const BASE_QUERY_OPTIONS = {
   refetchOnReconnect: true,
   refetchOnMount: false,
 };
+
+export const CURRENCY = "FCFA";

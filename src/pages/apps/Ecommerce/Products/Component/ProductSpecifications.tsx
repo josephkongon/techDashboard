@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Checkbox, Form, Input, Select } from "antd";
 import { ColorOptions, ProductSpecificationsMap } from "@/types/product.ts";
+import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
 const ProductSpecifications = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const [enableSpecifications, setEnableSpecifications] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -38,11 +40,11 @@ const ProductSpecifications = () => {
               {ProductSpecificationsMap[selectedCategory].map((spec) => (
                 <Form.Item
                   key={spec}
-                  name={["specification", spec.replaceAll(" ", "")]}
-                  label={spec}
+                  name={spec}
+                  label={t(spec)}
                   style={{ marginBottom: "8px" }}
                 >
-                  {spec === "Colors" ? (
+                  {spec === "colors" ? (
                     <Select
                       mode="multiple"
                       placeholder="Select available colors"
@@ -71,7 +73,7 @@ const ProductSpecifications = () => {
                       ))}
                     </Select>
                   ) : (
-                    <Input placeholder={`Enter ${spec}`} />
+                    <Input placeholder={`Enter ${t(spec)}`} />
                   )}
                 </Form.Item>
               ))}

@@ -13,7 +13,9 @@ const useProducts = () => {
     ...BASE_QUERY_OPTIONS,
   });
 
-  const categoryObject = useMemo(() => {}, [resData?.data]);
+  const categoryObject = useMemo(() => {
+    return resData?.data.reduce((arr, cur) => ({ ...arr, [cur.id]: cur }), {});
+  }, [resData?.data]);
 
   return {
     isLoading,
