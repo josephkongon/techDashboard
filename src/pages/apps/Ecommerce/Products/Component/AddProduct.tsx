@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Button,
   Drawer,
@@ -16,8 +16,10 @@ import ProductSpecifications from "@/pages/apps/Ecommerce/Products/Component/Pro
 import { PlusOutlined } from "@ant-design/icons";
 import useCategory from "@/hooks/queries/useCategory.ts";
 import { useMutation } from "react-query";
-import { createProduct } from "@/service/api/product.ts";
+import { createProduct, updateProduct } from "@/service/api/product.ts";
 import { appendObjectToFormData } from "@/utils/formdata.ts";
+import { removeUndefinedKeys } from "@/utils/general.ts";
+import useProducts from "@/hooks/queries/useProducts.ts";
 
 type FieldType = {
   name?: string;
@@ -34,14 +36,28 @@ interface IProps {
   isOpen: boolean;
   toggle: () => void;
   refetch: () => void;
+  product?: any;
+  setProduct?: (value: any) => void;
 }
-const AddProduct: FC<IProps> = ({ isOpen, toggle, refetch }) => {
+const AddProduct: FC<IProps> = ({
+  isOpen,
+  toggle,
+  refetch,
+  product,
+  setProduct,
+}) => {
   const [form] = Form.useForm();
   const { data } = useCategory();
   const [fileList, setFileList] = useState([]);
 
+  const { refetch: refetchAllProducts } = useProducts();
+
   const { isLoading, mutateAsync } = useMutation(async (payload: any) =>
     createProduct(payload),
+  );
+
+  const { isLoading: loadingUpdate, mutateAsync: mutateUpdate } = useMutation(
+    async (payload: any) => updateProduct(product?.id, payload),
   );
 
   const handleFileChange = ({ fileList }) => {
@@ -49,38 +65,65 @@ const AddProduct: FC<IProps> = ({ isOpen, toggle, refetch }) => {
   };
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    const formData = new FormData();
+    if (!product) {
+      const formData = new FormData();
 
-    if (!fileList.length) {
-      message.warning("Please select at least 1 image of the product");
-      return;
+      if (!fileList.length) {
+        message.warning("Please select at least 1 image of the product");
+        return;
+      }
+      fileList.forEach((file) => {
+        formData.append("file", file.originFileObj);
+      });
+
+      appendObjectToFormData(formData, removeUndefinedKeys(values));
+
+      mutateAsync(formData, {
+        onSuccess: () => {
+          message.success("Success!");
+          form.resetFields();
+          setFileList([]);
+          refetch();
+          toggle();
+        },
+        onError: () => {
+          message.error("Error!");
+        },
+      });
+    } else {
+      mutateUpdate(values, {
+        onSuccess: () => {
+          message.success("Success!");
+          form.resetFields();
+          refetch();
+          refetchAllProducts();
+          setProduct(null);
+        },
+        onError: () => {
+          message.error("Error!");
+        },
+      });
     }
-    fileList.forEach((file) => {
-      formData.append("file", file.originFileObj);
-    });
-
-    appendObjectToFormData(formData, values);
-
-    mutateAsync(formData, {
-      onSuccess: () => {
-        message.success("Success!");
-        form.resetFields();
-        setFileList([]);
-        refetch();
-        toggle();
-      },
-      onError: () => {
-        message.error("Error!");
-      },
-    });
   };
+
+  useEffect(() => {
+    if (product) {
+      form.setFieldsValue(product);
+    }
+  }, [product]);
 
   return (
     <Drawer
       width={"50rem"}
-      title={"Add New Product"}
+      title={product ? "Update Producr" : "Add New Product"}
       open={isOpen}
-      onClose={toggle}
+      onClose={() => {
+        if (product) {
+          setProduct(null);
+        } else {
+          toggle();
+        }
+      }}
       // onCancel={toggle}
       footer={null}
     >
@@ -183,39 +226,44 @@ const AddProduct: FC<IProps> = ({ isOpen, toggle, refetch }) => {
           />
         </Form.Item>
 
-        <Form.Item<FieldType>
-          label="Group Image"
-          // name="image"
-          rules={[{ required: true, message: "Please upload the image!" }]}
-        >
-          <Upload
-            beforeUpload={() => false}
-            listType="picture-card"
-            maxCount={5}
-            fileList={fileList}
-            onChange={handleFileChange}
+        {!product && (
+          <Form.Item<FieldType>
+            label="Group Image"
+            // name="image"
+            rules={[{ required: true, message: "Please upload the image!" }]}
           >
-            <button
-              style={{
-                color: "inherit",
-                cursor: "pointer",
-                border: 0,
-                background: "none",
-              }}
-              type="button"
+            <Upload
+              beforeUpload={() => false}
+              listType="picture-card"
+              maxCount={5}
+              fileList={fileList}
+              onChange={handleFileChange}
             >
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </button>
-          </Upload>
-        </Form.Item>
-
-        <ProductSpecifications />
+              <button
+                style={{
+                  color: "inherit",
+                  cursor: "pointer",
+                  border: 0,
+                  background: "none",
+                }}
+                type="button"
+              >
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </button>
+            </Upload>
+          </Form.Item>
+        )}
+        <ProductSpecifications product={product} />
 
         <Flex className={"justify-content-end mt-3"}>
           <Form.Item label={null}>
-            <Button loading={isLoading} type="primary" htmlType="submit">
-              Add Product
+            <Button
+              loading={isLoading || loadingUpdate}
+              type="primary"
+              htmlType="submit"
+            >
+              {product ? "Update Product" : "Add Product"}
             </Button>
           </Form.Item>
         </Flex>

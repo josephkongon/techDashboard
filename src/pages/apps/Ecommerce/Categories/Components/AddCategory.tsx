@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import {
   Button,
   Flex,
@@ -10,7 +10,7 @@ import {
   Select,
 } from "antd";
 import { useMutation } from "react-query";
-import { createCategory } from "@/service/api/category.ts";
+import { createCategory, updateCategory } from "@/service/api/category.ts";
 import useCategoryGroups from "@/hooks/queries/useCategoryGroups.ts";
 
 type FieldType = {
@@ -22,8 +22,16 @@ interface IProps {
   isOpen: boolean;
   toggle: () => void;
   refetch: () => void;
+  setCategory: (value: any) => void;
+  category?: any;
 }
-const AddCategory: FC<IProps> = ({ isOpen, toggle, refetch }) => {
+const AddCategory: FC<IProps> = ({
+  isOpen,
+  toggle,
+  refetch,
+  category,
+  setCategory,
+}) => {
   const [form] = Form.useForm();
   const { data } = useCategoryGroups();
 
@@ -32,33 +40,69 @@ const AddCategory: FC<IProps> = ({ isOpen, toggle, refetch }) => {
       createCategory(payload),
   );
 
+  const { isLoading: loadingUpdate, mutateAsync: mutateUpdate } = useMutation(
+    async (payload: any) => updateCategory(category.id, payload),
+  );
+
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
-    mutateAsync(
-      {
-        name: values.name,
-        categoryGroupId: values.categoryGroupId,
-      },
-      {
+    if (!category) {
+      mutateAsync(
+        {
+          name: values.name,
+          categoryGroupId: values.categoryGroupId,
+        },
+        {
+          onSuccess: () => {
+            message.success("Success!");
+            form.resetFields();
+            refetch();
+            toggle();
+          },
+          onError: () => {
+            message.error("Error!");
+          },
+        },
+      );
+    } else {
+      mutateUpdate(values, {
         onSuccess: () => {
           message.success("Success!");
           form.resetFields();
           refetch();
-          toggle();
+          setCategory(null);
         },
         onError: () => {
           message.error("Error!");
         },
-      },
-    );
+      });
+    }
   };
+
+  useEffect(() => {
+    if (category) {
+      form.setFieldValue("name", category.name);
+      form.setFieldValue("categoryGroupId", category.categoryGroupId);
+    }
+  }, [category]);
 
   return (
     <Modal
-      title={"Add Category"}
-      open={isOpen}
-      onClose={toggle}
-      onCancel={toggle}
+      title={category ? "Edit Category" : "Add Category"}
+      open={isOpen || !!category}
+      onClose={() => {
+        if (category) {
+          setCategory(null);
+        } else {
+          toggle();
+        }
+      }}
+      onCancel={() => {
+        if (category) {
+          setCategory(null);
+        } else {
+          toggle();
+        }
+      }}
       footer={null}
       destroyOnClose={true}
     >
@@ -97,8 +141,12 @@ const AddCategory: FC<IProps> = ({ isOpen, toggle, refetch }) => {
         </Form.Item>
         <Flex className={"justify-content-end"}>
           <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
-              Add
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={loadingUpdate || isLoading}
+            >
+              {category ? "Update Category" : "Add Category"}
             </Button>
           </Form.Item>
         </Flex>

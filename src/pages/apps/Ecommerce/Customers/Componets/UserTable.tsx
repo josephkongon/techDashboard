@@ -1,35 +1,32 @@
 import React, { FC } from "react";
 import { Card } from "react-bootstrap";
-import { Button, Image, Table } from "antd";
+import { Button, Table } from "antd";
 import { formatToDate } from "@/utils/format.ts";
 
 interface IProps {
   data: any[];
   isFetching: boolean;
-  setGroup: (group: any) => void;
+  setUser: (i: any) => void;
 }
-const CategoryGroupTable: FC<IProps> = ({ data, isFetching, setGroup }) => {
+const UserTable: FC<IProps> = ({ data, isFetching, setUser }) => {
   const columns = [
     {
-      title: "Image",
-      dataIndex: "file.originalUrl",
-      key: "file.originalUrl",
-      render: (_, record) => (
-        <Image
-          style={{ height: 50, width: 50 }}
-          src={record?.file?.originalUrl}
-          alt=""
-        />
-      ),
-    },
-    {
       title: "Name",
-      dataIndex: "name",
-      key: "name",
-      sort: true,
+      dataIndex: "username",
+      key: "username",
     },
     {
-      title: "Created At",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Created at",
       dataIndex: "createdAt",
       key: "createdAt",
       render: (createdAt, record) => <div>{formatToDate(createdAt)}</div>,
@@ -38,12 +35,11 @@ const CategoryGroupTable: FC<IProps> = ({ data, isFetching, setGroup }) => {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      width: 120,
       render: (action, record) => {
         return (
           <Button
             onClick={() => {
-              setGroup(record);
+              setUser(record);
             }}
           >
             Edit
@@ -57,7 +53,7 @@ const CategoryGroupTable: FC<IProps> = ({ data, isFetching, setGroup }) => {
     <Card>
       <Card.Body>
         <Table
-          scroll={{ y: 700 }}
+          rowKey={(row) => row.id}
           loading={isFetching}
           columns={columns}
           dataSource={data}
@@ -67,4 +63,4 @@ const CategoryGroupTable: FC<IProps> = ({ data, isFetching, setGroup }) => {
   );
 };
 
-export default CategoryGroupTable;
+export default UserTable;

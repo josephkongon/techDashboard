@@ -6,15 +6,23 @@ import { useDisclosure } from "@/hooks/useDisclosure.ts";
 import AddCategory from "@/pages/apps/Ecommerce/Categories/Components/AddCategory.tsx";
 import useCategory from "@/hooks/queries/useCategory.ts";
 import CategoryTable from "@/pages/apps/Ecommerce/Categories/Components/CategoryTable.tsx";
+import { useState } from "react";
 
 const Categories = () => {
   const { isOpen, toggle } = useDisclosure();
+  const [category, setCategory] = useState<any>();
 
   const { data, isFetching, refetch } = useCategory();
 
   return (
     <>
-      <AddCategory isOpen={isOpen} toggle={toggle} refetch={refetch} />
+      <AddCategory
+        category={category}
+        setCategory={setCategory}
+        isOpen={isOpen}
+        toggle={toggle}
+        refetch={refetch}
+      />
       <PageTitle title={"Categories"} />
 
       <Row>
@@ -26,7 +34,11 @@ const Categories = () => {
           </Card>
         </Col>
       </Row>
-      <CategoryTable data={data} isFetching={isFetching} />
+      <CategoryTable
+        setCategory={setCategory}
+        data={data}
+        isFetching={isFetching}
+      />
     </>
   );
 };

@@ -1,243 +1,208 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Card, Col, Nav, ProgressBar, Row, Tab } from "react-bootstrap";
+import { Button, Card, Col, Nav, Row, Tab } from "react-bootstrap";
 import Parser from "html-react-parser";
 import PageTitle from "../../../../../components/PageTitle";
-import useProducts from "@/hooks/queries/useProducts.ts";
-import { CURRENCY } from "@/types/constand";
-
-interface Product {
-  brand: string;
-  name?: string;
-  reviews: string;
-  status: string;
-  discount: number;
-  price: number;
-  description: string;
-  rating: number;
-  features: string[];
-}
-
-// Stock Table
-const Stocks = () => {
-  return (
-    <>
-      <div className="table-responsive mt-4">
-        <table className="table table-bordered table-centered mb-0">
-          <thead className="table-light">
-            <tr>
-              <th>Outlets</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Revenue</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ASOS Ridley Outlet - NYC</td>
-              <td>$139.58</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">27%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={27}
-                      className="progress-sm"
-                      variant="danger"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$1,89,547</td>
-            </tr>
-            <tr>
-              <td>Marco Outlet - SRT</td>
-              <td>$149.99</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">71%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={71}
-                      className="progress-sm"
-                      variant="success"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$87,245</td>
-            </tr>
-            <tr>
-              <td>Chairtest Outlet - HY</td>
-              <td>$135.87</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">82%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={82}
-                      className="progress-sm"
-                      variant="success"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$5,87,478</td>
-            </tr>
-            <tr>
-              <td>Nworld Group - India</td>
-              <td>$159.89</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">42%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={42}
-                      className="progress-sm"
-                      variant="warning"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$55,781</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-};
+import { BASE_QUERY_OPTIONS, CURRENCY } from "@/types/constand";
+import { getProductSpecification } from "@/utils/product.ts";
+import { useTranslation } from "react-i18next";
+import AddProduct from "@/pages/apps/Ecommerce/Products/Component/AddProduct.tsx";
+import { useQuery } from "react-query";
+import { getProduct } from "@/service/api/product.ts";
+import { Empty, Spin } from "antd";
 
 const ProductDetails = () => {
-  const { categoryObject } = useProducts();
-
+  const { t } = useTranslation();
+  const [product, setProduct] = useState<any | null>();
   const param = useParams();
 
-  const productItem = useMemo(
-    () => categoryObject?.[param.id] || {},
-    [categoryObject, param?.id],
-  );
-
-  console.log({ productItem });
-  const [product] = useState<Product>({
-    brand: "Jack & Jones",
-    name: "Jack & Jones Men's T-shirt (Blue)",
-    reviews: "36",
-    status: "Instock",
-    discount: 20,
-    price: 80,
-    description:
-      "The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.",
-    rating: 4.5,
-    features: [
-      "Sed ut perspiciatis unde",
-      "Itaque earum rerum hic",
-      "Nemo enim ipsam voluptatem",
-      "Donec quam felis ultricies nec",
-      "Temporibus autem quibusdam et",
-    ],
+  const {
+    isFetching,
+    refetch,
+    data: productItem,
+  } = useQuery(["get-single-product", param?.id], () => getProduct(param?.id), {
+    ...BASE_QUERY_OPTIONS,
   });
 
-  const [discountPrice] = useState<number>(
-    Math.round(product.price - (product.price * product.discount) / 100),
-  );
-
   return (
-    <>
+    <Spin spinning={isFetching}>
+      <AddProduct
+        setProduct={setProduct}
+        product={product}
+        isOpen={!!product}
+        toggle={() => setProduct(null)}
+        refetch={refetch}
+      />
       <PageTitle title={"Product Detail"} />
 
       <Row>
         <Col>
-          <Card>
-            <Card.Body>
-              <Row>
-                <Col lg={5}>
-                  <Tab.Container
-                    id="left-tabs-example"
-                    defaultActiveKey={productItem?.productImages?.[0]?.id}
-                  >
-                    <Tab.Content className="p-0">
-                      {productItem?.productImages?.map((image) => {
-                        return (
-                          <Tab.Pane key={image.id} eventKey={image.id}>
-                            <img
-                              src={image.file.originalUrl}
-                              alt=""
-                              style={{ height: "35rem", objectFit: "cover" }}
-                              className="img-fluid mx-auto d-block rounded"
-                            />
-                          </Tab.Pane>
-                        );
-                      })}
-                    </Tab.Content>
-
-                    <Nav variant="pills" as="ul" className="nav nav-justified">
-                      {productItem?.productImages?.map((image) => {
-                        return (
-                          <Nav.Item as="li" key={image.id}>
-                            <Nav.Link
-                              eventKey={image.id}
-                              className="product-thumb cursor-pointer"
-                            >
+          {!isFetching && !productItem ? (
+            <Empty description={"No product found."} />
+          ) : (
+            <Card>
+              <Card.Body>
+                <div>
+                  <div className="text-lg-end my-1 my-lg-0">
+                    <Button
+                      onClick={() => setProduct(productItem)}
+                      className="btn btn-danger waves-effect waves-light"
+                    >
+                      <i className="mdi mdi-book-edit me-1"></i> Edit Product
+                    </Button>
+                  </div>
+                </div>
+                <Row>
+                  <Col lg={5}>
+                    <Tab.Container
+                      id="left-tabs-example"
+                      defaultActiveKey={productItem?.productImages?.[0]?.id}
+                    >
+                      <Tab.Content className="p-0">
+                        {productItem?.productImages?.map((image) => {
+                          return (
+                            <Tab.Pane key={image.id} eventKey={image.id}>
                               <img
                                 src={image.file.originalUrl}
                                 alt=""
-                                style={{
-                                  height: "10rem",
-                                  width: "10rem",
-                                  objectFit: "cover",
-                                }}
+                                style={{ height: "35rem", objectFit: "cover" }}
                                 className="img-fluid mx-auto d-block rounded"
                               />
-                            </Nav.Link>
-                          </Nav.Item>
-                        );
-                      })}
-                    </Nav>
-                  </Tab.Container>
-                </Col>
+                            </Tab.Pane>
+                          );
+                        })}
+                      </Tab.Content>
 
-                <Col lg={7}>
-                  <div className="ps-xl-3 mt-3 mt-xl-0">
-                    <Link to="#" className="text-primary">
-                      {productItem?.brand}
-                    </Link>
-                    <h4 className="mb-3"> {productItem?.name}</h4>
+                      <Nav
+                        variant="pills"
+                        as="ul"
+                        className="nav nav-justified"
+                      >
+                        {productItem?.productImages?.map((image) => {
+                          return (
+                            <Nav.Item as="li" key={image.id}>
+                              <Nav.Link
+                                eventKey={image.id}
+                                className="product-thumb cursor-pointer"
+                              >
+                                <img
+                                  src={image.file.originalUrl}
+                                  alt=""
+                                  style={{
+                                    height: "10rem",
+                                    width: "10rem",
+                                    objectFit: "cover",
+                                  }}
+                                  className="img-fluid mx-auto d-block rounded"
+                                />
+                              </Nav.Link>
+                            </Nav.Item>
+                          );
+                        })}
+                      </Nav>
+                    </Tab.Container>
+                  </Col>
 
-                    <h4 className="mb-4">
-                      Price :{" "}
-                      <b>
-                        {productItem.price} {CURRENCY}
-                      </b>
-                    </h4>
+                  <Col lg={7}>
+                    <div className="ps-xl-3 mt-3 mt-xl-0">
+                      <Link to="#" className="text-primary">
+                        {productItem?.brand}
+                      </Link>
+                      <h4 className="mb-3"> {productItem?.name}</h4>
 
-                    <h4>
-                      <span className="badge bg-soft-success text-success mb-4">
-                        {productItem.quantity} {product.status}
-                      </span>
-                    </h4>
+                      <h4 className="mb-4">
+                        Price :{" "}
+                        <b>
+                          {productItem?.price} {CURRENCY}
+                        </b>
+                      </h4>
 
-                    <div className="text-muted mb-4">
-                      {Parser(productItem.description)}
+                      <h4>
+                        <span className="badge bg-soft-success text-success mb-4">
+                          {productItem?.quantity} in stock
+                        </span>
+                      </h4>
+
+                      <p style={{ fontSize: "1.2rem", fontWeight: "500" }}>
+                        Description
+                      </p>
+                      <div className="text-muted mb-4">
+                        {Parser(productItem?.description || "")}
+                      </div>
+
+                      <p style={{ fontSize: "1.2rem", fontWeight: "500" }}>
+                        Summary
+                      </p>
+                      <div className="text-muted mb-4">
+                        {Parser(productItem?.summary || "")}
+                      </div>
                     </div>
-                  </div>
-                </Col>
-              </Row>
+                  </Col>
+                </Row>
 
-              <Stocks />
-            </Card.Body>
-          </Card>
+                <>
+                  <div className="table-responsive mt-4">
+                    <table className="table table-bordered table-centered mb-0">
+                      <thead className="table-light">
+                        <tr>
+                          <th>Specification</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getProductSpecification(productItem || {}).map(
+                          ({ key, value }, index) => {
+                            if (key === "colors") {
+                              return (
+                                <tr key={index}>
+                                  <td>{t(key)}</td>
+                                  <td>
+                                    {value.map((color, index) => {
+                                      return (
+                                        <span
+                                          key={index}
+                                          style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                          }}
+                                        >
+                                          <span
+                                            style={{
+                                              backgroundColor:
+                                                color.toLowerCase(),
+                                              width: 16,
+                                              height: 16,
+                                              borderRadius: "50%",
+                                              display: "inline-block",
+                                              marginRight: 8,
+                                              border: "1px solid #ccc",
+                                            }}
+                                          ></span>
+                                          {color}
+                                        </span>
+                                      );
+                                    })}
+                                  </td>
+                                </tr>
+                              );
+                            }
+                            return (
+                              <tr key={index}>
+                                <td>{t(key)}</td>
+                                <td>{value}</td>
+                              </tr>
+                            );
+                          },
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              </Card.Body>
+            </Card>
+          )}
         </Col>
       </Row>
-    </>
+    </Spin>
   );
 };
 

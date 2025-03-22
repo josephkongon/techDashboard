@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Checkbox, Form, Input, Select } from "antd";
 import { ColorOptions, ProductSpecificationsMap } from "@/types/product.ts";
 import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
-const ProductSpecifications = () => {
+interface IProps {
+  product?: any;
+}
+
+const ProductSpecifications: FC<IProps> = ({ product }) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const [enableSpecifications, setEnableSpecifications] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  useEffect(() => {
+    if (product?.productType) {
+      setEnableSpecifications(true);
+      setSelectedCategory(product.productType);
+    }
+  }, [product]);
 
   return (
     <>
@@ -22,7 +33,7 @@ const ProductSpecifications = () => {
       </Checkbox>
       {enableSpecifications && (
         <>
-          <Form.Item label="Product Type">
+          <Form.Item label="Product Type" name={"productType"}>
             <Select
               placeholder="Select a product type"
               onChange={setSelectedCategory}

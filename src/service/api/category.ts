@@ -13,3 +13,13 @@ export const getCategory = () => {
     .get<IPaginatedData<any[]>>("/category")
     .then((res) => res.data);
 };
+
+export const updateCategory = (
+  id: string,
+  payload: {
+    name: string;
+    categoryGroupId: string;
+  },
+) => {
+  return apiClient.patch(`/category/${id}`, payload).then((res) => res.data);
+};

@@ -20,7 +20,7 @@ const ProductTable: FC<IProps> = ({ products, isFetching }) => {
       render: (_, product) => {
         return (
           <Image
-            src={product?.productImages?.[0]?.file.originalUrl}
+            src={product?.productImages?.[0]?.file.thumbnailUrl}
             height={60}
             width={60}
           />
@@ -68,7 +68,12 @@ const ProductTable: FC<IProps> = ({ products, isFetching }) => {
   return (
     <Card>
       <Card.Body>
-        <Table loading={isFetching} columns={columns} dataSource={products} />
+        <Table
+          rowKey={(item) => item?.id}
+          loading={isFetching}
+          columns={columns}
+          dataSource={products}
+        />
       </Card.Body>
     </Card>
   );

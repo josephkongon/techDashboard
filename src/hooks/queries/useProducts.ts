@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { BASE_QUERY_OPTIONS } from "@/types/constand.ts";
 import { useMemo } from "react";
-import { getProduct } from "@/service/api/product.ts";
+import { getProducts } from "@/service/api/product.ts";
 
 const useProducts = () => {
   const {
@@ -9,7 +9,7 @@ const useProducts = () => {
     refetch,
     isFetching,
     data: resData,
-  } = useQuery(["get-products"], async () => getProduct(), {
+  } = useQuery(["get-products"], async () => getProducts(), {
     ...BASE_QUERY_OPTIONS,
   });
 
