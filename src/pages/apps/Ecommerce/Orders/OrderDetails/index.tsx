@@ -1,13 +1,18 @@
 import React from "react";
-import { Row, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, Col, Row } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 
 // components
-import PageTitle from "../../../components/PageTitle";
+import PageTitle from "../../../../../components/PageTitle";
 
 import product1 from "@/assets/images/products/product-1.png";
 import product2 from "@/assets/images/products/product-2.png";
 import product3 from "@/assets/images/products/product-3.png";
+import OrderItems from "@/pages/apps/Ecommerce/Orders/OrderDetails/component/OrderItems.tsx";
+import { useQuery } from "react-query";
+import { getSingleOrder } from "@/service/api/order.ts";
+import { Spin } from "antd";
+import { BASE_QUERY_OPTIONS } from "@/types/constand.ts";
 
 interface OrderItem {
   id: number;
@@ -92,70 +97,6 @@ const TrackOrder = () => {
   );
 };
 
-// Item Table
-const Items = ({ order }: { order: OrderDetailsType }) => {
-  return (
-    <>
-      <div className="table-responsive">
-        <table className="table table-bordered table-centered mb-0">
-          <thead className="table-light">
-            <tr>
-              <th>Product name</th>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(order.items || []).map((item, index) => {
-              return (
-                <tr key={index}>
-                  <th scope="row">{item.name}</th>
-                  <td>
-                    <img src={item.image} alt="" height="32" />
-                  </td>
-                  <td>{item.quantity}</td>
-                  <td>{item.price}</td>
-                  <td>{item.total}</td>
-                </tr>
-              );
-            })}
-            <tr>
-              <th scope="row" colSpan={4} className="text-end">
-                Sub Total :
-              </th>
-              <td>
-                <div className="fw-bold">{order.sub_total}</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row" colSpan={4} className="text-end">
-                Shipping Charge :
-              </th>
-              <td>{order.shipping_charge}</td>
-            </tr>
-            <tr>
-              <th scope="row" colSpan={4} className="text-end">
-                Estimated Tax :
-              </th>
-              <td>{order.tax}</td>
-            </tr>
-            <tr>
-              <th scope="row" colSpan={4} className="text-end">
-                Total :
-              </th>
-              <td>
-                <div className="fw-bold"> {order.net_total}</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-};
-
 // shipping info
 const ShippingInfo = (props: { details: ShippingAddress }) => {
   const details = props.details;
@@ -211,12 +152,7 @@ const DeliveryInfo = (props: { details: Delivery }) => {
     <React.Fragment>
       <div className="text-center">
         <i className="mdi mdi-truck-fast h2 text-muted"></i>
-        <h5>
-          {
-            details.provider &&
-            <b>{details.provider}</b>
-          }
-        </h5>
+        <h5>{details.provider && <b>{details.provider}</b>}</h5>
         <p className="mb-1">
           <span className="fw-semibold">Order ID :</span> {details.order_id}
         </p>
@@ -229,8 +165,17 @@ const DeliveryInfo = (props: { details: Delivery }) => {
   );
 };
 
-// order details
 const OrderDetails = () => {
+  const param = useParams();
+
+  const { isFetching, data, refetch } = useQuery(
+    ["get-single-order", param?.id],
+    () => getSingleOrder(param?.id),
+    {
+      ...BASE_QUERY_OPTIONS,
+    },
+  );
+
   const order: OrderDetailsType = {
     id: "#BM31",
     tracking_id: "894152012012",
@@ -284,18 +229,8 @@ const OrderDetails = () => {
   };
 
   return (
-    <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/order/details" },
-          {
-            label: "Order Detail",
-            path: "/apps/ecommerce/order/details",
-            active: true,
-          },
-        ]}
-        title={"Order Detail"}
-      />
+    <Spin spinning={isFetching}>
+      <PageTitle title={"Order Detail"} />
 
       <Row>
         <Col lg={4}>
@@ -307,13 +242,7 @@ const OrderDetails = () => {
                 <Col lg={6}>
                   <div className="mb-4">
                     <h5 className="mt-0">Order ID:</h5>
-                    <p>{order.id}</p>
-                  </div>
-                </Col>
-                <Col lg={6}>
-                  <div className="mb-4">
-                    <h5 className="mt-0">Tracking ID:</h5>
-                    <p>{order.tracking_id}</p>
+                    <p>{data?.orderId}</p>
                   </div>
                 </Col>
               </Row>
@@ -327,41 +256,12 @@ const OrderDetails = () => {
           <Card>
             <Card.Body>
               <h4 className="header-title mb-3">Items from Order {order.id}</h4>
-              <Items order={order} />
+              <OrderItems refetch={refetch} order={data} />
             </Card.Body>
           </Card>
         </Col>
       </Row>
-
-      <Row>
-        <Col lg={4}>
-          <Card>
-            <Card.Body>
-              <h4 className="header-title mb-3">Shipping Information</h4>
-              <ShippingInfo details={order.shipping} />
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={4}>
-          <Card>
-            <Card.Body>
-              <h4 className="header-title mb-3">Billing Information</h4>
-              <BillingInfo details={order.billing} />
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={4}>
-          <Card>
-            <Card.Body>
-              <h4 className="header-title mb-3">Delivery Info</h4>
-              <DeliveryInfo details={order.delivery} />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </React.Fragment>
+    </Spin>
   );
 };
 

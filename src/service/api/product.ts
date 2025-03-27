@@ -9,10 +9,14 @@ export const createProduct = (payload: any) => {
   });
 };
 
-export const getProducts = () => {
-  return apiClient
-    .get<IPaginatedData<any[]>>("/product?join=productImages")
-    .then((res) => res.data);
+export const getProducts = ({ filter }: { filter?: string }) => {
+  let url = "/product?join=productImages";
+
+  if (filter) {
+    url += `&${filter}`;
+  }
+
+  return apiClient.get<IPaginatedData<any[]>>(url).then((res) => res.data);
 };
 
 export const updateProduct = (id: string, payload: any) => {

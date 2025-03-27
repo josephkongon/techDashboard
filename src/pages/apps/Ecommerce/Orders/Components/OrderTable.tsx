@@ -5,6 +5,7 @@ import { BiPen } from "react-icons/bi";
 import { EyeOutlined } from "@ant-design/icons";
 import { Card } from "react-bootstrap";
 import classNames from "classnames";
+import { formatToDate } from "@/utils/format.ts";
 
 interface IProps {
   orders: any[];
@@ -72,6 +73,7 @@ const StatusColumn = ({ status }: { status: string }) => {
             "bg-danger": status === "Cancelled",
             "bg-info": status === "Shipped",
             "bg-warning": status === "Processing",
+            "bg-info-subtle": status === "Pending",
           })}
         >
           {status}
@@ -86,49 +88,52 @@ const OrderTable: FC<IProps> = ({ orders }) => {
 
   const columns: TableColumnsType<any> = [
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
+      title: "Order ID",
+      dataIndex: "orderId",
+      key: "orderId",
     },
 
     {
       title: "Date",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (order_status, order) => {
+        return <>{formatToDate(order.createdAt)}</>;
+      },
     },
     {
       title: "Payment status",
-      dataIndex: "payment_status",
-      key: "payment_status",
+      dataIndex: "paymentStatus",
+      key: "paymentStatus",
       render: (payment) => PaymentStatusColumn({ status: payment }),
     },
     {
       title: "Order Status",
-      dataIndex: "order_status",
-
-      key: "order_status",
-      render: (order_status, order) => {
-        return <>{StatusColumn({ status: order_status })}</>;
+      dataIndex: "status",
+      key: "status",
+      render: (status, order) => {
+        return <>{StatusColumn({ status: status })}</>;
       },
     },
     {
-      title: "Total",
-      dataIndex: "total",
-      key: "total",
+      title: "Username",
+      dataIndex: "user.username",
+      key: "user.username",
+      render: (_, record) => <>{record?.user?.username}</>,
     },
     {
       title: "Action",
       key: "operation",
       fixed: "right",
       width: 120,
-      render: (item) => (
+      render: (_, record) => (
         <Flex style={{ gap: 5 }}>
           <Button variant={"filled"}>
             <BiPen />
           </Button>
           <Button
             onClick={() => {
-              navigate(`${item.id}`);
+              navigate(`${record.id}`);
             }}
           >
             <EyeOutlined />

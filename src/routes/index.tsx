@@ -51,10 +51,9 @@ const ProductDetails = React.lazy(
 const Customers = React.lazy(() => import("../pages/apps/Ecommerce/Customers"));
 const Orders = React.lazy(() => import("../pages/apps/Ecommerce/Orders"));
 const OrderDetails = React.lazy(
-  () => import("../pages/apps/Ecommerce/OrderDetails"),
+  () => import("../pages/apps/Ecommerce/Orders/OrderDetails"),
 );
 
-const Invoice = React.lazy(() => import("../pages/other/Invoice"));
 const Categories = React.lazy(
   () => import("../pages/apps/Ecommerce/Categories"),
 );
@@ -228,12 +227,6 @@ const extrapagesRoutes = {
       path: "/pages/sitemap",
       name: "Sitemap",
       element: <Sitemap />,
-      route: PrivateRoute,
-    },
-    {
-      path: "/pages/invoice",
-      name: "Invoice",
-      element: <Invoice />,
       route: PrivateRoute,
     },
 

@@ -96,13 +96,6 @@ const MENU_ITEMS: MenuItemTypes[] = [
         url: "/store/orders",
         parentKey: "apps-ecommerce",
       },
-
-      {
-        key: "page-invoice",
-        label: "Invoice",
-        url: "/pages/invoice",
-        parentKey: "extra-pages",
-      },
     ],
   },
 
@@ -1016,12 +1009,7 @@ const TWO_COl_MENU_ITEMS: MenuItemTypes[] = [
         url: "/pages/sitemap",
         parentKey: "extra-pages",
       },
-      {
-        key: "page-invoice",
-        label: "Invoice",
-        url: "/pages/invoice",
-        parentKey: "extra-pages",
-      },
+
       {
         key: "page-faq",
         label: "FAQs",

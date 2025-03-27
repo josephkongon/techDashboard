@@ -1,14 +1,22 @@
 import React, { FC } from "react";
 import { Card } from "react-bootstrap";
-import { Button, Table } from "antd";
+import { Button, Flex, Table } from "antd";
 import { formatToDate } from "@/utils/format.ts";
 
 interface IProps {
   data: any[];
   isFetching: boolean;
   setUser: (i: any) => void;
+  setUserOrder: (i: any) => void;
+  toggleCreateOrder: () => void;
 }
-const UserTable: FC<IProps> = ({ data, isFetching, setUser }) => {
+const UserTable: FC<IProps> = ({
+  data,
+  isFetching,
+  setUser,
+  setUserOrder,
+  toggleCreateOrder,
+}) => {
   const columns = [
     {
       title: "Name",
@@ -37,13 +45,24 @@ const UserTable: FC<IProps> = ({ data, isFetching, setUser }) => {
       key: "action",
       render: (action, record) => {
         return (
-          <Button
-            onClick={() => {
-              setUser(record);
-            }}
-          >
-            Edit
-          </Button>
+          <Flex style={{ gap: 5 }}>
+            <Button
+              onClick={() => {
+                setUser(record);
+              }}
+            >
+              Edit
+            </Button>
+
+            <Button
+              onClick={() => {
+                setUserOrder(record);
+                toggleCreateOrder();
+              }}
+            >
+              Create order
+            </Button>
+          </Flex>
         );
       },
     },

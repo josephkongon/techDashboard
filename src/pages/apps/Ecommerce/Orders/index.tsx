@@ -1,30 +1,20 @@
-import React, { useState } from "react";
-import { Button, Card, Col, Row } from "react-bootstrap"; // components
-import PageTitle from "../../../../components/PageTitle"; // dummy data
-import { orders, OrdersItemTypes } from "../data";
+import React from "react";
+import { Button, Card, Col, Row } from "react-bootstrap";
+import PageTitle from "../../../../components/PageTitle";
 import OrderTable from "@/pages/apps/Ecommerce/Orders/Components/OrderTable.tsx";
 import { useIsMobile } from "@/hooks/useMediaQuery.ts";
 import OrderItem from "@/pages/apps/Ecommerce/Orders/Components/OrderItem.tsx";
+import Invoice from "@/pages/invoice/Invoice.tsx";
+import useOrder from "@/hooks/queries/useOrder.ts";
 
-const Index = () => {
-  const [orderList, setOrderList] = useState<OrdersItemTypes[]>(orders);
+const Order = () => {
+  const { data } = useOrder();
 
   const isMobile = useIsMobile();
 
-  const changeOrderStatusGroup = (OrderStatusGroup: string) => {
-    let updatedData = [...orders];
-    //  filter
-    updatedData =
-      OrderStatusGroup === "All"
-        ? orders
-        : [...orders].filter((o) =>
-            o.payment_status?.includes(OrderStatusGroup),
-          );
-    setOrderList(updatedData);
-  };
-
   return (
     <>
+      <Invoice />
       <PageTitle title={"Orders"} />
 
       <Row>
@@ -42,9 +32,9 @@ const Index = () => {
                         <select
                           className="form-select"
                           id="status-select"
-                          onChange={(e: any) =>
-                            changeOrderStatusGroup(e.target.value)
-                          }
+                          // onChange={(e: any) =>
+                          //   changeOrderStatusGroup(e.target.value)
+                          // }
                         >
                           <option value="All">All</option>
                           <option value="Paid">Paid</option>
@@ -73,14 +63,14 @@ const Index = () => {
 
           {isMobile ? (
             <div>
-              {orderList.map((order, index) => (
+              {data.map((order, index) => (
                 <OrderItem key={index} />
               ))}
             </div>
           ) : (
             <Card>
               <Card.Body>
-                <OrderTable orders={orderList} />
+                <OrderTable orders={data} />
               </Card.Body>
             </Card>
           )}
@@ -90,4 +80,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Order;
