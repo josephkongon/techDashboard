@@ -31,17 +31,11 @@ interface IProps {
 }
 const Invoice: FC<IProps> = ({ user, products, isOpen, toggle, order }) => {
   const printRef = useRef<HTMLDivElement>(null);
-  const [customer] = useState<string>("Stanley Jones");
   const [notes] = useState<string>(
     "Thanks a lot because you keep purchasing our products. Our company promises to provide high quality products for you as well as outstanding customer service for every transaction.",
   );
 
   const [productList, setProductList] = useState<IItems[]>([]);
-  const [vat] = useState<string>("$459.75");
-
-  const handleAddProductToInvoice = (newItem: IItems) => {
-    setProductList((items) => [...items, newItem]);
-  };
 
   const handlePrint = () => {
     if (!printRef.current) return;

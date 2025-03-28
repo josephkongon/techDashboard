@@ -4,7 +4,6 @@ import PageTitle from "../../../../components/PageTitle";
 import OrderTable from "@/pages/apps/Ecommerce/Orders/Components/OrderTable.tsx";
 import { useIsMobile } from "@/hooks/useMediaQuery.ts";
 import OrderItem from "@/pages/apps/Ecommerce/Orders/Components/OrderItem.tsx";
-import Invoice from "@/pages/invoice/Invoice.tsx";
 import useOrder from "@/hooks/queries/useOrder.ts";
 import PaginatedList from "@/components/PaginatedList";
 
@@ -15,7 +14,6 @@ const Order = () => {
 
   return (
     <>
-      <Invoice />
       <PageTitle title={"Orders"} />
 
       <Row>
