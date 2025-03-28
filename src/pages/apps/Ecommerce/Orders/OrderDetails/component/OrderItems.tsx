@@ -52,8 +52,6 @@ interface IProps {
 const OrderItems: FC<IProps> = ({ refetch, order }) => {
   const { isOpen, toggle } = useDisclosure();
 
-  console.log({ order });
-
   const totalCost = useMemo(() => {
     let total = 0;
 
@@ -86,7 +84,9 @@ const OrderItems: FC<IProps> = ({ refetch, order }) => {
           </thead>
           <tbody>
             {(order?.orderProducts || []).map((item, index) => {
-              return <OrderItem key={index} orderItem={item} />;
+              return (
+                <OrderItem key={index} orderItem={item} refetch={refetch} />
+              );
             })}
             <tr>
               <th scope="row">

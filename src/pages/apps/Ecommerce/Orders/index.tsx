@@ -6,6 +6,7 @@ import { useIsMobile } from "@/hooks/useMediaQuery.ts";
 import OrderItem from "@/pages/apps/Ecommerce/Orders/Components/OrderItem.tsx";
 import Invoice from "@/pages/invoice/Invoice.tsx";
 import useOrder from "@/hooks/queries/useOrder.ts";
+import PaginatedList from "@/components/PaginatedList";
 
 const Order = () => {
   const { data } = useOrder();
@@ -63,9 +64,14 @@ const Order = () => {
 
           {isMobile ? (
             <div>
-              {data.map((order, index) => (
-                <OrderItem key={index} />
-              ))}
+              {
+                <PaginatedList
+                  data={data}
+                  RenderComponent={({ item }) => {
+                    return <OrderItem order={item} />;
+                  }}
+                />
+              }
             </div>
           ) : (
             <Card>

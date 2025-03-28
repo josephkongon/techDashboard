@@ -1,12 +1,11 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { FC, useMemo, useRef, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap"; // components
 import logoDark from "@/assets/images/logo-dark.png";
 import logoLight from "@/assets/images/logo-light.png";
-import { Button, Drawer } from "antd";
-import AddProductToInvoice from "@/pages/invoice/AddProductToInvoice.tsx";
-import { useDisclosure } from "@/hooks/useDisclosure.ts";
+import { Drawer } from "antd";
 import ProductItem from "@/pages/invoice/component/ProductItem.tsx";
 import { CURRENCY } from "@/types/constand.ts";
+import { formatToDate } from "@/utils/format.ts";
 
 interface Address {
   line_1: string;
@@ -26,33 +25,16 @@ interface IItems {
 interface IProps {
   user: any;
   products: any[];
+  isOpen: boolean;
+  order: any;
+  toggle: () => void;
 }
-const Invoice = () => {
-  const { isOpen, toggle } = useDisclosure();
+const Invoice: FC<IProps> = ({ user, products, isOpen, toggle, order }) => {
   const printRef = useRef<HTMLDivElement>(null);
   const [customer] = useState<string>("Stanley Jones");
   const [notes] = useState<string>(
     "Thanks a lot because you keep purchasing our products. Our company promises to provide high quality products for you as well as outstanding customer service for every transaction.",
   );
-  const [order_date] = useState<string>("Jan 17, 2016");
-  const [order_status] = useState<string>("Unpaid");
-  const [order_no] = useState<string>("000028");
-  const [billing_address] = useState<Address>({
-    line_1: "Stanley Jones",
-    line_2: "795 Folsom Ave, Suite 600",
-    city: "San Francisco",
-    state: "CA",
-    zip: 94107,
-    phone: "(123) 456-7890",
-  });
-  const [shipping_address] = useState<Address>({
-    line_1: "Stanley Jones",
-    line_2: "795 Folsom Ave, Suite 600",
-    city: "San Francisco",
-    state: "CA",
-    zip: 94107,
-    phone: "(123) 456-7890",
-  });
 
   const [productList, setProductList] = useState<IItems[]>([]);
   const [vat] = useState<string>("$459.75");
@@ -87,8 +69,10 @@ const Invoice = () => {
 
   const calculateTotal = useMemo(() => {
     let total = 0;
-    productList.forEach((prod) => {
-      total += prod?.quantity * prod.price;
+    products?.forEach((prod) => {
+      total += prod.price
+        ? prod?.quantity * prod.price
+        : prod?.quantity * prod.product.price;
     });
 
     return total;
@@ -96,13 +80,13 @@ const Invoice = () => {
 
   return (
     <>
-      <AddProductToInvoice
-        toggle={toggle}
-        isOpen={isOpen}
-        update={handleAddProductToInvoice}
-      />
-
-      <Drawer width={1200} height={500}>
+      <Drawer
+        open={isOpen}
+        onClose={toggle}
+        destroyOnClose
+        width={1200}
+        height={500}
+      >
         <Row ref={printRef}>
           <Col>
             <Card>
@@ -131,7 +115,7 @@ const Invoice = () => {
                   <Col md={6}>
                     <div className="mt-3">
                       <p>
-                        <b>Hello, {customer}</b>
+                        <b>Hello, {order?.user?.username}</b>
                       </p>
                       <p className="text-muted">{notes}</p>
                     </div>
@@ -143,7 +127,8 @@ const Invoice = () => {
                         <strong>Order Date : </strong>{" "}
                         <span className="float-end">
                           {" "}
-                          &nbsp;&nbsp;&nbsp; {order_date}{" "}
+                          &nbsp;&nbsp;&nbsp;{" "}
+                          {formatToDate(order?.createAt)}{" "}
                         </span>
                       </p>
                       <p>
@@ -151,7 +136,7 @@ const Invoice = () => {
                         <span className="float-end">
                           {" "}
                           <span className="badge bg-danger">
-                            {order_status}
+                            {order?.status}
                           </span>
                         </span>
                       </p>
@@ -159,39 +144,10 @@ const Invoice = () => {
                         <strong>Order No. : </strong>
                         <span className="float-end">
                           {" "}
-                          <span className="float-end">{order_no}</span>
+                          <span className="float-end">{order?.orderId}</span>
                         </span>
                       </p>
                     </div>
-                  </Col>
-                </Row>
-
-                <Row className="mt-3">
-                  <Col sm={6}>
-                    <h6>Billing Address</h6>
-                    <address>
-                      {billing_address.line_1}
-                      <br />
-                      {billing_address.line_2}
-                      <br />
-                      {billing_address.city}, {billing_address.state}{" "}
-                      {billing_address.zip}
-                      <br />
-                      <abbr title="Phone">P:</abbr> {billing_address.phone}
-                    </address>
-                  </Col>
-                  <Col sm={6}>
-                    <h6>Shipping Address</h6>
-                    <address>
-                      {shipping_address.line_1}
-                      <br />
-                      {shipping_address.line_2}
-                      <br />
-                      {shipping_address.city}, {shipping_address.state}{" "}
-                      {shipping_address.zip}
-                      <br />
-                      <abbr title="Phone">P:</abbr> {shipping_address.phone}
-                    </address>
                   </Col>
                 </Row>
 
@@ -211,14 +167,18 @@ const Invoice = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {(productList || []).map((item, idx) => {
+                          {(products || []).map((item, idx) => {
                             return (
                               <ProductItem
-                                id={item.id}
+                                price={
+                                  item?.price
+                                    ? item?.price
+                                    : item.product?.price
+                                }
                                 quantity={item.quantity}
                                 key={idx}
                                 itemNumber={idx}
-                                setProductList={setProductList}
+                                productItem={item}
                               />
                             );
                           })}
@@ -228,40 +188,48 @@ const Invoice = () => {
                   </Col>
                 </Row>
 
-                <Button onClick={toggle}>+</Button>
-
-                <Row>
-                  <Col sm={6}>
-                    <div className="clearfix pt-5">
-                      <h6 className="text-muted">Notes:</h6>
-                      <small className="text-muted">
-                        All accounts are to be paid within 7 days from receipt
-                        of invoice. To be paid by cheque or credit card or
-                        direct payment online. If account is not paid within 7
-                        days the credits details supplied as confirmation of
-                        work undertaken will be charged the agreed quoted fee
-                        noted above.
-                      </small>
+                <Row
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "2rem",
+                  }}
+                >
+                  <Col>
+                    <div
+                      style={{
+                        border: "1px solid #000",
+                        padding: "20px",
+                        width: "100%",
+                        maxWidth: "250px",
+                        height: "100px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <p>
+                        <b>Signature:</b>
+                      </p>
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "60px",
+                          borderBottom: "1px solid #000",
+                          marginTop: "10px",
+                        }}
+                      ></div>
                     </div>
                   </Col>
-                  <Col sm={6}>
-                    <div className="float-end">
+
+                  <Col>
+                    <div>
                       <p>
-                        <b>Sub-total:</b>{" "}
-                        <span className="float-end">{calculateTotal}</span>
-                      </p>
-                      <p>
-                        <b>Discount (10%):</b>{" "}
-                        <span className="float-end">
-                          {" "}
-                          &nbsp;&nbsp;&nbsp; {vat}
-                        </span>
+                        <b>Sub-total:</b> <span>{calculateTotal}</span>
                       </p>
                       <h3>
                         {calculateTotal} {CURRENCY}
                       </h3>
                     </div>
-                    <div className="clearfix"></div>
+                    <div style={{ clear: "both" }}></div>
                   </Col>
                 </Row>
               </Card.Body>

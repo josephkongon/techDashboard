@@ -29,3 +29,9 @@ export const addProductToOrder = (payload: {
     .post(`/manage-order/add-product`, payload)
     .then((res) => res.data);
 };
+
+export const updateOrder = (id: string, payload: any) => {
+  return apiClient
+    .patch(`/manage-order/update-order-product/${id}`, payload)
+    .then((res) => res.data);
+};

@@ -1,8 +1,5 @@
-import React, { FC, useEffect, useMemo } from "react";
-import { useQuery } from "react-query";
-import { getProduct } from "@/service/api/product.ts";
+import React, { FC, useMemo } from "react";
 import Parser from "html-react-parser";
-import { Spin } from "antd";
 
 interface IItems {
   id: string;
@@ -10,51 +7,30 @@ interface IItems {
   price: number;
 }
 interface IProps {
-  id: string;
   itemNumber: number;
   quantity: number;
-  setProductList: React.Dispatch<React.SetStateAction<IItems[]>>;
+  price: number;
+  productItem: any;
 }
 const ProductItem: FC<IProps> = ({
-  id,
   itemNumber,
   quantity,
-  setProductList,
+  price,
+  productItem,
 }) => {
-  const { isFetching, data } = useQuery(["get-product", id], () =>
-    getProduct(id),
-  );
-
   const total = useMemo(() => {
-    return data?.price * quantity;
-  }, [data, quantity]);
-
-  useEffect(() => {
-    if (data) {
-      setProductList((prev) => {
-        return prev.map((item) => {
-          if (item.id === data.id) {
-            item.price = data.price;
-            return item;
-          } else {
-            return item;
-          }
-        });
-      });
-    }
-  }, [data]);
+    return price * quantity;
+  }, [productItem, quantity]);
 
   return (
-    <tr key={data?.id}>
+    <tr key={productItem?.id}>
+      <td>{itemNumber + 1}</td>
       <td>
-        {itemNumber + 1} <Spin spinning={isFetching} />
-      </td>
-      <td>
-        <b>{data?.name}</b> <br />
-        {Parser(data?.description || "")}
+        <b>{productItem?.product?.name}</b> <br />
+        {Parser(productItem?.product?.description || "")}
       </td>
       <td>{quantity}</td>
-      <td>{data?.price}</td>
+      <td>{price}</td>
       <td className="text-end">{total}</td>
     </tr>
   );
