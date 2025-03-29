@@ -5,23 +5,31 @@ import { useParams } from "react-router-dom";
 // components
 import PageTitle from "../../../../../components/PageTitle";
 import OrderItems from "@/pages/apps/Ecommerce/Orders/OrderDetails/component/OrderItems.tsx";
-import { useQuery } from "react-query";
-import { getSingleOrder } from "@/service/api/order.ts";
-import { Spin } from "antd";
+import { useMutation, useQuery } from "react-query";
+import { getSingleOrder, updateOrder } from "@/service/api/order.ts";
+import { Flex, message, Popover, Select, Spin } from "antd";
 import { BASE_QUERY_OPTIONS } from "@/types/constand.ts";
 import { formatToDate } from "@/utils/format.ts";
 import Invoice from "@/pages/invoice/Invoice.tsx";
 import { useDisclosure } from "@/hooks/useDisclosure.ts";
+import { PaymentStatus } from "@/types/order.ts";
+import { useTranslation } from "react-i18next";
 
 const OrderDetails = () => {
   const param = useParams();
   const { isOpen, toggle } = useDisclosure();
+  const { t } = useTranslation();
+
   const { isFetching, data, refetch } = useQuery(
     ["get-single-order", param?.id],
     () => getSingleOrder(param?.id),
     {
       ...BASE_QUERY_OPTIONS,
     },
+  );
+
+  const { isLoading, mutateAsync } = useMutation(async (payload: any) =>
+    updateOrder(data?.id, payload),
   );
 
   return (
@@ -97,9 +105,50 @@ const OrderDetails = () => {
         <Col lg={8}>
           <Card>
             <Card.Body>
-              <h4 className="header-title mb-3">
-                Items from Order {data?.orderId}
-              </h4>
+              <Flex className={"justify-content-between"}>
+                <h4 className="header-title mb-3">
+                  Items from Order {data?.orderId}
+                </h4>
+                <Popover
+                  content={
+                    <Select
+                      value={data?.paymentStatus}
+                      style={{ width: "12rem" }}
+                      onSelect={(value) => {
+                        mutateAsync(
+                          { paymentStatus: value },
+                          {
+                            onSuccess: () => {
+                              message.success("Payment status updated");
+                              refetch();
+                            },
+                            onError: () => {
+                              message.error("An error occured");
+                            },
+                          },
+                        );
+                      }}
+                    >
+                      {Object.values(PaymentStatus).map((item) => {
+                        return (
+                          <Select.Option key={item} value={item}>
+                            {t(item)}
+                          </Select.Option>
+                        );
+                      })}
+                    </Select>
+                  }
+                  title={"Update status"}
+                  trigger={"click"}
+                >
+                  <h4
+                    className="header-title mb-3 bg-info p-1 "
+                    style={{ cursor: "pointer" }}
+                  >
+                    Payment status: {t(data?.paymentStatus)}
+                  </h4>
+                </Popover>
+              </Flex>
               <OrderItems refetch={refetch} order={data} />
             </Card.Body>
           </Card>

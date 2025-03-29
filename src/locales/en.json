@@ -35,6 +35,9 @@
   "lensMountType": "Lens Mount Type",
   "videoResolution": "Video Resolution",
   "iosRange": "ISO Range",
-  "screenType": "Screen Type"
+  "screenType": "Screen Type",
+  "Paid": "Paid",
+  "UpPaid": "Not Paid",
+  "PaymentInCompleted": "Payment not completed"
 
 }

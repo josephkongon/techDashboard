@@ -30,8 +30,14 @@ export const addProductToOrder = (payload: {
     .then((res) => res.data);
 };
 
-export const updateOrder = (id: string, payload: any) => {
+export const updateOrderProduct = (id: string, payload: any) => {
   return apiClient
     .patch(`/manage-order/update-order-product/${id}`, payload)
+    .then((res) => res.data);
+};
+
+export const updateOrder = (id: string, payload: any) => {
+  return apiClient
+    .patch(`/manage-order/${id}`, payload)
     .then((res) => res.data);
 };

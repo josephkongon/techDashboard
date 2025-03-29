@@ -4,7 +4,7 @@ import { getProduct } from "@/service/api/product.ts";
 import { BASE_QUERY_OPTIONS } from "@/types/constand.ts";
 import { Button, Flex, InputNumber, message, Popover } from "antd";
 import { Col } from "react-bootstrap";
-import { updateOrder } from "@/service/api/order.ts";
+import { updateOrderProduct } from "@/service/api/order.ts";
 
 interface IProps {
   orderItem: any;
@@ -24,7 +24,7 @@ const OrderItem: FC<IProps> = ({ orderItem, refetch }) => {
   );
 
   const { isLoading, mutateAsync } = useMutation(async (payload: any) =>
-    updateOrder(orderItem?.id, payload),
+    updateOrderProduct(orderItem?.id, payload),
   );
 
   return (
