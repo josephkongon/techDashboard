@@ -119,6 +119,21 @@ const MENU_ITEMS: MenuItemTypes[] = [
       },
     ],
   },
+
+  {
+    key: "apps-setting",
+    label: "Settings",
+    isTitle: false,
+    icon: FiAperture,
+    children: [
+      {
+        key: "settings-list",
+        label: "Category menu",
+        url: "/apps/settings/category-menu",
+        parentKey: "apps-tickets",
+      },
+    ],
+  },
 ];
 
 const HORIZONTAL_MENU_ITEMS: MenuItemTypes[] = [

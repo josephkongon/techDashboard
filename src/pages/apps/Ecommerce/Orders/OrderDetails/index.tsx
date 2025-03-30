@@ -81,9 +81,6 @@ const OrderDetails = () => {
                       className={`${data?.status === "Delivered" && "completed"}`}
                     >
                       <h5 className="mt-0 mb-1"> Delivered</h5>
-                      <p className="text-muted">
-                        Estimated delivery within 3 days
-                      </p>
                     </li>
                   </ul>
 

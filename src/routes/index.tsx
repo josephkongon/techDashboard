@@ -63,6 +63,11 @@ const TicketsDetails = React.lazy(
   () => import("../pages/apps/Tickets/Details/"),
 );
 
+//Setting
+const CategoryMenu = React.lazy(
+  () => import("../pages/apps/Settings/CategoryMenu"),
+);
+
 // extra pages
 const Starter = React.lazy(() => import("../pages/other/Starter"));
 const Timeline = React.lazy(() => import("../pages/other/Timeline"));
@@ -201,8 +206,28 @@ const ticketsRoutes = {
     },
   ],
 };
+const SettingRoutes = {
+  path: "/apps/settings",
+  name: "Settings",
+  route: PrivateRoute,
+  roles: ["Admin"],
+  icon: "aperture",
+  children: [
+    {
+      path: "/apps/settings/category-menu",
+      name: "List",
+      element: <CategoryMenu />,
+      route: PrivateRoute,
+    },
+  ],
+};
 
-const appRoutes = [calendarAppRoutes, ecommerceAppRoutes, ticketsRoutes];
+const appRoutes = [
+  calendarAppRoutes,
+  ecommerceAppRoutes,
+  ticketsRoutes,
+  SettingRoutes,
+];
 
 // pages
 const extrapagesRoutes = {

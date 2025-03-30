@@ -125,15 +125,15 @@ const Invoice: FC<IProps> = ({ user, products, isOpen, toggle, order }) => {
                           {formatToDate(order?.createAt)}{" "}
                         </span>
                       </p>
-                      <p>
-                        <strong>Order Status : </strong>{" "}
-                        <span className="float-end">
-                          {" "}
-                          <span className="badge bg-danger">
-                            {order?.status}
-                          </span>
-                        </span>
-                      </p>
+                      {/*<p>*/}
+                      {/*  <strong>Order Status : </strong>{" "}*/}
+                      {/*  <span className="float-end">*/}
+                      {/*    {" "}*/}
+                      {/*    <span className="badge bg-danger">*/}
+                      {/*      {order?.status}*/}
+                      {/*    </span>*/}
+                      {/*  </span>*/}
+                      {/*</p>*/}
                       <p>
                         <strong>Order No. : </strong>
                         <span className="float-end">
