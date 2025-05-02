@@ -155,7 +155,7 @@ const CalendarApp = () => {
   };
 
   /*
-    on add event 
+    on add event
     */
   const onAddEvent = (data: any) => {
     const modifiedEvents = [...events];
@@ -216,14 +216,6 @@ const CalendarApp = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Apps", path: "/apps/calendar" },
-          { label: "Calendar", path: "/apps/calendar", active: true },
-        ]}
-        title={"Calendar"}
-      />
-
       <Row>
         <Col>
           <Card>

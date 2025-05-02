@@ -94,7 +94,7 @@ const Inbox = () => {
   const [endIndex, setEndIndex] = useState<number>(20);
   const [totalPages] = useState<number>(mails.length / 20);
   const [totalUnreadEmails] = useState<number>(
-    mails.filter((e: any) => e.is_read === false).length
+    mails.filter((e: any) => e.is_read === false).length,
   );
 
   /**
@@ -143,14 +143,6 @@ const Inbox = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Email", path: "/apps/email/inbox" },
-          { label: "Inbox", path: "/apps/email/inbox", active: true },
-        ]}
-        title={"Inbox"}
-      />
-
       <Row>
         <Col>
           <Card>

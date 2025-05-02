@@ -42,18 +42,6 @@ const RangeSliders = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extended UI", path: "/extended-ui/rangesliders" },
-          {
-            label: "Range Slider",
-            path: "/extended-ui/rangesliders",
-            active: true,
-          },
-        ]}
-        title={"Range Slider"}
-      />
-
       <Row>
         <Col xl={6}>
           <Card>
@@ -65,9 +53,7 @@ const RangeSliders = () => {
                 range={{ min: 0, max: 100 }}
                 start={[20]}
                 connect
-                onSlide={(value, percent) =>
-                  onSlide(1, value, percent)
-                }
+                onSlide={(value, percent) => onSlide(1, value, percent)}
               />
               <p className="mt-2 mb-0">
                 Value:{" "}
@@ -92,9 +78,7 @@ const RangeSliders = () => {
                 range={{ min: 10, max: 150 }}
                 start={[20, 45]}
                 connect
-                onSlide={(value) =>
-                  onSlide2(1, value)
-                }
+                onSlide={(value) => onSlide2(1, value)}
               />
               <p className="mt-2 mb-0">
                 Value:{" "}
@@ -117,9 +101,7 @@ const RangeSliders = () => {
                 start={[20]}
                 step={10}
                 connect
-                onSlide={(value, percent) =>
-                  onSlide(2, value, percent)
-                }
+                onSlide={(value, percent) => onSlide(2, value, percent)}
               />
               <p className="mt-2 mb-0">
                 Value:{" "}
@@ -147,9 +129,7 @@ const RangeSliders = () => {
                 start={[20, 45]}
                 step={15}
                 connect
-                onSlide={(value) =>
-                  onSlide2(2, value)
-                }
+                onSlide={(value) => onSlide2(2, value)}
               />
               <p className="mt-2 mb-0">
                 Value:{" "}

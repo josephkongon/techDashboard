@@ -25,7 +25,7 @@ const RoundedCircle = ({ size }: { size: string }) => {
           className={classNames(
             "img-fluid",
             "rounded-circle",
-            "avatar-" + size
+            "avatar-" + size,
           )}
         />
         <p>
@@ -39,14 +39,6 @@ const RoundedCircle = ({ size }: { size: string }) => {
 const Avatars = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/avatars" },
-          { label: "Avatars", path: "/ui/avatars", active: true },
-        ]}
-        title={"Avatars"}
-      />
-
       <Row>
         <Col xl={6}>
           <Card>

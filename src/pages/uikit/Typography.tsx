@@ -1,4 +1,3 @@
-
 import { Row, Col, Card } from "react-bootstrap";
 
 // components
@@ -8,14 +7,6 @@ import React from "react";
 const Typography = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/typography" },
-          { label: "Typography", path: "/ui/typography", active: true },
-        ]}
-        title={"Typography"}
-      />
-
       <Row>
         <Col>
           <Card>

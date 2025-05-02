@@ -211,12 +211,7 @@ const DeliveryInfo = (props: { details: Delivery }) => {
     <React.Fragment>
       <div className="text-center">
         <i className="mdi mdi-truck-fast h2 text-muted"></i>
-        <h5>
-          {
-            details.provider &&
-            <b>{details.provider}</b>
-          }
-        </h5>
+        <h5>{details.provider && <b>{details.provider}</b>}</h5>
         <p className="mb-1">
           <span className="fw-semibold">Order ID :</span> {details.order_id}
         </p>
@@ -285,18 +280,6 @@ const OrderDetails = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/order/details" },
-          {
-            label: "Order Detail",
-            path: "/apps/ecommerce/order/details",
-            active: true,
-          },
-        ]}
-        title={"Order Detail"}
-      />
-
       <Row>
         <Col lg={4}>
           <Card>

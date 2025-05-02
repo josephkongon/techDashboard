@@ -5,7 +5,6 @@ import { Row, Col, Card } from "react-bootstrap";
 // styles
 import "react-nestable/dist/styles/index.css";
 
-
 // components
 import PageTitle from "../../components/PageTitle";
 
@@ -71,18 +70,6 @@ const NestableList = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extended UI", path: "/extended-ui/nestable" },
-          {
-            label: "Nestable List",
-            path: "/extended-ui/nestable",
-            active: true,
-          },
-        ]}
-        title={"Nestable List"}
-      />
-
       <Row>
         <Col lg={12}>
           <div className="text-start">

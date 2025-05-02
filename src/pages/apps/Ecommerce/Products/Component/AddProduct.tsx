@@ -115,7 +115,7 @@ const AddProduct: FC<IProps> = ({
   return (
     <Drawer
       width={"50rem"}
-      title={product ? "Update Producr" : "Add New Product"}
+      title={product ? "Update Product" : "Add New Product"}
       open={isOpen}
       onClose={() => {
         if (product) {

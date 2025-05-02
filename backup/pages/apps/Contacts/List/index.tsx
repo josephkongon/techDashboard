@@ -24,7 +24,7 @@ const List = () => {
     else {
       var modifiedProducts = data;
       modifiedProducts = modifiedProducts.filter((item) =>
-        item.name.toLowerCase().includes(value)
+        item.name.toLowerCase().includes(value),
       );
       setContacts(modifiedProducts);
     }
@@ -45,14 +45,6 @@ const List = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Contacts", path: "/apps/contacts/list" },
-          { label: "Contacts List", path: "/apps/contacts/list", active: true },
-        ]}
-        title={"Contacts List"}
-      />
-
       <Row>
         <Col>
           <Card>

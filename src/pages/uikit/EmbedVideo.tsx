@@ -6,14 +6,6 @@ import PageTitle from "../../components/PageTitle";
 const EmbedVideo = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/embedvideo" },
-          { label: "Video", path: "/ui/embedvideo", active: true },
-        ]}
-        title={"Embed Video"}
-      />
-
       <Row>
         <Col xl={6}>
           <Card>

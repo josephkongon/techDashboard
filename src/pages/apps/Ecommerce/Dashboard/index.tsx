@@ -1,8 +1,6 @@
-
-import { Row, Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 // components
-import PageTitle from "../../../../components/PageTitle";
 
 import Statistics from "./Statistics";
 import SalesChart from "./SalesChart";
@@ -10,25 +8,12 @@ import RevenueDetails from "./RevenueDetails";
 import Transactions from "./Transactions";
 import ProductsDetails from "./ProductsDetails";
 
-
 // dummy data
-import { transactions, products } from "./data";
+import { products, transactions } from "./data";
 
 const Dashboard = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/dashboard" },
-          {
-            label: "Dashboard",
-            path: "/apps/ecommerce/dashboard",
-            active: true,
-          },
-        ]}
-        title={"Dashboard"}
-      />
-
       <Row>
         <Col md={6} xl={3}>
           <Statistics

@@ -48,13 +48,6 @@ const SiteMapMenuItem = ({ item }: { item: ItemType }) => {
 const Sitemap = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extra Pages", path: "/pages/invoice" },
-          { label: "Sitemap", path: "/pages/invoice", active: true },
-        ]}
-        title={"Sitemap"}
-      />
       <Row>
         <Col>
           <Card>

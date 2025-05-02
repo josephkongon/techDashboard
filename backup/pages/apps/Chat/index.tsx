@@ -22,14 +22,6 @@ const ChatApp = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Apps", path: "/apps/chat" },
-          { label: "Chat", path: "/apps/chat", active: true },
-        ]}
-        title={"Chat"}
-      />
-
       <Row>
         <Col lg={4} xl={3}>
           <ChatUsers onUserSelect={onUserChange} />

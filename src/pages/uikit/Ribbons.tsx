@@ -19,7 +19,7 @@ const Ribbon1 = ({ label, color, direction }: RibbonProps) => {
           className={classNames(
             "ribbon",
             "ribbon-" + color,
-            direction === "left" ? "float-start" : "float-end"
+            direction === "left" ? "float-start" : "float-end",
           )}
         >
           <i className="mdi mdi-access-point me-1"></i> {label}
@@ -28,7 +28,7 @@ const Ribbon1 = ({ label, color, direction }: RibbonProps) => {
           className={classNames(
             "text-" + color,
             "mt-0",
-            direction === "left" ? "float-end" : "float-start"
+            direction === "left" ? "float-end" : "float-start",
           )}
         >
           {label} Header
@@ -68,14 +68,6 @@ const Ribbon2 = ({ label, color }: RibbonProps) => {
 const Ribbons = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/ribbons" },
-          { label: "Ribbons", path: "/ui/ribbons", active: true },
-        ]}
-        title={"Ribbons"}
-      />
-
       <Row>
         <Col lg={4}>
           <Ribbon1 label="Blue" color="blue" direction="left" />

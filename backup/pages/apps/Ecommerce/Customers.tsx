@@ -132,18 +132,6 @@ const sizePerPageList = [
 const Customers = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/customers" },
-          {
-            label: "Customers",
-            path: "/apps/ecommerce/customers",
-            active: true,
-          },
-        ]}
-        title={"Customers"}
-      />
-
       <Row>
         <Col>
           <Card>

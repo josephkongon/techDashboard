@@ -24,7 +24,7 @@ const OrderItem: FC<IProps> = ({ order }) => {
                 <div className="col">
                   <h5 className="font-16 mt-0 sp-line-1">
                     <Link to="" className="text-dark">
-                      {order.orderId}
+                      {order?.shortId}
                     </Link>
                   </h5>
 

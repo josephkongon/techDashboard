@@ -1,4 +1,3 @@
-
 import { Row, Col } from "react-bootstrap";
 
 // components
@@ -14,19 +13,11 @@ import RevenueChart from "./RevenueChart";
 // dummy data
 import { chatMessages } from "./data";
 
-import 'chart.js/auto';
+import "chart.js/auto";
 
 const Dashboard3 = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Dashboards", path: "/dashboard-3" },
-          { label: "Dashboard 3", path: "/dashboard-3", active: true },
-        ]}
-        title={"Dashboard 3"}
-      />
-
       <Statistics />
       <Row>
         <Col xl={6}>

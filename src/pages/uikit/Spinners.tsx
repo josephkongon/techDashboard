@@ -225,14 +225,6 @@ const ButtonSpinners = () => {
 const Spinners = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/spinners" },
-          { label: "Spinners", path: "/ui/spinners", active: true },
-        ]}
-        title={"Spinners"}
-      />
-
       <Row>
         <Col lg={6}>
           <BorderedSpinners />

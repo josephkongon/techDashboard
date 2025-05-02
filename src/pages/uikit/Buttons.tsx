@@ -596,14 +596,6 @@ const ButtonGroups = () => {
 const Buttons = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/buttons" },
-          { label: "Buttons", path: "/ui/buttons", active: true },
-        ]}
-        title={"Buttons"}
-      />
-
       <Row>
         <Col>
           <Card>

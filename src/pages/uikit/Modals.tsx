@@ -940,14 +940,6 @@ const StaticBackdropModal = () => {
 const Modals = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/modals" },
-          { label: "Modals", path: "/ui/modals", active: true },
-        ]}
-        title={"Modals"}
-      />
-
       <Row>
         <Col md={6}>
           <ModalSizes />

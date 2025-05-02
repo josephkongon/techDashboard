@@ -82,13 +82,6 @@ const Checkout = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/checkout" },
-          { label: "Checkout", path: "/apps/ecommerce/checkout", active: true },
-        ]}
-        title={"Checkout"}
-      />
       <Tab.Container defaultActiveKey="1">
         <Row>
           <Col>
@@ -109,7 +102,7 @@ const Checkout = () => {
                           className={classnames(
                             "mdi mdi-account-circle",
                             "d-block",
-                            "font-24"
+                            "font-24",
                           )}
                         ></i>
                         <span className="d-none d-lg-block">Billing Info</span>
@@ -123,7 +116,7 @@ const Checkout = () => {
                           className={classnames(
                             "mdi mdi-truck-fast",
                             "d-block",
-                            "font-24"
+                            "font-24",
                           )}
                         ></i>
                         <span className="d-none d-lg-block">Shipping Info</span>
@@ -137,7 +130,7 @@ const Checkout = () => {
                           className={classnames(
                             "mdi mdi-cash-multiple",
                             "d-block",
-                            "font-24"
+                            "font-24",
                           )}
                         ></i>
                         <span className="d-none d-lg-block">Payment Info</span>

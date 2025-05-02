@@ -200,14 +200,6 @@ const Offcanvases = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/offcanvas" },
-          { label: "Offcanvas", path: "/ui/offcanvas", active: true },
-        ]}
-        title={"Offcanvas"}
-      />
-
       <Row>
         <Col xl={6}>
           <DefaultOffcanvas />

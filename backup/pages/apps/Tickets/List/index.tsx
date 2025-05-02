@@ -1,4 +1,3 @@
-
 import { Row, Col } from "react-bootstrap";
 
 // components
@@ -13,13 +12,6 @@ import { ticketDetails } from "./data";
 const List = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Tickets", path: "/apps/tickets/list" },
-          { label: "Ticket List", path: "/apps/tickets/list", active: true },
-        ]}
-        title={"Ticket List"}
-      />
       <Row>
         <Col md={6} xl={3}>
           <Statistics

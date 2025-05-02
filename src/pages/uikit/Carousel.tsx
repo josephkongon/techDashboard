@@ -1,6 +1,6 @@
-import image1 from '@/assets/images/small/img-1.jpg';
-import image2 from '@/assets/images/small/img-2.jpg';
-import image3 from '@/assets/images/small/img-3.jpg';
+import image1 from "@/assets/images/small/img-1.jpg";
+import image2 from "@/assets/images/small/img-2.jpg";
+import image3 from "@/assets/images/small/img-3.jpg";
 import React, { useState } from "react";
 import { Card, Carousel, Col, Row } from "react-bootstrap";
 
@@ -20,11 +20,7 @@ const DefaultSlides = () => {
 
         <Carousel indicators={false} controls={false}>
           <Carousel.Item>
-            <img
-              className="d-block img-fluid"
-              src={image1}
-              alt="First slide"
-            />
+            <img className="d-block img-fluid" src={image1} alt="First slide" />
           </Carousel.Item>
           <Carousel.Item>
             <img
@@ -34,11 +30,7 @@ const DefaultSlides = () => {
             />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block img-fluid"
-              src={image2}
-              alt="Third slide"
-            />
+            <img className="d-block img-fluid" src={image2} alt="Third slide" />
           </Carousel.Item>
         </Carousel>
       </Card.Body>
@@ -56,25 +48,13 @@ const SlidesWithControls = () => {
         </p>
         <Carousel indicators={false}>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image1}
-              alt="First slide"
-            />
+            <img className="d-block w-100" src={image1} alt="First slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image2}
-              alt="Second slide"
-            />
+            <img className="d-block w-100" src={image2} alt="Second slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image3}
-              alt="Third slide"
-            />
+            <img className="d-block w-100" src={image3} alt="Third slide" />
           </Carousel.Item>
         </Carousel>
       </Card.Body>
@@ -98,25 +78,13 @@ const SlidesWithIndicators = () => {
         </p>
         <Carousel activeIndex={index} onSelect={handleSelect}>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image1}
-              alt="First slide"
-            />
+            <img className="d-block w-100" src={image1} alt="First slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image2}
-              alt="Second slide"
-            />
+            <img className="d-block w-100" src={image2} alt="Second slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image3}
-              alt="Third slide"
-            />
+            <img className="d-block w-100" src={image3} alt="Third slide" />
           </Carousel.Item>
         </Carousel>
       </Card.Body>
@@ -136,33 +104,21 @@ const SlidesWithCaptions = () => {
         </p>
         <Carousel indicators={false}>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image1}
-              alt="First slide"
-            />
+            <img className="d-block w-100" src={image1} alt="First slide" />
             <Carousel.Caption>
               <h3>First slide label</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image2}
-              alt="Second slide"
-            />
+            <img className="d-block w-100" src={image2} alt="Second slide" />
             <Carousel.Caption>
               <h3>Second slide label</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image3}
-              alt="Third slide"
-            />
+            <img className="d-block w-100" src={image3} alt="Third slide" />
             <Carousel.Caption>
               <h3>Third slide label</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -185,25 +141,13 @@ const CrossFade = () => {
         </p>
         <Carousel fade indicators={false}>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image1}
-              alt="First slide"
-            />
+            <img className="d-block w-100" src={image1} alt="First slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image2}
-              alt="Second slide"
-            />
+            <img className="d-block w-100" src={image2} alt="Second slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image3}
-              alt="Third slide"
-            />
+            <img className="d-block w-100" src={image3} alt="Third slide" />
           </Carousel.Item>
         </Carousel>
       </Card.Body>
@@ -223,25 +167,13 @@ const IndividualInterval = () => {
         </p>
         <Carousel fade indicators={false}>
           <Carousel.Item interval={1000}>
-            <img
-              className="d-block w-100"
-              src={image1}
-              alt="First slide"
-            />
+            <img className="d-block w-100" src={image1} alt="First slide" />
           </Carousel.Item>
           <Carousel.Item interval={2000}>
-            <img
-              className="d-block w-100"
-              src={image2}
-              alt="Second slide"
-            />
+            <img className="d-block w-100" src={image2} alt="Second slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={image3}
-              alt="Third slide"
-            />
+            <img className="d-block w-100" src={image3} alt="Third slide" />
           </Carousel.Item>
         </Carousel>
       </Card.Body>
@@ -252,14 +184,6 @@ const IndividualInterval = () => {
 const Carousels = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/carousel" },
-          { label: "Carousel", path: "/ui/carousel", active: true },
-        ]}
-        title={"Carousel"}
-      />
-
       <Row>
         <Col lg={6}>
           <DefaultSlides />

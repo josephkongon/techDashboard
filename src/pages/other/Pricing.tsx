@@ -60,14 +60,6 @@ const Pricing = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extra Pages", path: "/pages/pricing" },
-          { label: "Pricing", path: "/pages/pricing", active: true },
-        ]}
-        title={"Pricing"}
-      />
-
       <Row className="justify-content-center">
         <Col xl={10}>
           <div className="text-center">

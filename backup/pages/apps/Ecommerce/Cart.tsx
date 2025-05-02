@@ -130,18 +130,6 @@ const Cart = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/shopping-cart" },
-          {
-            label: "Shopping Cart",
-            path: "/apps/ecommerce/shopping-cart",
-            active: true,
-          },
-        ]}
-        title={"Shopping Cart"}
-      />
-
       <Row>
         <Col>
           <Card>
@@ -240,7 +228,8 @@ const Cart = () => {
                         href="/apps/ecommerce/products"
                         className="btn text-muted d-none d-sm-inline-block btn-link fw-semibold"
                       >
-                        <i className="mdi mdi-arrow-left"></i> Continue Shopping{" "}
+                        <i className="mdi mdi-arrow-left"></i> Continue
+                        Shopping{" "}
                       </a>
                     </Col>
                     <Col sm={6}>
@@ -249,7 +238,8 @@ const Cart = () => {
                           to="/apps/ecommerce/checkout"
                           className="btn btn-danger"
                         >
-                          <i className="mdi mdi-cart-plus me-1"></i> Checkout{" "}
+                          <i className="mdi mdi-cart-plus me-1"></i>{" "}
+                          Checkout{" "}
                         </Link>
                       </div>
                     </Col>

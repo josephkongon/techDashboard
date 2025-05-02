@@ -121,14 +121,6 @@ const Customers = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "CRM", path: "/apps/crm/customers" },
-          { label: "Customers", path: "/apps/crm/customers", active: true },
-        ]}
-        title={"Customers"}
-      />
-
       <Row>
         <Col>
           <Card>

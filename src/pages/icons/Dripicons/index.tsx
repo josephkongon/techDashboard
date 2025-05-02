@@ -10,18 +10,6 @@ import { DRIPICONS_LIST } from "./data";
 const Dripicons = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Icons", path: "/ui/icons/dripicons" },
-          {
-            label: "Dripicons Icons",
-            path: "/ui/icons/dripicons",
-            active: true,
-          },
-        ]}
-        title={"Dripicons Icons"}
-      />
-
       <Row>
         <Col>
           <Card>

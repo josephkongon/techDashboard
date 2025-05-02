@@ -1,5 +1,12 @@
-
-import { Row, Col, Card, Pagination, Badge, Breadcrumb, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Card,
+  Pagination,
+  Badge,
+  Breadcrumb,
+  Button,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
@@ -112,7 +119,7 @@ const ContexualBadges = () => {
               className={classNames(
                 "me-1",
                 "badge bg-" + color.color,
-                color.color === "light" ? "text-dark" : null
+                color.color === "light" ? "text-dark" : null,
               )}
               key={index}
             >
@@ -179,7 +186,7 @@ const PillBadges = () => {
                 "me-1",
                 "bg-" + color.color,
                 color.color === "light" ? "text-dark" : null,
-                color.color === "dark" ? "text-light" : null
+                color.color === "dark" ? "text-light" : null,
               )}
               key={index}
             >
@@ -289,7 +296,7 @@ const DefaultPagination = () => {
     items.push(
       <Pagination.Item key={number} active={number === 3}>
         {number}
-      </Pagination.Item>
+      </Pagination.Item>,
     );
   }
 
@@ -316,7 +323,7 @@ const RoundedPagination = () => {
     items.push(
       <Pagination.Item key={number} active={number === 3}>
         {number}
-      </Pagination.Item>
+      </Pagination.Item>,
     );
   }
   return (
@@ -431,13 +438,6 @@ const BreadcrumbExample = () => {
 const GeneralUI = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/general" },
-          { label: "General UI", path: "/ui/general", active: true },
-        ]}
-        title={"General UI"}
-      />
       <Row>
         <Col xl={6}>
           <DefaultBadges />

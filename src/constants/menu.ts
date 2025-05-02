@@ -132,6 +132,19 @@ const MENU_ITEMS: MenuItemTypes[] = [
         url: "/apps/settings/category-menu",
         parentKey: "apps-tickets",
       },
+
+      {
+        key: "config",
+        label: "Config",
+        url: "/apps/settings/config",
+        parentKey: "apps-tickets",
+      },
+      {
+        key: "contact-us",
+        label: "Contact Us",
+        url: "/apps/settings/contact-us",
+        parentKey: "apps-tickets",
+      },
     ],
   },
 ];

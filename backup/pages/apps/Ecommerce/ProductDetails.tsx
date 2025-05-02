@@ -142,23 +142,11 @@ const ProductDetails = () => {
   });
 
   const [discountPrice] = useState<number>(
-    Math.round(product.price - (product.price * product.discount) / 100)
+    Math.round(product.price - (product.price * product.discount) / 100),
   );
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/details" },
-          {
-            label: "Product Detail",
-            path: "/apps/ecommerce/details",
-            active: true,
-          },
-        ]}
-        title={"Product Detail"}
-      />
-
       <Row>
         <Col>
           <Card>

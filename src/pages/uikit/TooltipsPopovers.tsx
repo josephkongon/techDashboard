@@ -1,4 +1,3 @@
-
 import {
   Row,
   Col,
@@ -107,18 +106,6 @@ const TooltipDirection = () => {
 const TooltipsPopovers = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/tooltips-popovers" },
-          {
-            label: "Tooltips & Popovers",
-            path: "/ui/tooltips-popovers",
-            active: true,
-          },
-        ]}
-        title={"Tooltips & Popovers"}
-      />
-
       <Row>
         <Col>
           <PopoverDirection />

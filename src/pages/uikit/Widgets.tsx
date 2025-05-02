@@ -1,4 +1,3 @@
-
 import { Row, Col, Card } from "react-bootstrap";
 import CountUp from "react-countup";
 
@@ -66,14 +65,6 @@ const Widgets = () => {
   ];
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Components", path: "/ui/widgets" },
-          { label: "Widgets", path: "/ui/widgets", active: true },
-        ]}
-        title={"Widgets"}
-      />
-
       {/* StatisticsWidget */}
       <Row>
         <Col md={6} xl={3}>

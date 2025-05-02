@@ -11,23 +11,11 @@ import RadarChart from "./RadarChart";
 import PolarChart from "./PolarChart";
 import BubbleChart from "./BubbleChart";
 
-import 'chart.js/auto';
+import "chart.js/auto";
 
 const ChartJs = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Charts", path: "/features/charts/chartjs" },
-          {
-            label: "Chartjs Charts",
-            path: "/features/charts/chartjs",
-            active: true,
-          },
-        ]}
-        title={"Chartjs Charts"}
-      />
-
       <Row>
         <Col xl={6}>
           <LineChart />

@@ -20,7 +20,7 @@ const Products = () => {
     else {
       let modifiedProducts = data;
       modifiedProducts = modifiedProducts.filter((item) =>
-        item.name.toLowerCase().includes(value)
+        item.name.toLowerCase().includes(value),
       );
       setProducts(modifiedProducts);
     }
@@ -28,14 +28,6 @@ const Products = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/products" },
-          { label: "Products", path: "/apps/ecommerce", active: true },
-        ]}
-        title={"Products"}
-      />
-
       <Row>
         <Col>
           <Card>

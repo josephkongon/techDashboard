@@ -51,18 +51,21 @@ const withProgressHook =
         onClick={() => {
           setProgress(0.01);
           const inc = () => {
-            setTimeout(() => {
-              let nv = 0;
-              setProgress((p: any) => {
-                nv = p + 0.05;
-                return nv;
-              });
-              if (nv < 1) inc();
-              else
-                setTimeout(() => {
-                  setProgress(null);
-                }, 75);
-            }, Math.random() * (500 - 100) + 100);
+            setTimeout(
+              () => {
+                let nv = 0;
+                setProgress((p: any) => {
+                  nv = p + 0.05;
+                  return nv;
+                });
+                if (nv < 1) inc();
+                else
+                  setTimeout(() => {
+                    setProgress(null);
+                  }, 75);
+              },
+              Math.random() * (500 - 100) + 100,
+            );
           };
           inc();
         }}
@@ -76,18 +79,6 @@ const ExProgressLaddaButton = withProgressHook(LaddaButton);
 const LoadingButtons = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extended UI", path: "/extended-ui/loading-buttons" },
-          {
-            label: "Loading Buttons",
-            path: "/extended-ui/loading-buttons",
-            active: true,
-          },
-        ]}
-        title={"Loading Buttons"}
-      />
-
       <Row>
         <Col>
           <Card>
@@ -130,7 +121,7 @@ const LoadingButtons = () => {
                         </ExLoadingLaddaButton>
                       </div>
                     </Col>
-                  )
+                  ),
                 )}
               </Row>
 
@@ -149,7 +140,7 @@ const LoadingButtons = () => {
                         </ExLoadingLaddaButton>
                       </div>
                     </Col>
-                  )
+                  ),
                 )}
               </Row>
 

@@ -38,6 +38,10 @@
   "screenType": "Screen Type",
   "Paid": "Paid",
   "UpPaid": "Not Paid",
-  "PaymentInCompleted": "Payment not completed"
+  "PaymentInCompleted": "Payment not completed",
+  "email": "Email",
+  "hotline": "Hotline",
+  "whatsappNumber": "Whatsapp number",
+  "whatsappEnable": "Whatsapp Enable"
 
 }

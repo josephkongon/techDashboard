@@ -1,4 +1,3 @@
-
 import { Row, Col } from "react-bootstrap";
 
 // components
@@ -16,14 +15,6 @@ import { projectsDetails } from "./data";
 const Dashboard4 = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Dashboards", path: "/dashboard-4" },
-          { label: "Dashboard 4", path: "/dashboard-4", active: true },
-        ]}
-        title={"Dashboard 4"}
-      />
-
       <Row>
         <Col xl={4} md={6}>
           <SalesChart />

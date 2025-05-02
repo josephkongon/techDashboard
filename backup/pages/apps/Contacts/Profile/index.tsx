@@ -1,4 +1,3 @@
-
 import { Row, Col, Card, Tab, Nav } from "react-bootstrap";
 
 // components
@@ -65,13 +64,6 @@ const Profile = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Contacts", path: "/apps/contacts/profile" },
-          { label: "Profile", path: "/apps/contacts/profile", active: true },
-        ]}
-        title={"Profile"}
-      />
       <Row>
         <Col xl={4} lg={4}>
           {/* User information */}

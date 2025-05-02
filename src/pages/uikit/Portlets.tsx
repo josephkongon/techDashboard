@@ -1,4 +1,3 @@
-
 import { Row, Col } from "react-bootstrap";
 import classNames from "classnames";
 
@@ -10,14 +9,6 @@ const Portlets = () => {
   const headerVariant = ["danger", "blue", "warning", "info", "dark", "pink"];
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/portlets" },
-          { label: "Portlets", path: "/ui/portlets", active: true },
-        ]}
-        title={"Portlets"}
-      />
-
       <Row>
         <Col lg={4}>
           <BasicPortlet titleClass="card-title">
@@ -68,11 +59,11 @@ const Portlets = () => {
                 headerClass={classNames(
                   "py-3",
                   "bg-" + item,
-                  item === "dark" ? "text-light" : "text-white"
+                  item === "dark" ? "text-light" : "text-white",
                 )}
                 titleClass={classNames(
                   "card-title",
-                  item === "dark" ? "text-light" : "text-white"
+                  item === "dark" ? "text-light" : "text-white",
                 )}
               >
                 <div>

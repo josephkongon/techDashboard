@@ -1,4 +1,3 @@
-
 import { Row, Col, Card } from "react-bootstrap";
 
 // components
@@ -108,14 +107,6 @@ const ImageSizes = () => {
 const Images = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/images" },
-          { label: "Images", path: "/ui/images", active: true },
-        ]}
-        title={"Images"}
-      />
-
       <Row>
         <Col sm={12}>
           <Card>

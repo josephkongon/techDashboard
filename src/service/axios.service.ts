@@ -1,5 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { LocalStorageService } from "@/service/localStorage.service.ts";
+import { usersActions } from "@/redux/slices/auth.ts";
+import store from "@/redux";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 export const apiClient = axios.create({
@@ -25,13 +27,13 @@ apiClient.interceptors.response.use(
   async (error: AxiosError<{ statusCode?: string; message?: string }>) => {
     const { response } = error;
 
-    const ignoredStatusCodes = ["WrongUsernameOrPassword"];
+    const ignoredStatusCodes = ["Incorrect password"];
 
     if (
       [401].includes(response?.status ?? 0) &&
       !ignoredStatusCodes.includes(response?.data?.statusCode ?? "")
     ) {
-      // store.dispatch(tabActions.clearSession({}));
+      store.dispatch(usersActions.clearCurrentUser({}));
     }
 
     return Promise.reject(error);

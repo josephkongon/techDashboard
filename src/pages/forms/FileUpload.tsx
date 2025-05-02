@@ -8,14 +8,6 @@ import DropzoneFormInput from "@/components/DropzoneFormInput";
 const FileUpload = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Forms", path: "/forms/upload" },
-          { label: "Form Upload", path: "/forms/upload", active: true },
-        ]}
-        title={"Form Upload"}
-      />
-
       <Row>
         <Col>
           <Card>
@@ -33,11 +25,16 @@ const FileUpload = () => {
                 }}
               /> */}
               <DropzoneFormInput
-          className="py-5"
-          text="Drop your images here, or click to browse"
-          helpText={<span className="text-muted fs-13 ">(1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are allowed )</span>}
-          showPreview
-        />
+                className="py-5"
+                text="Drop your images here, or click to browse"
+                helpText={
+                  <span className="text-muted fs-13 ">
+                    (1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are
+                    allowed )
+                  </span>
+                }
+                showPreview
+              />
             </Card.Body>
           </Card>
         </Col>

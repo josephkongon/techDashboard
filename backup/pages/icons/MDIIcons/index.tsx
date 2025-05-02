@@ -16,18 +16,6 @@ const MDIIcons = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Icons", path: "/ui/icons/mdi" },
-          {
-            label: "Material Design Icons",
-            path: "/ui/icons/mdi",
-            active: true,
-          },
-        ]}
-        title={"Material Design Icons"}
-      />
-
       <Row className="icons-list-demo">
         <Col>
           <Card>
@@ -60,7 +48,7 @@ const MDIIcons = () => {
                         className={classNames(
                           "mdi",
                           "mdi-" + size + "px",
-                          "mdi-account"
+                          "mdi-account",
                         )}
                       ></i>
                       <span>mdi-{size}px</span>
@@ -87,7 +75,7 @@ const MDIIcons = () => {
                         className={classNames(
                           "mdi",
                           "mdi-rotate-" + angle,
-                          "mdi-account"
+                          "mdi-account",
                         )}
                       ></i>
                       <span>mdi-rotate-{angle}</span>

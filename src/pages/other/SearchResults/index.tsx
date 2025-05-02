@@ -12,18 +12,6 @@ import { allResults, users } from "./data";
 const SearchResults = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extra Pages", path: "/pages/serach-results" },
-          {
-            label: "Search Results",
-            path: "/pages/serach-results",
-            active: true,
-          },
-        ]}
-        title={"Search Results"}
-      />
-
       <Row>
         <Col>
           <Card className="search-result-box">

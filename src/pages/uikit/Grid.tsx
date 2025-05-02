@@ -7,14 +7,6 @@ import PageTitle from "../../components/PageTitle";
 const Grid = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/grid" },
-          { label: "Grid System", path: "/ui/grid", active: true },
-        ]}
-        title={"Grid System"}
-      />
-
       <Row>
         <Col>
           <Card>

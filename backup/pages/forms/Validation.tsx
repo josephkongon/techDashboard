@@ -213,14 +213,6 @@ const FormValidationWithTooltip = () => {
 const FormValidation = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Forms", path: "/forms/validation" },
-          { label: "Form Validation", path: "/forms/validation", active: true },
-        ]}
-        title={"Form Validation"}
-      />
-
       <Row>
         <Col lg={6}>
           <NormalFormValidation />

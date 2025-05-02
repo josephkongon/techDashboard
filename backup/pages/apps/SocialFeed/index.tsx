@@ -14,14 +14,6 @@ import Followers from "./Followers";
 const SocialFeed = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Apps", path: "/apps/social-feed" },
-          { label: "Social Feed", path: "/apps/social-feed", active: true },
-        ]}
-        title={"Social Feed"}
-      />
-
       <Row>
         <Col xl={{ span: 3, order: 1 }} lg={{ span: 6, order: 1 }}>
           <UserProfile />

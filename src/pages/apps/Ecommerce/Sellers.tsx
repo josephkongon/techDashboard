@@ -121,14 +121,6 @@ const sizePerPageList = [
 const Sellers = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/sellers" },
-          { label: "Sellers", path: "/apps/ecommerce/sellers", active: true },
-        ]}
-        title={"Sellers"}
-      />
-
       <Row>
         <Col>
           <Card>

@@ -89,8 +89,8 @@ const OrderTable: FC<IProps> = ({ orders }) => {
   const columns: TableColumnsType<any> = [
     {
       title: "Order ID",
-      dataIndex: "orderId",
-      key: "orderId",
+      dataIndex: "shortId",
+      key: "shortId",
     },
 
     {

@@ -10,14 +10,6 @@ import { WEATHERICONS } from "./data";
 const WeatherIcons = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Icons", path: "/ui/icons/weather" },
-          { label: "Weather Icons", path: "/ui/icons/weather", active: true },
-        ]}
-        title={"Weather Icons"}
-      />
-
       <Row>
         <Col>
           <Card>

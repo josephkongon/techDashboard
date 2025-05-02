@@ -17,14 +17,6 @@ import MixedChart from "./MixedChart";
 const ApexChart = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Charts", path: "/features/charts/apex" },
-          { label: "Apex Charts", path: "/features/charts/apex", active: true },
-        ]}
-        title={"Apex Charts"}
-      />
-
       <Row>
         <Col xl={6}>
           <LineChart />

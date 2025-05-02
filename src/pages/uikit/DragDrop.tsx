@@ -49,7 +49,7 @@ const MovableCard = ({ item }: { item: ProjectType }) => {
             "float-end",
             item.announced_on === "Latest"
               ? "badge-soft-success"
-              : "badge-soft-secondary"
+              : "badge-soft-secondary",
           )}
         >
           {item.announced_on}
@@ -58,7 +58,9 @@ const MovableCard = ({ item }: { item: ProjectType }) => {
           <a
             href="/"
             className={classNames(
-              item.announced_on === "Latest" ? "text-success" : "text-secondary"
+              item.announced_on === "Latest"
+                ? "text-success"
+                : "text-secondary",
             )}
           >
             {item.title}
@@ -307,18 +309,6 @@ const DragDrop = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extended UI", path: "/extended-ui/dragdrop" },
-          {
-            label: "Drag and Drop",
-            path: "/extended-ui/dragdrop",
-            active: true,
-          },
-        ]}
-        title={"Drag and Drop"}
-      />
-
       <Row>
         <Col>
           <Card>

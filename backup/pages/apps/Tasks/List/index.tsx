@@ -17,7 +17,7 @@ const TaskList = () => {
   const [upcomingTask] = useState<TaskItemTypes[]>([...upcomingTasks]);
   const [otherTask] = useState<TaskItemTypes[]>([...otherTasks]);
   const [selectedTask, setSelectedTask] = useState<TaskItemTypes>(
-    todayTasks[0]
+    todayTasks[0],
   );
 
   /**
@@ -30,13 +30,6 @@ const TaskList = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Tasks", path: "/apps/tasks/list" },
-          { label: "Tasks List", path: "/apps/tasks/list", active: true },
-        ]}
-        title={"Tasks List"}
-      />
       <Row>
         <Col xl={8}>
           <Row>

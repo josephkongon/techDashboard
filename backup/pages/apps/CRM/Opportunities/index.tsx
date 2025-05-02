@@ -1,4 +1,3 @@
-
 import { Row, Col } from "react-bootstrap";
 
 // components
@@ -13,17 +12,6 @@ import { companyInfo } from "./data";
 const Opportunities = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "CRM", path: "/apps/crm/opportunities" },
-          {
-            label: "Opportunities",
-            path: "/apps/crm/opportunities",
-            active: true,
-          },
-        ]}
-        title={"Opportunities"}
-      />
       <Row>
         <Col xl={{ span: 8, order: 1 }} xs={{ span: 12, order: 2 }}>
           <CompanyDetails companyInfo={companyInfo} />

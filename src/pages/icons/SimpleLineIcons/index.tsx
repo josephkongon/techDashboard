@@ -10,18 +10,6 @@ import { SIMPLELINEICONS } from "./data";
 const SimpleLineIcons = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Icons", path: "/ui/icons/simple-line" },
-          {
-            label: "Simple Line Icons",
-            path: "/ui/icons/simple-line",
-            active: true,
-          },
-        ]}
-        title={"Simple Line Icons"}
-      />
-
       <Row>
         <Col>
           <Card>

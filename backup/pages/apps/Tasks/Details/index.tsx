@@ -17,13 +17,6 @@ const TaskDetails = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Tasks", path: "/apps/tasks/details" },
-          { label: "Task Detail", path: "/apps/tasks/details", active: true },
-        ]}
-        title={"Task Detail"}
-      />
       <Row>
         <Col xl={8} lg={7}>
           <Task task={selectedTask} />

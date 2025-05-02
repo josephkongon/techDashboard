@@ -329,7 +329,7 @@ const BorderdCards = () => {
               className={classNames(
                 "text-white",
                 [`bg-${item.variant}`],
-                "mb-3"
+                "mb-3",
               )}
             >
               <Card.Header className={classNames([`bg-${item.variant}`])}>
@@ -355,7 +355,7 @@ const BorderdCards = () => {
               className={classNames(
                 "border",
                 [`border-${item.variant}`],
-                "mb-3"
+                "mb-3",
               )}
             >
               <Card.Header>Header</Card.Header>
@@ -611,14 +611,6 @@ const Cards = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/cards" },
-          { label: "Cards", path: "/ui/cards", active: true },
-        ]}
-        title={"Cards"}
-      />
-
       <Row>
         <Col lg={6} xl={3}>
           <CardWithImage />

@@ -479,14 +479,6 @@ const DropdownWithText = () => {
 const Dropdowns = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/dropdowns" },
-          { label: "Dropdowns", path: "/ui/dropdowns", active: true },
-        ]}
-        title={"Dropdowns"}
-      />
-
       <Row>
         <Col>
           <Card>

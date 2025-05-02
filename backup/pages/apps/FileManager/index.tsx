@@ -91,13 +91,6 @@ const LeftSide = () => {
 const FileManager = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Apps", path: "/apps/file-manager" },
-          { label: "File Manager", path: "/apps/file-manager", active: true },
-        ]}
-        title={"File Manager"}
-      />
       <Row>
         <Col>
           <Card>

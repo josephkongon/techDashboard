@@ -3,7 +3,12 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Row, Col, Card, Dropdown, Modal, Button } from "react-bootstrap";
 
-import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd'
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "@hello-pangea/dnd";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -44,7 +49,7 @@ const Kanban = () => {
       title: yup.string().required(),
       priority: yup.string().required(),
       description: yup.string().required(),
-    })
+    }),
   );
 
   /*
@@ -111,7 +116,7 @@ const Kanban = () => {
     source: Iterable<unknown> | ArrayLike<unknown>,
     destination: Iterable<unknown> | ArrayLike<unknown>,
     droppableSource: { index: number; droppableId: string | number },
-    droppableDestination: { index: number; droppableId: string | number }
+    droppableDestination: { index: number; droppableId: string | number },
   ) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
@@ -147,7 +152,7 @@ const Kanban = () => {
       const items = reorder(
         getList(source.droppableId),
         source.index,
-        destination.index
+        destination.index,
       );
       const localState: any = { ...state };
       localState[source.droppableId] = items;
@@ -157,7 +162,7 @@ const Kanban = () => {
         getList(source.droppableId),
         getList(destination.droppableId),
         source,
-        destination
+        destination,
       );
       const localState = { ...state, ...result };
       setState(localState);
@@ -200,13 +205,6 @@ const Kanban = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Tasks", path: "apps/tasks/kanban" },
-          { label: "Kanban Board", path: "apps/tasks/kanban", active: true },
-        ]}
-        title={"Kanban Board"}
-      />
       <Row>
         <DragDropContext onDragEnd={onDragEnd}>
           {/* todo */}

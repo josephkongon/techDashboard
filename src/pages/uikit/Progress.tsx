@@ -144,14 +144,6 @@ const VerticalBottomProgress = () => {
 const ProgressBarExamples = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/progressBar" },
-          { label: "Progress", path: "/ui/progressBar", active: true },
-        ]}
-        title={"Progress"}
-      />
-
       <Row>
         <Col md={6}>
           <Basic />

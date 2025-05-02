@@ -1,11 +1,10 @@
 import React, { FC, useMemo, useRef, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap"; // components
-import logoDark from "@/assets/images/logo-dark.png";
-import logoLight from "@/assets/images/logo-light.png";
 import { Drawer } from "antd";
 import ProductItem from "@/pages/invoice/component/ProductItem.tsx";
 import { CURRENCY } from "@/types/constand.ts";
 import { formatToDate } from "@/utils/format.ts";
+import { currentBrand } from "@/brands/activeBrand.ts";
 
 interface Address {
   line_1: string;
@@ -90,18 +89,16 @@ const Invoice: FC<IProps> = ({ user, products, isOpen, toggle, order }) => {
                     <div className="auth-logo">
                       <div className="logo logo-dark">
                         <span className="logo-lg">
-                          <img src={logoDark} alt="" height="22" />
-                        </span>
-                      </div>
-                      <div className="logo logo-light">
-                        <span className="logo-lg">
-                          <img src={logoLight} alt="" height="22" />
+                          <img src={currentBrand.logo} alt="" height="22" />
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="float-end">
-                    <h4 className="m-0 d-print-none">Invoice</h4>
+                    <h4 className="m-0 d-print-none">
+                      <span>Invoice from</span>
+                      <span> {currentBrand.name}</span>
+                    </h4>
                   </div>
                 </div>
 

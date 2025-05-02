@@ -472,7 +472,7 @@ const CustomBackgroundAlerts = () => {
                   "bg-" + color,
                   "border-0",
                   color === "light" ? "text-dark" : "text-white",
-                  color === "dark" ? "text-light" : "text-white"
+                  color === "dark" ? "text-light" : "text-white",
                 )}
               >
                 This is a <strong>{color}</strong> alert—check it out!
@@ -524,7 +524,7 @@ const DismissibleCustomBackgroundAlerts = () => {
                 "bg-" + color,
                 "border-0",
                 color === "light" ? "text-dark" : "text-white",
-                color === "dark" ? "text-light" : "text-white"
+                color === "dark" ? "text-light" : "text-white",
               )}
               dismissible
             >
@@ -540,18 +540,6 @@ const DismissibleCustomBackgroundAlerts = () => {
 const Notifications = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/toasts" },
-          {
-            label: "Alerts & Notifications",
-            path: "/ui/notifications",
-            active: true,
-          },
-        ]}
-        title={"Alerts & Notifications"}
-      />
-
       {/* toasts */}
       <Row>
         <Col>

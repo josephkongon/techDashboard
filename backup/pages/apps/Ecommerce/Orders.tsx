@@ -191,21 +191,13 @@ const Orders = () => {
       OrderStatusGroup === "All"
         ? orders
         : [...orders].filter((o) =>
-            o.payment_status?.includes(OrderStatusGroup)
+            o.payment_status?.includes(OrderStatusGroup),
           );
     setOrderList(updatedData);
   };
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/orders" },
-          { label: "Orders", path: "/apps/ecommerce/orders", active: true },
-        ]}
-        title={"Orders"}
-      />
-
       <Row>
         <Col>
           <Card>

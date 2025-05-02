@@ -51,7 +51,7 @@ const ProjectForm = () => {
       { value: "Shreyu N", name: "Shreyu N", image: avatar1 },
       { value: "Greeva N", name: "Greeva N", image: avatar2 },
       { value: "Dhyanu B", name: "Dhyanu B", image: avatar3 },
-    ]
+    ],
   );
 
   /*
@@ -60,7 +60,7 @@ const ProjectForm = () => {
   const selectTeamMembers = (e: any) => {
     if (e.length !== 0) {
       const isAlreadySelected = selectedTeamMembers.filter(
-        (x) => x["name"] === e[0].name
+        (x) => x["name"] === e[0].name,
       );
       if (isAlreadySelected && isAlreadySelected.length === 0) {
         setSelectedTeamMembers([...selectedTeamMembers, e[0]]);
@@ -74,7 +74,7 @@ const ProjectForm = () => {
   const schemaResolver = yupResolver(
     yup.object().shape({
       name: yup.string().required("Please enter Project Name"),
-    })
+    }),
   );
 
   /*
@@ -90,23 +90,11 @@ const ProjectForm = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Projects", path: "/apps/projects/create" },
-          {
-            label: "Create Project",
-            path: "/apps/projects/create",
-            active: true,
-          },
-        ]}
-        title={"Create Project"}
-      />
-
       <Row>
         <Col>
           <Card>
             <Card.Body>
-              <form onSubmit={handleSubmit(() => { })}>
+              <form onSubmit={handleSubmit(() => {})}>
                 <Row>
                   <Col xl={6}>
                     <FormInput
@@ -239,7 +227,12 @@ const ProjectForm = () => {
                       <DropzoneFormInput
                         className="py-2"
                         text="Drop your images here, or click to browse"
-                        helpText={<span className="text-muted fs-13 ">(1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are allowed )</span>}
+                        helpText={
+                          <span className="text-muted fs-13 ">
+                            (1600 x 1200 (4:3) recommended. PNG, JPG and GIF
+                            files are allowed )
+                          </span>
+                        }
                         showPreview
                       />
                     </Form.Group>

@@ -6,18 +6,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
 import ReactQuill from "react-quill-new";
 
-
 // components
 import PageTitle from "../../../components/PageTitle";
 import { FormInput } from "../../../components/";
 
 // styles
-import 'react-quill-new/dist/quill.snow.css';
-import 'react-quill-new/dist/quill.bubble.css';
+import "react-quill-new/dist/quill.snow.css";
+import "react-quill-new/dist/quill.bubble.css";
 import DropzoneFormInput from "@/components/DropzoneFormInput";
 
 const ProductEdit = () => {
-
   const categories = [
     {
       label: "Shopping",
@@ -59,35 +57,40 @@ const ProductEdit = () => {
       metatitle: yup.string().required("Please enter Project Name"),
       metakeywords: yup.string().required("Please enter Project Name"),
       metadescription: yup.string().required("Please enter Project Name"),
-    })
+    }),
   );
 
   const [value, setValue] = useState(
     '<h3><span class="ql-size-large">Hello World!</span></h3>\n' +
-    '    <p><br/></p>\n' +
-    '    <h3>This is a simple editable area.</h3>\n' +
-    '    <p><br/></p>\n' +
-    '    <ul>\n' +
-    '      <li>Select a text to reveal the toolbar.</li>\n' +
-    '      <li>Edit rich document on-the-fly, so elastic!</li>\n' +
-    '    </ul>\n' +
-    '<p><br/></p>\n' +
-    '<p>End of simple area</p>');
+      "    <p><br/></p>\n" +
+      "    <h3>This is a simple editable area.</h3>\n" +
+      "    <p><br/></p>\n" +
+      "    <ul>\n" +
+      "      <li>Select a text to reveal the toolbar.</li>\n" +
+      "      <li>Edit rich document on-the-fly, so elastic!</li>\n" +
+      "    </ul>\n" +
+      "<p><br/></p>\n" +
+      "<p>End of simple area</p>",
+  );
 
   const modules = {
     toolbar: [
       [{ font: [] }, { size: [] }],
-      ['bold', 'italic', 'underline', 'strike'],
+      ["bold", "italic", "underline", "strike"],
       [{ color: [] }, { background: [] }],
-      [{ script: 'super' }, { script: 'sub' }],
-      [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-      ['direction', { align: [] }],
-      ['link', 'image', 'video'],
-      ['clean'],
+      [{ script: "super" }, { script: "sub" }],
+      [{ header: [false, 1, 2, 3, 4, 5, 6] }, "blockquote", "code-block"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["direction", { align: [] }],
+      ["link", "image", "video"],
+      ["clean"],
     ],
-  }
-
+  };
 
   /*
    * form methods
@@ -102,19 +105,7 @@ const ProductEdit = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/details" },
-          {
-            label: "Add / Edit Product",
-            path: "/apps/ecommerce/details",
-            active: true,
-          },
-        ]}
-        title={"Add / Edit Product"}
-      />
-
-      <form onSubmit={handleSubmit(() => { })}>
+      <form onSubmit={handleSubmit(() => {})}>
         <Row>
           <Col lg={6}>
             <Card>
@@ -145,9 +136,12 @@ const ProductEdit = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Product Description</Form.Label>
 
-                  <ReactQuill theme="snow" value={value}  modules={modules}
-                    style={{ minHeight: "300px", width: "100%" }} />
-
+                  <ReactQuill
+                    theme="snow"
+                    value={value}
+                    modules={modules}
+                    style={{ minHeight: "300px", width: "100%" }}
+                  />
                 </Form.Group>
 
                 <FormInput
@@ -248,7 +242,12 @@ const ProductEdit = () => {
                 <DropzoneFormInput
                   className="py-2"
                   text="Drop your images here, or click to browse"
-                  helpText={<span className="text-muted fs-13 ">(1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are allowed )</span>}
+                  helpText={
+                    <span className="text-muted fs-13 ">
+                      (1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are
+                      allowed )
+                    </span>
+                  }
                   showPreview
                 />
               </Card.Body>

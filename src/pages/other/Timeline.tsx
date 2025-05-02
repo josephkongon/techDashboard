@@ -13,14 +13,6 @@ import small3 from "@/assets/images/small/img-3.jpg";
 const Timeline = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extra Pages", path: "/pages/timeline" },
-          { label: "Timeline", path: "/pages/timeline", active: true },
-        ]}
-        title={"Timeline"}
-      />
-
       <Row className="justify-content-center">
         <Col>
           <div className="timeline">

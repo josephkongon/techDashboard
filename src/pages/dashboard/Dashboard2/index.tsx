@@ -1,4 +1,3 @@
-
 import { Row, Col } from "react-bootstrap";
 
 // components
@@ -17,14 +16,6 @@ import { products } from "./data";
 const Dashboard2 = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Dashboards", path: "/dashboard-2" },
-          { label: "Dashboard 2", path: "/dashboard-2", active: true },
-        ]}
-        title={"Dashboard 2"}
-      />
-
       <Statistics />
 
       <Row>

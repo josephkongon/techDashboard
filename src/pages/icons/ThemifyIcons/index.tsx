@@ -10,13 +10,6 @@ import { THEMIFYICONS_LIST } from "./data";
 const ThemifyIcons = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Icons", path: "/ui/icons/themify" },
-          { label: "Themify Icons", path: "/ui/icons/themify", active: true },
-        ]}
-        title={"Themify Icons"}
-      />
       <Row>
         <Col>
           <Card>

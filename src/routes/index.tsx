@@ -68,6 +68,9 @@ const CategoryMenu = React.lazy(
   () => import("../pages/apps/Settings/CategoryMenu"),
 );
 
+const Config = React.lazy(() => import("../pages/apps/Settings/Config"));
+const ContactUs = React.lazy(() => import("../pages/apps/Settings/ContactUs"));
+
 // extra pages
 const Starter = React.lazy(() => import("../pages/other/Starter"));
 const Timeline = React.lazy(() => import("../pages/other/Timeline"));
@@ -217,6 +220,18 @@ const SettingRoutes = {
       path: "/apps/settings/category-menu",
       name: "List",
       element: <CategoryMenu />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/apps/settings/config",
+      name: "List",
+      element: <Config />,
+      route: PrivateRoute,
+    },
+    {
+      path: "/apps/settings/contact-us",
+      name: "List",
+      element: <ContactUs />,
       route: PrivateRoute,
     },
   ],

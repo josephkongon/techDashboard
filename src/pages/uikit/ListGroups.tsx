@@ -511,14 +511,6 @@ const Numbered = () => {
 const ListGroups = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/listgroups" },
-          { label: "List Group", path: "/ui/listgroups", active: true },
-        ]}
-        title={"List Group"}
-      />
-
       <Row>
         <Col xl={4}>
           <Basic />

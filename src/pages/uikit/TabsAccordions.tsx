@@ -43,7 +43,7 @@ const CustomToggle = ({
 
   const decoratedOnClick = useAccordionButton(
     eventKey,
-    () => callback && callback(eventKey)
+    () => callback && callback(eventKey),
   );
 
   const isCurrentEventKey = activeEventKey === eventKey;
@@ -254,18 +254,6 @@ const TabsAccordions = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/tabs-accordions" },
-          {
-            label: "Tabs & Accordions",
-            path: "/ui/tabs-accordions",
-            active: true,
-          },
-        ]}
-        title={"Tabs & Accordions"}
-      />
-
       <Row>
         <Col xl={6}>
           <Card>

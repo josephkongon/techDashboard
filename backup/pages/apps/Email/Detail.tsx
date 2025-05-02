@@ -30,14 +30,14 @@ interface EmailItems {
   attachments: [
     { id: number; name: string; size: string; ext: string },
     { id: number; name: string; size: string; ext: string },
-    { id: number; name: string; size: string; ext: string }
+    { id: number; name: string; size: string; ext: string },
   ];
 }
 
 // EmailDetail
 const EmailDetail = () => {
   const [totalUnreadEmails] = useState<number>(
-    emails.filter((e: any) => e.is_read === false).length
+    emails.filter((e: any) => e.is_read === false).length,
   );
   const [email] = useState<EmailItems>({
     avatar: avatarImg,
@@ -54,14 +54,6 @@ const EmailDetail = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Email", path: "/apps/email/details" },
-          { label: "Email Read", path: "/apps/email/details", active: true },
-        ]}
-        title={"Email Read"}
-      />
-
       <Row>
         <Col>
           <Card>

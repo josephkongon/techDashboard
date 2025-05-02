@@ -492,14 +492,6 @@ const ResponsiveTable = () => {
 const Tables = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Tables", path: "/ui/tables/basic" },
-          { label: "Basic Tables", path: "/ui/tables/basic", active: true },
-        ]}
-        title={"Basic Tables"}
-      />
-
       <Row>
         <Col lg={6}>
           <BasicTable />

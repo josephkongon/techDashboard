@@ -66,14 +66,6 @@ const FAQ = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extra Pages", path: "/pages/faq" },
-          { label: "FAQs", path: "/pages/faq", active: true },
-        ]}
-        title={"FAQs"}
-      />
-
       <Row>
         <Col>
           <div className="text-center">

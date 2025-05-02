@@ -175,13 +175,6 @@ const PlaceholdersWithSizes = () => {
 const Placeholders = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Base UI", path: "/ui/placeholders" },
-          { label: "Placeholders", path: "/ui/placeholders", active: true },
-        ]}
-        title={"Placeholders"}
-      />
       <Row>
         <Col xl={6}>
           <BasicPlaceholders />

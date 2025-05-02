@@ -21,31 +21,35 @@ import LeftBar from "./LeftBar";
 import ReactQuill from "react-quill-new";
 
 const Compose = () => {
-
-
   const [value, setValue] = useState<string>(
     '<h3><span class="ql-size-large">Hello World!</span></h3>\n' +
-    '    <p><br/></p>\n' +
-    '    <h3>This is a simple editable area.</h3>\n' +
-    '    <p><br/></p>\n' +
-    '    <ul>\n' +
-    '      <li>Select a text to reveal the toolbar.</li>\n' +
-    '      <li>Edit rich document on-the-fly, so elastic!</li>\n' +
-    '    </ul>\n' +
-    '<p><br/></p>\n' +
-    '<p>End of simple area</p>');
+      "    <p><br/></p>\n" +
+      "    <h3>This is a simple editable area.</h3>\n" +
+      "    <p><br/></p>\n" +
+      "    <ul>\n" +
+      "      <li>Select a text to reveal the toolbar.</li>\n" +
+      "      <li>Edit rich document on-the-fly, so elastic!</li>\n" +
+      "    </ul>\n" +
+      "<p><br/></p>\n" +
+      "<p>End of simple area</p>",
+  );
 
   const modules = {
     toolbar: [
       [{ font: [] }, { size: [] }],
-      ['bold', 'italic', 'underline', 'strike'],
+      ["bold", "italic", "underline", "strike"],
       [{ color: [] }, { background: [] }],
-      [{ script: 'super' }, { script: 'sub' }],
-      [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-      ['direction', { align: [] }],
-      ['link', 'image', 'video'],
-      ['clean'],
+      [{ script: "super" }, { script: "sub" }],
+      [{ header: [false, 1, 2, 3, 4, 5, 6] }, "blockquote", "code-block"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["direction", { align: [] }],
+      ["link", "image", "video"],
+      ["clean"],
     ],
   };
   // const [editorState, setEditorState] = useState<any>();
@@ -88,13 +92,6 @@ const Compose = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Email", path: "/apps/email/compose" },
-          { label: "Email Compose", path: "/apps/email/compose", active: true },
-        ]}
-        title={"Email Compose"}
-      />
       <Row>
         <Col>
           <Card>
@@ -194,12 +191,17 @@ const Compose = () => {
                     placeholder="Your subject"
                     containerClass={"mb-3"}
                   />
-                   
-                 
+
                   <div className="mb-2">
-                  <ReactQuill className="d-flex flex-column" theme="snow" value={value} onChange={setValue} modules={modules}/>
+                    <ReactQuill
+                      className="d-flex flex-column"
+                      theme="snow"
+                      value={value}
+                      onChange={setValue}
+                      modules={modules}
+                    />
                   </div>
-                  
+
                   <div className="text-end">
                     <Button
                       variant="success"
@@ -218,7 +220,6 @@ const Compose = () => {
                     </Button>
                   </div>
                   {/* </VerticalForm> */}
-
                 </div>
               </div>
 

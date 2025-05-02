@@ -1,24 +1,23 @@
-import { useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
+import { useState } from "react";
+import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 // components
-import PageTitle from '../../../components/PageTitle';
-import Loader from '../../../components/Loader';
-
+import PageTitle from "../../../components/PageTitle";
+import Loader from "../../../components/Loader";
 
 // dummy data
-import { gallery as data, GalleryItem, ImageType } from './data';
-import GlightBox from '@/components/GlightBox';
+import { gallery as data, GalleryItem, ImageType } from "./data";
+import GlightBox from "@/components/GlightBox";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState<GalleryItem[]>(data);
-  const [category, setCategory] = useState<string>('all');
+  const [category, setCategory] = useState<string>("all");
   const [galleryImages, setGalleryImages] = useState<ImageType[]>(
     (data || []).map((album) => {
       return album.image;
-    })
+    }),
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -33,12 +32,14 @@ const Gallery = () => {
     setCategory(category);
     setTimeout(() => {
       const galleryAlbums =
-        category === 'all' ? data : data.filter((album) => album.category?.includes(category));
+        category === "all"
+          ? data
+          : data.filter((album) => album.category?.includes(category));
       setGallery(galleryAlbums);
       setGalleryImages(
         (galleryAlbums || []).map((album) => {
           return album.image;
-        })
+        }),
       );
       setIsLoading(false);
     }, 300);
@@ -54,59 +55,51 @@ const Gallery = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: 'Extra Pages', path: '/pages/gallery' },
-          { label: 'Gallery', path: '/pages/gallery', active: true },
-        ]}
-        title={'Gallery'}
-      />
-
       <Row>
         <Col>
           <div className="text-center filter-menu">
             <Link
               to="#"
-              className={classNames('filter-menu-item', 'me-1', {
-                active: category === 'all',
+              className={classNames("filter-menu-item", "me-1", {
+                active: category === "all",
               })}
-              onClick={() => filterImages('all')}
+              onClick={() => filterImages("all")}
             >
               All
             </Link>
             <Link
               to="#"
-              className={classNames('filter-menu-item', 'me-1', {
-                active: category === 'web',
+              className={classNames("filter-menu-item", "me-1", {
+                active: category === "web",
               })}
-              onClick={() => filterImages('web')}
+              onClick={() => filterImages("web")}
             >
               Web Design
             </Link>
             <Link
               to="#"
-              className={classNames('filter-menu-item', 'me-1', {
-                active: category === 'graphic',
+              className={classNames("filter-menu-item", "me-1", {
+                active: category === "graphic",
               })}
-              onClick={() => filterImages('graphic')}
+              onClick={() => filterImages("graphic")}
             >
               Graphic Design
             </Link>
             <Link
               to="#"
-              className={classNames('filter-menu-item', 'me-1', {
-                active: category === 'illustrator',
+              className={classNames("filter-menu-item", "me-1", {
+                active: category === "illustrator",
               })}
-              onClick={() => filterImages('illustrator')}
+              onClick={() => filterImages("illustrator")}
             >
               Illustrator
             </Link>
             <Link
               to="#"
-              className={classNames('filter-menu-item', 'me-1', {
-                active: category === 'photography',
+              className={classNames("filter-menu-item", "me-1", {
+                active: category === "photography",
               })}
-              onClick={() => filterImages('photography')}
+              onClick={() => filterImages("photography")}
             >
               Photography
             </Link>
@@ -118,7 +111,12 @@ const Gallery = () => {
         {isLoading && <Loader />}
         {(gallery || []).map((item, index) => {
           return (
-            <Col sm={6} xl={3} key={index} className="filter-item  all web illustrator">
+            <Col
+              sm={6}
+              xl={3}
+              key={index}
+              className="filter-item  all web illustrator"
+            >
               <div className="gal-box">
                 <Link
                   to="#"
@@ -134,7 +132,12 @@ const Gallery = () => {
                 <div className="gall-info">
                   <h4 className="font-16 mt-0">{item.title}</h4>
                   <Link to="#">
-                    <img src={item.avatar} alt="user-img" className="rounded-circle" height="24" />
+                    <img
+                      src={item.avatar}
+                      alt="user-img"
+                      className="rounded-circle"
+                      height="24"
+                    />
                     <span className="text-muted ms-1">{item.userName}</span>
                   </Link>
                   <Link to="#" className="gal-like-btn">

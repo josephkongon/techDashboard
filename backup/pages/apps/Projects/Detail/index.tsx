@@ -82,18 +82,6 @@ const ProjectDetail = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Projects", path: "/apps/projects" },
-          {
-            label: "Project Details",
-            path: "/apps/projects/detail",
-            active: true,
-          },
-        ]}
-        title={"Project Details"}
-      />
-
       <Row>
         <Col md={6} xl={3}>
           <Statistics
@@ -166,7 +154,7 @@ const ProjectDetail = () => {
                     "bg-warning": project.state === "Planned",
                   },
                   "text-light",
-                  "mb-3"
+                  "mb-3",
                 )}
               >
                 {project.state}

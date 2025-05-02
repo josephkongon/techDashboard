@@ -29,14 +29,6 @@ const Animation = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Extended UI", path: "/extended-ui/animation" },
-          { label: "Animation", path: "/extended-ui/animation", active: true },
-        ]}
-        title={"Animation"}
-      />
-
       <Row>
         <Col>
           <Card>

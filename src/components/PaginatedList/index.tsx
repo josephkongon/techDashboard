@@ -16,8 +16,6 @@ const PaginatedVirtualizedList = <T,>({
   itemsPerPage = 10,
   height = 400,
 }: PaginatedVirtualizedListProps<T>) => {
-  console.log(data);
-
   const [currentPage, setCurrentPage] = useState(1);
 
   // Compute the data for the current page

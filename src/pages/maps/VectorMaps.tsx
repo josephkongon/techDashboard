@@ -4,7 +4,15 @@ import { Card, Col, Row } from "react-bootstrap";
 import PageTitle from "../../components/PageTitle";
 
 // react plugin for creating vector maps
-import { CanadaVectorMap, IraqVectorMap, ItalyVectorMap, RussiaVectorMap, SpainVectorMap, UsaVectorMap, WorldVectorMap } from "../../components/VectorMap";
+import {
+  CanadaVectorMap,
+  IraqVectorMap,
+  ItalyVectorMap,
+  RussiaVectorMap,
+  SpainVectorMap,
+  UsaVectorMap,
+  WorldVectorMap,
+} from "../../components/VectorMap";
 
 const VectorMaps = () => {
   // vector map config
@@ -58,14 +66,6 @@ const VectorMaps = () => {
 
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Maps", path: "/ui/vectormaps" },
-          { label: "Vector Maps", path: "/ui/vectormaps", active: true },
-        ]}
-        title={"Vector Maps"}
-      />
-
       <Row>
         <Col>
           <Card>

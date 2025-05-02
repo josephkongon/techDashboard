@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { Button, Card, Col, Form, ProgressBar, Row } from "react-bootstrap";
 
 import { useForm } from "react-hook-form";
-import StepWizard from 'react-step-wizard';
+import StepWizard from "react-step-wizard";
 
-import { Controller } from 'react-hook-form';
+import { Controller } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -18,29 +18,27 @@ type StepWizardInstance = {
   goToStep: (step: number) => void;
 };
 
-
 const BasicWizard = () => {
+  const wizardRef = useRef<StepWizardInstance | null>(null);
 
-  const wizardRef = useRef<StepWizardInstance | null>(null)
-
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeStep, setActiveStep] = useState(1);
 
   const nextStep = () => {
     if (wizardRef.current) {
-      wizardRef.current.nextStep()
-      setActiveStep((prev) => prev + 1)
+      wizardRef.current.nextStep();
+      setActiveStep((prev) => prev + 1);
     }
-  }
+  };
 
   const prevStep = () => {
     if (wizardRef.current) {
-      wizardRef.current.previousStep()
-      setActiveStep((prev) => prev - 1)
+      wizardRef.current.previousStep();
+      setActiveStep((prev) => prev - 1);
     }
-  }
+  };
 
   return (
-    <Card >
+    <Card>
       <Card.Body className="overflow-hidden">
         <h4 className="header-title mb-3"> Basic Wizard</h4>
 
@@ -100,8 +98,11 @@ const BasicWizard = () => {
 
               <ul className="list-inline wizard mb-0">
                 <li className="next list-inline-item float-end">
-                  <Button onClick={nextStep}
-                    disabled={activeStep === 3} variant="success">
+                  <Button
+                    onClick={nextStep}
+                    disabled={activeStep === 3}
+                    variant="success"
+                  >
                     Next
                   </Button>
                 </li>
@@ -154,14 +155,20 @@ const BasicWizard = () => {
 
               <ul className="list-inline wizard mb-0">
                 <li className="previous list-inline-item">
-                  <Button onClick={prevStep}
-                    disabled={activeStep === 1} variant="info">
+                  <Button
+                    onClick={prevStep}
+                    disabled={activeStep === 1}
+                    variant="info"
+                  >
                     Previous
                   </Button>
                 </li>
                 <li className="next list-inline-item float-end">
-                  <Button onClick={nextStep}
-                    disabled={activeStep === 3} variant="success">
+                  <Button
+                    onClick={nextStep}
+                    disabled={activeStep === 3}
+                    variant="success"
+                  >
                     Next
                   </Button>
                 </li>
@@ -179,8 +186,8 @@ const BasicWizard = () => {
 
                   <p className="w-75 mb-2 mx-auto">
                     Quisque nec turpis at urna dictum luctus. Suspendisse
-                    convallis dignissim eros at volutpat. In egestas mattis
-                    dui. Aliquam mattis dictum aliquet.
+                    convallis dignissim eros at volutpat. In egestas mattis dui.
+                    Aliquam mattis dictum aliquet.
                   </p>
 
                   <div className="mb-3">
@@ -197,8 +204,11 @@ const BasicWizard = () => {
               <Col sm={12}>
                 <ul className="list-inline wizard mb-0">
                   <li className="previous list-inline-item">
-                    <Button onClick={prevStep}
-                      disabled={activeStep === 1} variant="info">
+                    <Button
+                      onClick={prevStep}
+                      disabled={activeStep === 1}
+                      variant="info"
+                    >
                       Previous
                     </Button>
                   </li>
@@ -219,25 +229,22 @@ const BasicWizard = () => {
 };
 
 const WizardWithProgressbar = () => {
-
-  const wizardRef = useRef<StepWizardInstance | null>(null)
-  const [activeStep, setActiveStep] = useState(1)
-
-
+  const wizardRef = useRef<StepWizardInstance | null>(null);
+  const [activeStep, setActiveStep] = useState(1);
 
   const nextStep = () => {
     if (wizardRef.current) {
-      wizardRef.current.nextStep()
-      setActiveStep((prev) => prev + 1)
+      wizardRef.current.nextStep();
+      setActiveStep((prev) => prev + 1);
     }
-  }
+  };
 
   const prevStep = () => {
     if (wizardRef.current) {
-      wizardRef.current.previousStep()
-      setActiveStep((prev) => prev - 1)
+      wizardRef.current.previousStep();
+      setActiveStep((prev) => prev - 1);
     }
-  }
+  };
 
   return (
     <Card>
@@ -262,7 +269,6 @@ const WizardWithProgressbar = () => {
             onStepChange={(stats: any) => setActiveStep(stats?.activeStep)}
           >
             <div>
-
               <Form>
                 <Form.Group as={Row} className="mb-3">
                   <Form.Label htmlFor="exampleEmail" column md={3}>
@@ -310,8 +316,11 @@ const WizardWithProgressbar = () => {
 
                 <ul className="list-inline wizard mb-0">
                   <li className="next list-inline-item float-end">
-                    <Button onClick={nextStep}
-                      disabled={activeStep === 3} variant="success">
+                    <Button
+                      onClick={nextStep}
+                      disabled={activeStep === 3}
+                      variant="success"
+                    >
                       Next
                     </Button>
                   </li>
@@ -364,14 +373,20 @@ const WizardWithProgressbar = () => {
 
                 <ul className="list-inline wizard mb-0">
                   <li className="previous list-inline-item">
-                    <Button onClick={prevStep}
-                      disabled={activeStep === 1} variant="info">
+                    <Button
+                      onClick={prevStep}
+                      disabled={activeStep === 1}
+                      variant="info"
+                    >
                       Previous
                     </Button>
                   </li>
                   <li className="next list-inline-item float-end">
-                    <Button onClick={nextStep}
-                      disabled={activeStep === 3} variant="success">
+                    <Button
+                      onClick={nextStep}
+                      disabled={activeStep === 3}
+                      variant="success"
+                    >
                       Next
                     </Button>
                   </li>
@@ -388,9 +403,9 @@ const WizardWithProgressbar = () => {
                     <h3 className="mt-0">Thank you !</h3>
 
                     <p className="w-75 mb-2 mx-auto">
-                      Quisque nec turpis at urna dictum luctus.
-                      Suspendisse convallis dignissim eros at volutpat. In
-                      egestas mattis dui. Aliquam mattis dictum aliquet.
+                      Quisque nec turpis at urna dictum luctus. Suspendisse
+                      convallis dignissim eros at volutpat. In egestas mattis
+                      dui. Aliquam mattis dictum aliquet.
                     </p>
 
                     <div className="mb-3">
@@ -407,8 +422,11 @@ const WizardWithProgressbar = () => {
                 <Col sm={12}>
                   <ul className="list-inline wizard mb-0">
                     <li className="previous list-inline-item">
-                      <Button onClick={prevStep}
-                        disabled={activeStep === 1} variant="info">
+                      <Button
+                        onClick={prevStep}
+                        disabled={activeStep === 1}
+                        variant="info"
+                      >
                         Previous
                       </Button>
                     </li>
@@ -429,14 +447,15 @@ const WizardWithProgressbar = () => {
   );
 };
 
-
 const schema = yup.object({
-  email: yup.string().email('Please enter a valid email').required('Please enter email'),
-  password: yup.string().required('Please enter password'),
-  fName: yup.string().required('Please enter first name'),
-  lName: yup.string().required('Please enter last name'),
+  email: yup
+    .string()
+    .email("Please enter a valid email")
+    .required("Please enter email"),
+  password: yup.string().required("Please enter password"),
+  fName: yup.string().required("Please enter first name"),
+  lName: yup.string().required("Please enter last name"),
 });
-
 
 const WizardWithFormValidation = () => {
   const { handleSubmit, control, trigger } = useForm({
@@ -449,23 +468,23 @@ const WizardWithFormValidation = () => {
   const nextStep = async () => {
     // For step 1 validation
     if (activeStep === 1) {
-      const isValidStep1 = await trigger(['email', 'password']);
+      const isValidStep1 = await trigger(["email", "password"]);
       if (isValidStep1 && wizardRef.current) {
         wizardRef.current.nextStep();
         setActiveStep((prev) => prev + 1);
       } else {
-        console.log('Step 1 validation failed');
+        console.log("Step 1 validation failed");
       }
     }
 
     // For step 2 validation
     if (activeStep === 2) {
-      const isValidStep2 = await trigger(['fName', 'lName']);
+      const isValidStep2 = await trigger(["fName", "lName"]);
       if (isValidStep2 && wizardRef.current) {
         wizardRef.current.nextStep();
         setActiveStep((prev) => prev + 1);
       } else {
-        console.log('Step 2 validation failed');
+        console.log("Step 2 validation failed");
       }
     }
   };
@@ -478,7 +497,7 @@ const WizardWithFormValidation = () => {
   };
 
   const onSubmit = (data) => {
-    console.log('Form Data:', data);
+    console.log("Form Data:", data);
   };
 
   return (
@@ -508,7 +527,11 @@ const WizardWithFormValidation = () => {
                 render={({ field, fieldState }) => (
                   <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control {...field} type="email" isInvalid={!!fieldState.error} />
+                    <Form.Control
+                      {...field}
+                      type="email"
+                      isInvalid={!!fieldState.error}
+                    />
                     <Form.Control.Feedback type="invalid">
                       {fieldState.error?.message}
                     </Form.Control.Feedback>
@@ -521,7 +544,11 @@ const WizardWithFormValidation = () => {
                 render={({ field, fieldState }) => (
                   <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control {...field} type="password" isInvalid={!!fieldState.error} />
+                    <Form.Control
+                      {...field}
+                      type="password"
+                      isInvalid={!!fieldState.error}
+                    />
                     <Form.Control.Feedback type="invalid">
                       {fieldState.error?.message}
                     </Form.Control.Feedback>
@@ -545,7 +572,11 @@ const WizardWithFormValidation = () => {
                 render={({ field, fieldState }) => (
                   <Form.Group className="mb-3">
                     <Form.Label>First Name</Form.Label>
-                    <Form.Control {...field} type="text" isInvalid={!!fieldState.error} />
+                    <Form.Control
+                      {...field}
+                      type="text"
+                      isInvalid={!!fieldState.error}
+                    />
                     <Form.Control.Feedback type="invalid">
                       {fieldState.error?.message}
                     </Form.Control.Feedback>
@@ -558,7 +589,11 @@ const WizardWithFormValidation = () => {
                 render={({ field, fieldState }) => (
                   <Form.Group className="mb-3">
                     <Form.Label>Last Name</Form.Label>
-                    <Form.Control {...field} type="text" isInvalid={!!fieldState.error} />
+                    <Form.Control
+                      {...field}
+                      type="text"
+                      isInvalid={!!fieldState.error}
+                    />
                     <Form.Control.Feedback type="invalid">
                       {fieldState.error?.message}
                     </Form.Control.Feedback>
@@ -589,7 +624,8 @@ const WizardWithFormValidation = () => {
                     </h2>
                     <h3>Thank you!</h3>
                     <p>
-                      Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat.
+                      Quisque nec turpis at urna dictum luctus. Suspendisse
+                      convallis dignissim eros at volutpat.
                     </p>
                   </div>
                 </Col>
@@ -616,18 +652,9 @@ const WizardWithFormValidation = () => {
   );
 };
 
-
 const FormWizard = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Forms", path: "/ui/forms/wizard" },
-          { label: "Form Wizard", path: "/ui/forms/wizard", active: true },
-        ]}
-        title={"Form Wizard"}
-      />
-
       <Row>
         <Col xl={6}>
           <BasicWizard />

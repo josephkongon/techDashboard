@@ -1018,7 +1018,7 @@ const CheckboxCircled = () => {
             className={classNames(
               "mb-2",
               "form-check",
-              "form-check-" + item.variant
+              "form-check-" + item.variant,
             )}
           >
             <Form.Check.Input
@@ -1211,14 +1211,6 @@ const RadioDisabled = () => {
 const BasicForms = () => {
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Forms", path: "/forms/basic" },
-          { label: "Basic Elements", path: "/forms/basic", active: true },
-        ]}
-        title={"Basic Elements"}
-      />
-
       <Row>
         <Col>
           <BasicInputElements />

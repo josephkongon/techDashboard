@@ -60,6 +60,7 @@ const AddCategoryMenu: FC<IProps> = ({
       mutateAsync(
         {
           name: values.name,
+          //@ts-ignore
           categoryGroupIds: values.categoryGroupIds,
         },
         {

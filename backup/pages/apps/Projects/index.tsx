@@ -1,4 +1,3 @@
-
 import {
   Row,
   Col,
@@ -66,7 +65,7 @@ const SingleProject = (props: { project: ProjectsList }) => {
               "bg-soft-success text-success": project.state === "Finished",
               "bg-soft-secondary text-secondary": project.state === "Ongoing",
             },
-            "mb-3"
+            "mb-3",
           )}
         >
           {project.state}
@@ -126,14 +125,6 @@ const SingleProject = (props: { project: ProjectsList }) => {
 const Projects = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Projects", path: "/apps/projects/list" },
-          { label: "Projects List", path: "/apps/projects/list", active: true },
-        ]}
-        title={"Projects List"}
-      />
-
       <Row className="mb-2">
         <Col sm={4}>
           <Link

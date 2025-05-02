@@ -10,14 +10,6 @@ import { FEATHERICONLIST } from "./data";
 const FeatherIcons = () => {
   return (
     <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Icons", path: "/ui/icons/feather" },
-          { label: "Feather Icons", path: "/ui/icons/feather", active: true },
-        ]}
-        title={"Feather Icons"}
-      />
-
       <Row>
         <Col>
           <Card>
