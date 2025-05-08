@@ -1,1 +1,0 @@
-function s(n,o,t){Object.entries(o).forEach(([r,e])=>{const i=t?`${t}[${r}]`:r;e instanceof File?n.append(i,e):typeof e=="object"&&e!==null?s(n,e,i):n.append(i,String(e))})}const c=n=>Object.fromEntries(Object.entries(n).filter(([o,t])=>t!==void 0));export{s as a,c as r};

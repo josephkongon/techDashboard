@@ -1,1 +1,0 @@
-import{a as e}from"./index-CBw9tgfC.js";const p=({payload:t})=>e.post("/category-group",t,{headers:{"Content-Type":"multipart/form-data"}}).then(a=>a.data),n=()=>e.get("/category-group?join=file").then(t=>t.data),u=({id:t,payload:a})=>e.patch(`/category-group/${t}`,a,{headers:{"Content-Type":"multipart/form-data"}}).then(r=>r.data);export{p as c,n as g,u};
