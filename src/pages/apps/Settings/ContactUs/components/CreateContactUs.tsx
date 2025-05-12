@@ -5,6 +5,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { createContactUs } from "@/service/api/contactUs.ts";
 import { appendObjectToFormData } from "@/utils/formdata.ts";
 import { removeUndefinedKeys } from "@/utils/general.ts";
+import imageCompression from "browser-image-compression";
 
 interface IProps {
   isOpen: boolean;
@@ -44,8 +45,28 @@ const CreateContactUs: FC<IProps> = ({ isOpen, toggle, refetch }) => {
     });
   };
 
-  const handleFileChange = ({ fileList }) => {
-    setFileList(fileList);
+  const handleFileChange = async ({ fileList: newFileList }) => {
+    const compressedList = await Promise.all(
+      newFileList.map(async (file) => {
+        try {
+          const compressedFile = await imageCompression(file.originFileObj, {
+            maxSizeMB: 0.2,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+          });
+
+          return {
+            ...file,
+            originFileObj: compressedFile,
+          };
+        } catch (error) {
+          console.error("Compression error:", error);
+          return file;
+        }
+      }),
+    );
+
+    setFileList(compressedList);
   };
 
   useEffect(() => {
@@ -123,6 +144,7 @@ const CreateContactUs: FC<IProps> = ({ isOpen, toggle, refetch }) => {
             maxCount={1}
             fileList={fileList}
             onChange={handleFileChange}
+            accept="image/*"
           >
             <button
               style={{

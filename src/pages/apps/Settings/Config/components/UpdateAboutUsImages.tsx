@@ -4,6 +4,7 @@ import useConfig from "@/hooks/queries/useConfig";
 import { useMutation } from "react-query";
 import { updateImage } from "@/service/api/config.ts";
 import { PlusOutlined } from "@ant-design/icons";
+import imageCompression from "browser-image-compression";
 
 interface IProps {
   isOpen: boolean;
@@ -18,8 +19,28 @@ const UpdateAboutUsImages: FC<IProps> = ({ isOpen, toggle, refetch }) => {
     updateImage(data?.id, payload),
   );
 
-  const handleFileChange = ({ fileList }) => {
-    setFileList(fileList);
+  const handleFileChange = async ({ fileList: newFileList }) => {
+    const compressedList = await Promise.all(
+      newFileList.map(async (file) => {
+        try {
+          const compressedFile = await imageCompression(file.originFileObj, {
+            maxSizeMB: 0.2,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+          });
+
+          return {
+            ...file,
+            originFileObj: compressedFile,
+          };
+        } catch (error) {
+          console.error("Compression error:", error);
+          return file;
+        }
+      }),
+    );
+
+    setFileList(compressedList);
   };
 
   const onFinish = (values: any) => {
@@ -76,6 +97,7 @@ const UpdateAboutUsImages: FC<IProps> = ({ isOpen, toggle, refetch }) => {
             maxCount={5}
             fileList={fileList}
             onChange={handleFileChange}
+            accept="image/*"
           >
             <button
               style={{
