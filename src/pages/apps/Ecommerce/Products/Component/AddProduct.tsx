@@ -260,7 +260,7 @@ const AddProduct: FC<IProps> = ({
               fileList={fileList}
               onChange={handleFileChange}
               accept="image/*"
-              capture="environment"
+              // capture="environment"
             >
               <button
                 style={{
