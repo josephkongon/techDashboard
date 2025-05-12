@@ -20,6 +20,7 @@ import { createProduct, updateProduct } from "@/service/api/product.ts";
 import { appendObjectToFormData } from "@/utils/formdata.ts";
 import { removeUndefinedKeys } from "@/utils/general.ts";
 import useProducts from "@/hooks/queries/useProducts.ts";
+import imageCompression from "browser-image-compression";
 
 type FieldType = {
   name?: string;
@@ -60,8 +61,28 @@ const AddProduct: FC<IProps> = ({
     async (payload: any) => updateProduct(product?.id, payload),
   );
 
-  const handleFileChange = ({ fileList }) => {
-    setFileList(fileList);
+  const handleFileChange = async ({ fileList: newFileList }) => {
+    const compressedList = await Promise.all(
+      newFileList.map(async (file) => {
+        try {
+          const compressedFile = await imageCompression(file.originFileObj, {
+            maxSizeMB: 0.2,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+          });
+
+          return {
+            ...file,
+            originFileObj: compressedFile,
+          };
+        } catch (error) {
+          console.error("Compression error:", error);
+          return file;
+        }
+      }),
+    );
+
+    setFileList(compressedList);
   };
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
@@ -238,6 +259,8 @@ const AddProduct: FC<IProps> = ({
               maxCount={5}
               fileList={fileList}
               onChange={handleFileChange}
+              accept="image/*"
+              capture="environment"
             >
               <button
                 style={{
