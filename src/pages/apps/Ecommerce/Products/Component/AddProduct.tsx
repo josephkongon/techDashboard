@@ -21,6 +21,7 @@ import { appendObjectToFormData } from "@/utils/formdata.ts";
 import { removeUndefinedKeys } from "@/utils/general.ts";
 import useProducts from "@/hooks/queries/useProducts.ts";
 import imageCompression from "browser-image-compression";
+import { convertToPng } from "@/utils/image.ts";
 
 type FieldType = {
   name?: string;
@@ -71,12 +72,14 @@ const AddProduct: FC<IProps> = ({
             useWebWorker: true,
           });
 
+          const pngFile = await convertToPng(compressedFile);
+
           return {
             ...file,
-            originFileObj: compressedFile,
+            originFileObj: pngFile,
           };
         } catch (error) {
-          console.error("Compression error:", error);
+          console.error("Compression or conversion error:", error);
           return file;
         }
       }),

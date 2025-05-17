@@ -5,6 +5,7 @@ import { useMutation } from "react-query";
 import { updateImage } from "@/service/api/config.ts";
 import { PlusOutlined } from "@ant-design/icons";
 import imageCompression from "browser-image-compression";
+import { convertToPng } from "@/utils/image.ts";
 
 interface IProps {
   isOpen: boolean;
@@ -29,9 +30,11 @@ const UpdateAboutUsImages: FC<IProps> = ({ isOpen, toggle, refetch }) => {
             useWebWorker: true,
           });
 
+          const pngFile = await convertToPng(compressedFile);
+
           return {
             ...file,
-            originFileObj: compressedFile,
+            originFileObj: pngFile,
           };
         } catch (error) {
           console.error("Compression error:", error);

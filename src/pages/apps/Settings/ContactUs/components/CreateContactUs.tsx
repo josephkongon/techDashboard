@@ -6,6 +6,7 @@ import { createContactUs } from "@/service/api/contactUs.ts";
 import { appendObjectToFormData } from "@/utils/formdata.ts";
 import { removeUndefinedKeys } from "@/utils/general.ts";
 import imageCompression from "browser-image-compression";
+import { convertToPng } from "@/utils/image.ts";
 
 interface IProps {
   isOpen: boolean;
@@ -55,9 +56,11 @@ const CreateContactUs: FC<IProps> = ({ isOpen, toggle, refetch }) => {
             useWebWorker: true,
           });
 
+          const pngFile = await convertToPng(compressedFile);
+
           return {
             ...file,
-            originFileObj: compressedFile,
+            originFileObj: pngFile,
           };
         } catch (error) {
           console.error("Compression error:", error);
