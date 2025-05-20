@@ -8,10 +8,14 @@ export const createCategory = (payload: {
   return apiClient.post("/category", payload).then((res) => res.data);
 };
 
-export const getCategory = () => {
-  return apiClient
-    .get<IPaginatedData<any[]>>("/category")
-    .then((res) => res.data);
+export const getCategory = ({ filter }: { filter?: string }) => {
+  let url = "/category";
+
+  if (filter) {
+    url += `?${filter}`;
+  }
+
+  return apiClient.get<IPaginatedData<any[]>>(url).then((res) => res.data);
 };
 
 export const updateCategory = (

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { Pagination } from "antd";
 import { Card, ListGroup } from "react-bootstrap";
 import { Virtuoso } from "react-virtuoso";
@@ -8,30 +8,39 @@ type PaginatedVirtualizedListProps<T> = {
   RenderComponent: React.FC<{ item: T }>;
   itemsPerPage?: number;
   height?: number;
+  pagination?: {
+    current: number;
+    pageSize: number;
+    total: number;
+  };
+  handlePageChange?: (page: number) => void;
 };
 
 const PaginatedVirtualizedList = <T,>({
   data,
   RenderComponent,
-  itemsPerPage = 10,
+  itemsPerPage = 100,
   height = 400,
+  pagination,
+  handlePageChange,
 }: PaginatedVirtualizedListProps<T>) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // Compute the data for the current page
-  const paginatedData = useMemo(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    return data.slice(startIndex, startIndex + itemsPerPage);
-  }, [currentPage, data, itemsPerPage]);
-
   return (
     <div>
       <Card style={{ padding: "5px", display: "flex", alignItems: "flex-end" }}>
         <Pagination
-          current={currentPage}
-          total={data.length}
-          pageSize={itemsPerPage}
-          onChange={setCurrentPage}
+          current={pagination?.current}
+          total={pagination?.pageSize}
+          pageSize={pagination?.total}
+          // pagination={{
+          //   ...pagination,
+          //   onChange: (page, size) => {
+          //     handlePageChange(page);
+          //   },
+          // }}
+
+          onChange={(page) => {
+            if (handlePageChange) handlePageChange(page);
+          }}
           style={{ marginTop: 10, textAlign: "center" }}
         />
       </Card>
@@ -39,10 +48,8 @@ const PaginatedVirtualizedList = <T,>({
       <ListGroup>
         <Virtuoso
           style={{ height }}
-          totalCount={paginatedData.length}
-          itemContent={(index) => (
-            <RenderComponent item={paginatedData[index]} />
-          )}
+          totalCount={data.length}
+          itemContent={(index) => <RenderComponent item={data[index]} />}
         />
       </ListGroup>
 

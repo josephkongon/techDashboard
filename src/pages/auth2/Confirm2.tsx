@@ -1,4 +1,3 @@
-
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -14,9 +13,9 @@ const BottomLink = () => {
   return (
     <footer className="footer footer-alt">
       <p className="text-muted">
-        {t("2018 - " + new Date().getFullYear() + " © UBold theme by")}{" "}
+        {t("2018 - " + new Date().getFullYear() + " © Copy right")}{" "}
         <Link to="#" className="text-muted">
-          {t("Coderthemes")}
+          {t("Nyx")}
         </Link>
       </p>
     </footer>
@@ -36,7 +35,7 @@ const Confirm2 = () => {
             {t("A email has been send to ")}
             <b>{t("youremail@domain.com")}</b>
             {t(
-              "Please check for an email from company and click on the included link to reset your password."
+              "Please check for an email from company and click on the included link to reset your password.",
             )}
           </p>
           <Link

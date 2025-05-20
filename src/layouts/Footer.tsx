@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,8 +11,7 @@ const Footer = () => {
         <div className="container-fluid">
           <Row>
             <Col md={6}>
-              {currentYear} &copy; UBold theme by{" "}
-              <Link to="#">Coderthemes</Link>
+              {currentYear} &copy; Copyright by <Link to="#">Nyx</Link>
             </Col>
 
             <Col md={6}>

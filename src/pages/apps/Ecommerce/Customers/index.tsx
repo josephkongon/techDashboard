@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
-import { Button, Flex, Spin } from "antd";
+import { Button, Flex, Input, Spin } from "antd";
 
-// components
 import PageTitle from "../../../../components/PageTitle";
 import CreateUser from "@/pages/apps/Ecommerce/Customers/Componets/CreateUser.tsx";
 import { useDisclosure } from "@/hooks/useDisclosure.ts";
@@ -12,9 +11,8 @@ import { useIsMobile } from "@/hooks/useMediaQuery.ts";
 import PaginatedVirtualizedList from "@/components/PaginatedList";
 import CreateOrder from "@/pages/apps/Ecommerce/Orders/Components/CreateOrder.tsx";
 
-// dummy data
+const { Search } = Input;
 
-// main component
 const Customers = () => {
   const { isOpen, toggle } = useDisclosure();
   const { isOpen: openCreateOrder, toggle: toggleCreateOrder } =
@@ -22,8 +20,13 @@ const Customers = () => {
   const [user, setUser] = useState<any>();
   const [userOrder, setUserOrder] = useState<any>();
 
-  const { isFetching, data, refetch } = useUsers();
+  const { isFetching, data, refetch, setSearchValue } = useUsers();
   const isMobile = useIsMobile();
+
+  const onSearch = (value, _e) => {
+    _e.preventDefault();
+    setSearchValue(value);
+  };
 
   return (
     <Spin spinning={isFetching}>
@@ -48,11 +51,24 @@ const Customers = () => {
       <Row>
         <Col>
           <Card>
-            <div className={"d-flex align-items-center justify-content-end"}>
-              <Button onClick={toggle} className="btn btn-danger my-2 ">
-                <i className="mdi mdi-plus-circle me-2"></i> Add Customer
-              </Button>
-            </div>
+            {/*<Card.Body>*/}
+            <Row className="justify-content-between">
+              <Col className="col-auto">
+                <form className="d-flex flex-wrap align-items-center">
+                  <Search
+                    placeholder="input search text"
+                    onSearch={onSearch}
+                    enterButton
+                  />
+                </form>
+              </Col>
+              <Col className={"col-auto"}>
+                <Button onClick={toggle} className="btn btn-danger my-2 ">
+                  <i className="mdi mdi-plus-circle me-2"></i> Add Customer
+                </Button>
+              </Col>
+            </Row>
+            {/*</Card.Body>*/}
           </Card>
         </Col>
       </Row>

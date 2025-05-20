@@ -1,15 +1,25 @@
 import React, { FC } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import { Button, Flex, Image, Table, TableColumnsType } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
-import { BiPen } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 interface IProps {
   products: any[];
   isFetching: boolean;
+  pagination?: {
+    current: number;
+    pageSize: number;
+    total: number;
+  };
+  handlePageChange: (page: number) => void;
 }
-const ProductTable: FC<IProps> = ({ products, isFetching }) => {
+const ProductTable: FC<IProps> = ({
+  products,
+  isFetching,
+  pagination,
+  handlePageChange,
+}) => {
   const navigate = useNavigate();
 
   const columns: TableColumnsType<any> = [
@@ -50,9 +60,9 @@ const ProductTable: FC<IProps> = ({ products, isFetching }) => {
       width: 100,
       render: (item) => (
         <Flex style={{ gap: 5 }}>
-          <Button variant={"filled"}>
-            <BiPen />
-          </Button>
+          {/*<Button variant={"filled"}>*/}
+          {/*  <BiPen />*/}
+          {/*</Button>*/}
           <Button
             onClick={() => {
               navigate(`${item.id}`);
@@ -65,14 +75,25 @@ const ProductTable: FC<IProps> = ({ products, isFetching }) => {
     },
   ];
 
+  console.log(pagination);
+
   return (
     <Card>
       <Card.Body>
+        <Col className={"flex p-1 justify-content-end align-content-end"}>
+          Total {pagination.total}
+        </Col>
         <Table
           rowKey={(item) => item?.id}
           loading={isFetching}
           columns={columns}
           dataSource={products}
+          pagination={{
+            ...pagination,
+            onChange: (page, size) => {
+              handlePageChange(page);
+            },
+          }}
         />
       </Card.Body>
     </Card>

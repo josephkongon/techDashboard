@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 
 import logoDark from "@/assets/images/logo-dark.png";
 import logoLight from "@/assets/images/logo-light.png";
@@ -53,9 +53,9 @@ const ServerError = () => {
       </div>
 
       <footer className="footer footer-alt">
-        2015 - {new Date().getFullYear()} &copy; UBold theme by{" "}
+        2015 - {new Date().getFullYear()} &copy; Copyright by{" "}
         <Link to="#" className="text-white-50">
-          Coderthemes
+          Nyx
         </Link>
       </footer>
     </React.Fragment>

@@ -5,10 +5,13 @@ export const createOrder = (payload: { userId: string }) => {
   return apiClient.post("/manage-order", payload).then((res) => res.data);
 };
 
-export const getAllOrder = () => {
-  return apiClient
-    .get<IPaginatedData<any[]>>("/manage-order?join=user")
-    .then((res) => res.data);
+export const getAllOrder = ({ filter }: { filter?: string }) => {
+  let url = "/manage-order?join=user&sort=createdAt,DESC";
+
+  if (filter) {
+    url += `&${filter}`;
+  }
+  return apiClient.get<IPaginatedData<any[]>>(url).then((res) => res.data);
 };
 
 export const getSingleOrder = (id: string) => {

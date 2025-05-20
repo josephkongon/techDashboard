@@ -9,8 +9,14 @@ export const createProduct = (payload: any) => {
   });
 };
 
-export const getProducts = ({ filter }: { filter?: string }) => {
-  let url = "/product?join=productImages";
+export const getProducts = ({
+  filter,
+  page,
+}: {
+  filter?: string;
+  page: number;
+}) => {
+  let url = `/product?join=productImages&page=${page}&limit=100`;
 
   if (filter) {
     url += `&${filter}`;

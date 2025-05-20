@@ -10,7 +10,7 @@ const Error500Two = () => {
     if (document.body)
       document.body.classList.remove(
         "authentication-bg",
-        "authentication-bg-pattern"
+        "authentication-bg-pattern",
       );
     if (document.body) document.body.classList.add("auth-fluid-pages", "pb-0");
 
@@ -68,9 +68,9 @@ const Error500Two = () => {
 
               <footer className="footer footer-alt">
                 <p className="text-muted">
-                  2015 - {new Date().getFullYear()} &copy; UBold theme by{" "}
+                  2015 - {new Date().getFullYear()} &copy; Copyright by{" "}
                   <Link to="#" className="text-muted">
-                    Coderthemes
+                    Nyx
                   </Link>
                 </p>
               </footer>

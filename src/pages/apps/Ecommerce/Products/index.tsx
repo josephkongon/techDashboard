@@ -10,15 +10,27 @@ import useProducts from "@/hooks/queries/useProducts.ts";
 import PaginatedVirtualizedList from "@/components/PaginatedList";
 import { Link, useNavigate } from "react-router-dom";
 import { CURRENCY } from "@/types/constand.ts";
+import FilterProvider from "@/providers/FilterProvider.tsx";
+import { Input } from "antd";
+
+const { Search } = Input;
 
 const Products = () => {
-  const { data, refetch, isFetching } = useProducts();
+  const { productData, refetch, isFetching, setSearchValue, handlePageChange } =
+    useProducts();
   const { isOpen, toggle } = useDisclosure();
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
+  const onSearch = (value, _e) => {
+    _e.preventDefault();
+    setSearchValue(value);
+  };
+
+  console.log({ productData });
+
   return (
-    <>
+    <FilterProvider name={"products"}>
       <AddProduct isOpen={isOpen} toggle={toggle} refetch={refetch} />
       <PageTitle title={"Products"} />
 
@@ -26,26 +38,19 @@ const Products = () => {
         <Col>
           <Card>
             <Card.Body>
-              <Row className="justify-content-between">
+              <Row className="justify-content-between align-items-center">
                 <Col className="col-auto">
                   <form className="d-flex flex-wrap align-items-center">
-                    <label htmlFor="inputPassword2" className="visually-hidden">
-                      Search
-                    </label>
-                    <div className="me-3">
-                      <input
-                        type="search"
-                        className="form-control my-1 my-lg-0"
-                        id="inputPassword2"
-                        placeholder="Search..."
-                        // onChange={(e: any) => searchProduct(e.target.value)}
-                      />
-                    </div>
+                    <Search
+                      placeholder="input search text"
+                      onSearch={onSearch}
+                      enterButton
+                    />
                   </form>
                 </Col>
 
                 <Col className="col-auto">
-                  <div className="text-lg-end my-1 my-lg-0">
+                  <div>
                     <Button
                       onClick={toggle}
                       className="btn btn-danger waves-effect waves-light"
@@ -63,8 +68,14 @@ const Products = () => {
       {isMobile ? (
         <>
           <PaginatedVirtualizedList
-            data={data || []}
-            itemsPerPage={20}
+            data={productData.products || []}
+            pagination={{
+              current: productData.page,
+              pageSize: productData.totalPages,
+              total: productData.total + 2,
+            }}
+            handlePageChange={handlePageChange}
+            itemsPerPage={100}
             height={700}
             RenderComponent={({ item }) => {
               return (
@@ -124,9 +135,18 @@ const Products = () => {
           />
         </>
       ) : (
-        <ProductTable products={data} isFetching={isFetching} />
+        <ProductTable
+          pagination={{
+            current: productData.page,
+            pageSize: productData.total,
+            total: productData.totalPages,
+          }}
+          products={productData.products}
+          isFetching={isFetching}
+          handlePageChange={handlePageChange}
+        />
       )}
-    </>
+    </FilterProvider>
   );
 };
 

@@ -6,11 +6,19 @@ import { useIsMobile } from "@/hooks/useMediaQuery.ts";
 import OrderItem from "@/pages/apps/Ecommerce/Orders/Components/OrderItem.tsx";
 import useOrder from "@/hooks/queries/useOrder.ts";
 import PaginatedList from "@/components/PaginatedList";
+import { Input } from "antd";
+
+const { Search } = Input;
 
 const Order = () => {
-  const { data } = useOrder();
+  const { data, setSearchValue } = useOrder();
 
   const isMobile = useIsMobile();
+
+  const onSearch = (value, _e) => {
+    _e.preventDefault();
+    setSearchValue(value);
+  };
 
   return (
     <>
@@ -20,31 +28,14 @@ const Order = () => {
         <Col>
           <Card>
             <Card.Body>
-              <Row className="align-items-center">
-                <Col lg={8}>
-                  <form className="row gy-2 gx-2 align-items-center justify-content-lg-start justify-content-between">
-                    <div className="col-auto">
-                      <div className="d-flex align-items-center w-auto">
-                        <label htmlFor="status-select" className="me-2">
-                          Status
-                        </label>
-                        <select
-                          className="form-select"
-                          id="status-select"
-                          // onChange={(e: any) =>
-                          //   changeOrderStatusGroup(e.target.value)
-                          // }
-                        >
-                          <option value="All">All</option>
-                          <option value="Paid">Paid</option>
-                          <option value="Authorization">
-                            Awaiting Authorization
-                          </option>
-                          <option value="Failed">Payment failed</option>
-                          <option value="Unpaid">Unpaid</option>
-                        </select>
-                      </div>
-                    </div>
+              <Row className="align-items-center justify-content-between">
+                <Col className="col-auto">
+                  <form className="d-flex flex-wrap align-items-center">
+                    <Search
+                      placeholder="input search text"
+                      onSearch={onSearch}
+                      enterButton
+                    />
                   </form>
                 </Col>
 

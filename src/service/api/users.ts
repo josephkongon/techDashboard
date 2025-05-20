@@ -1,8 +1,14 @@
 import { apiClient } from "@/service/axios.service.ts";
 import { IPaginatedData } from "@/types/api.ts";
 
-export const getAllUsers = () => {
-  return apiClient.get<IPaginatedData<any[]>>("/user").then((res) => res.data);
+export const getAllUsers = ({ filter }: { filter?: string }) => {
+  let url = "/user";
+
+  if (filter) {
+    url += `?${filter}`;
+  }
+
+  return apiClient.get<IPaginatedData<any[]>>(url).then((res) => res.data);
 };
 
 export const createUser = (payload: any) => {

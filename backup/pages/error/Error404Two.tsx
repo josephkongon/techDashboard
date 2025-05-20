@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 
 import logoDark from "@/assets/images/logo-dark.png";
 import logoLight from "@/assets/images/logo-light.png";
@@ -19,7 +19,7 @@ const Error404Svg = () => {
         <use className="text" href="#s-text"></use>
         <use className="text" href="#s-text"></use>
         <use className="text" href="#s-text"></use>
-      </svg >
+      </svg>
     </>
   );
 };
@@ -29,7 +29,7 @@ const Error404Two = () => {
     if (document.body)
       document.body.classList.remove(
         "authentication-bg",
-        "authentication-bg-pattern"
+        "authentication-bg-pattern",
       );
     if (document.body) document.body.classList.add("auth-fluid-pages", "pb-0");
 
@@ -92,9 +92,9 @@ const Error404Two = () => {
 
               <footer className="footer footer-alt">
                 <p className="text-muted">
-                  2015 - {new Date().getFullYear()} &copy; UBold theme by{" "}
+                  2015 - {new Date().getFullYear()} &copy; Copyright by{" "}
                   <Link to="#" className="text-muted">
-                    Coderthemes
+                    Nyx
                   </Link>
                 </p>
               </footer>

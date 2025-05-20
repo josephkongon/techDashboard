@@ -122,7 +122,7 @@ const Maintenance = () => {
                               className={classNames(
                                 item.icon,
                                 "font-22",
-                                "avatar-title"
+                                "avatar-title",
                               )}
                             ></i>
                           </div>
@@ -142,9 +142,9 @@ const Maintenance = () => {
       </div>
 
       <footer className="footer footer-alt">
-        2015 - {new Date().getFullYear()} &copy; UBold theme by{" "}
+        2015 - {new Date().getFullYear()} &copy; Copyright by{" "}
         <Link to="#" className="text-white-50">
-          Coderthemes
+          Nyx
         </Link>
       </footer>
     </>
