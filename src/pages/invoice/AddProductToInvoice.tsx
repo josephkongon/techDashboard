@@ -13,7 +13,7 @@ interface IProps {
 async function fetchUserList(name: string) {
   const filter = `&filter=name||$contL||${name}`;
 
-  const data = await getProducts({ filter });
+  const data = await getProducts({ filter, page: 1 });
   return data.data.map((product) => {
     return {
       label: (
