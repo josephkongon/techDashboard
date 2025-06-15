@@ -16,6 +16,11 @@ const allBrands = {
     name: "Technoland",
     logo: TechnolandLogo,
   },
+  Firstbornceantal: {
+    favicon: TechnolandImage,
+    name: "First born ceantal",
+    logo: TechnolandLogo,
+  },
 };
 
 const brandName = import.meta.env.VITE_BRAND_NAME as string;
